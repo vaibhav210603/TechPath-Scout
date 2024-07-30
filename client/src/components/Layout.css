@@ -1,0 +1,26 @@
+/* Layout.css */
+
+.navbar_container {
+    width: 100vw;
+    background-color: rgb(255, 255, 255);
+    height: 8vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    
+    padding: 0 20px;
+    z-index: 1000;
+  }
+  
+  .page-content {
+    margin-top: 5vh; /* Adjust to the height of your navbar */
+    padding: 20px;
+  }
+  
+ .r  {
+    z-index: 1001;
+    margin-right: 30px; /* Ensure the button is always on top */
+  }
+  

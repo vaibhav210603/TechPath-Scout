@@ -1,0 +1,30 @@
+/* Quiz.css */
+
+.container_quiz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align items at the top */
+    
+    background-color: #f9f9f9;
+    max-height: 100vh; /* Make sure the container takes at least the full height of the viewport */
+    box-sizing: border-box; /* Ensure padding is included in the height calculation */
+    overflow: hidden; /* Prevent scrolling within the container */
+  }
+  
+  .time {
+    width: 100%;
+    max-width: 200px;
+    background-color: #ffffff;
+    border: 1px solid rgb(206, 205, 205);
+    border-radius: 10px;
+    padding: 10px;
+   margin-top: 100px;
+    position:absolute;
+    z-index: 99;
+    text-align: center;
+
+  }
+  
+
+  

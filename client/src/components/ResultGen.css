@@ -1,0 +1,12 @@
+.result_container{
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+   
+}
+
+.response_text{
+    font-weight: bold;
+    margin: 10vh 25vw;
+    
+}

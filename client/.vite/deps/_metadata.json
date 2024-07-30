@@ -1,0 +1,55 @@
+{
+  "hash": "4270a00c",
+  "configHash": "043ef9e1",
+  "lockfileHash": "e3b0c442",
+  "browserHash": "f2a69356",
+  "optimized": {
+    "@react-spring/parallax": {
+      "src": "../../node_modules/@react-spring/parallax/dist/react-spring_parallax.modern.mjs",
+      "file": "@react-spring_parallax.js",
+      "fileHash": "90c78ce6",
+      "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "a60c276d",
+      "needsInterop": true
+    },
+    "react-bootstrap": {
+      "src": "../../node_modules/react-bootstrap/esm/index.js",
+      "file": "react-bootstrap.js",
+      "fileHash": "20e88246",
+      "needsInterop": false
+    },
+    "react-bootstrap/Button": {
+      "src": "../../node_modules/react-bootstrap/esm/Button.js",
+      "file": "react-bootstrap_Button.js",
+      "fileHash": "a2747934",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "8e1e20c7",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "6b424b85",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-KHDPP3JE": {
+      "file": "chunk-KHDPP3JE.js"
+    },
+    "chunk-QPG7G3M7": {
+      "file": "chunk-QPG7G3M7.js"
+    },
+    "chunk-UTEJFLXC": {
+      "file": "chunk-UTEJFLXC.js"
+    }
+  }
+}

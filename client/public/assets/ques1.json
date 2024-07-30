@@ -1,0 +1,68 @@
+{
+    "questions": [
+      {
+        "question": "You are planning a vacation with friends. How do you contribute to the planning?",
+        "options": [
+          "Design a informative and easy-to-use itinerary document.",
+          "Analyze past vacation data to pick the best destination.",
+          "Organize the trip details and solve any logistical issues.",
+          "Ensure all travel bookings and information are secure and legit."
+        ]
+      },
+      {
+        "question": "You are given the task of organizing a community event. What would be your main focus?",
+        "options": [
+          "Creating a stunning webpage to promote the event.",
+          "Collecting and analyzing data on community preferences for the event",
+          "Implementing security measures to protect attendee information",
+          "Try to automate tasks/systems as much as possible like guest management/verification, a chatbot for assistance etc"
+        ]
+      },
+      {
+        "question": "You are working on a group project for a school fair. Which role would you prefer?",
+        "options": [
+          "Designing and setting up a visually appealing booth",
+          "Analyzing survey data to understand what attracts visitors",
+          "Solving technical problems to ensure everything works smoothly",
+          "Making sure all project materials are secure from tampering"
+        ]
+      },
+      {
+        "question": "When faced with a challenging problem, how do you typically respond?",
+        "options": [
+          "Look for creative and visually appealing solutions",
+          "Research and analyze the problem from all angles",
+          "Break it down into smaller, manageable parts",
+          "Think about potential risks and how to mitigate them"
+        ]
+      },
+      {
+        "question": "You have been asked to improve the efficiency of your school’s cafeteria. What do you do first?",
+        "options": [
+          "I redesign the menu layout to make it more appealing and easier to read.",
+          "I analyze past sales data to see which meals are most popular.",
+          "I work on streamlining the order and payment processes and the security of the payment systems and student data.",
+          "I suggest using a smart system to predict food demand and reduce waste."
+        ]
+      },
+      {
+        "question": "Your friend wants to start a YouTube channel. How do you help them?",
+        "options": [
+          "I create an attractive channel banner and thumbnails.",
+          "I research and analyze trends to choose the best topics and keywords.",
+          "I ensure their content and account are secure from hackers.",
+          "I explore automated tools for video editing and content creation which makes it easier"
+        ]
+      },
+      {
+        "question": "What fascinated you the most, as a child?",
+        "options": [
+          "Hacking into a website/app, cracking someone's password, exploiting game applications",
+          "Designing a base in Clash of Clans that was hard to beat.(likewise games)",
+          "Having a collection of different sized/shaped pebbles or other objects and keeping them systematically",
+          "Solving Rubics Cube, crosswords, sudoku or other brainstorming games."
+        ]
+      }
+    ]
+  }
+  
