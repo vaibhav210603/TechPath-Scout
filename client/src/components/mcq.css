@@ -1,75 +1,95 @@
-.contain{
-    height:38vh;
-    width: 80vh;
+.contain {
+    max-height: 70vh; /* Adjust height to fit the container */
+    width: 90vw;
+    max-width: 600px; /* Maximum width for larger screens */
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     border: 1px solid white;
     text-align: left;
-
+    box-sizing: border-box;
+    padding: 20px;
+    overflow: hidden; /* Hide overflow to avoid scroll */
 }
 
-
-
-.ques
-{
-    font-size: 30px;
-    padding: 2%;
-    border-bottom: 1px solid rgb(203, 197, 197);
-   
-
+.ques {
+    font-size: 1.8em; /* Relative font size */
+    margin-bottom: 10px; /* Margin to separate from options */
+    word-wrap: break-word; /* Ensure long words break properly */
 }
 
-.option{
-    padding:3%;
-    border-bottom: 1px solid grey;
-    
+.options_container {
+    max-height: 50vh; /* Limit height for options */
+    overflow-y: auto; /* Allow scrolling within options if needed */
+    margin-bottom: 20px; /* Space below options */
 }
 
-
-
-.option:hover{
+.option {
+    padding: 15px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em; /* Responsive font size */
+    background-color: #f9f9f9;
     cursor: pointer;
-    font-size: 17px;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
-.ques:hover{
+.option:hover {
+    background-color: #e0e0e0;
+    font-size: 20px;
+}
+
+.option.selected {
+    background-color: rgba(0, 128, 0, 0.2);
+    border-color: #007bff;
+}
+
+.next,
+.prev,
+.finish {
+    width: 30%; /* Adjust width for button size */
+    padding: 10px;
+    font-size: 1em;
     cursor: pointer;
-    
 }
 
-.option.selected{
-    background-color: rgba(0, 128, 0, 0.196);
-}
-
-.next{
-  
-   position: relative;
-   margin-top: 20px;
-
-   
-}
-.prev{
-   
-   position: relative;
-   margin-top: 20px;
-
-   
-}
-
-.quiz_buttons{
+.quiz_buttons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-top: 20px; /* Space above buttons */
+    gap: 10px; /* Gap between buttons */
 }
 
-
-.bigger_container{
+.bigger_container {
     width: 100vw;
-    height: 80vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(255, 255, 255);
-    position: relative;
-
-   
+    background-color: rgb(240, 240, 240);
+    box-sizing: border-box;
+    padding: 20px;
 }
+
+@media (max-width: 768px) {
+    .contain {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .ques {
+        font-size: 1.5em; /* Adjusted for smaller screens */
+    }
+
+    .option {
+        font-size: 0.9em;
+    }
+
+    .next,
+    .prev,
+    .finish {
+        font-size: 0.9em;
+    }
+}
+

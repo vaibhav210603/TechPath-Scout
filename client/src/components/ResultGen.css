@@ -1,12 +1,30 @@
-.result_container{
-    height: 100vh;
-    width: 100vw;
+.result_container {
+    height: 50vh;
+    width: 60vw;
     text-align: center;
-   
-}
-
-.response_text{
-    font-weight: bold;
-    margin: 10vh 25vw;
-    
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content at the top */
+    align-items: center;
+    border: 2px solid #000000;
+    margin-left: 20vw;
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px; /* Add padding to avoid content touching the edges */
+    box-sizing: border-box; /* Ensure padding is included in width and height calculations */
+  }
+  
+  .typewriter {
+    display: inline-block;
+    text-align: left; /* Ensure text aligns from left to right */
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 18px;
+  }
+  
+  .heading {
+    margin-bottom: 10vh;
+    text-align: center;
+    font-size: 60px;
+  }
+  
