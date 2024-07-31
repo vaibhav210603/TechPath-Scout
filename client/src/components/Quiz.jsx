@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Mcq from './Mcq';
 import ResultGen from './ResultGen';
 import { useLocation } from 'react-router-dom';
-import Timer from '../timer'
+import Timer from '../constants/timer'
 import './Quiz.css'
 
 function Quiz() {

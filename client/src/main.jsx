@@ -9,7 +9,7 @@ import {
   import Hero from './components/Hero'
   import Quiz from './components/Quiz'
   import Layout from './components/Layout.jsx';
-  import Contact from './components/Contact.jsx';
+  import Assistant from './components/Assistant.jsx';
 import ResultGen from './components/ResultGen.jsx';
   
 
@@ -31,8 +31,8 @@ import ResultGen from './components/ResultGen.jsx';
       },
 
     {
-        path: "/contact",
-        element: <Contact/>
+        path: "/assistant",
+        element: <Assistant/>
       },
     {
         path: "/resultgen",

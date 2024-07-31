@@ -1,5 +1,5 @@
 import React from 'react'
-import TextBlock from '../TextBlock'
+import TextBlock from '../constants/TextBlock'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import './Hero.css'
 import { Outlet, Link } from "react-router-dom";

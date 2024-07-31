@@ -17,7 +17,7 @@ function ResultGen() {
 
   // Prompt for the AI model
   const prompt =
-    'Consider yourself as a computer science domain counselor and you gave a student a set of questions and the following are his answers for each question. Give a detailed analysis of the student mindset and qualities and justify which computer science domain he should be choosing and why, in detail, in 100 words or more, d nt use question number as reference, the report for each student must be DIFFERENT or unique, write like you are talkig to the student';
+    'Consider yourself as a computer science domain counselor and you gave a student a set of questions and the following are his answers for each question. Give a detailed analysis of the student mindset and qualities and justify which computer science domain he should be choosing and why, in detail, in 100 words or more, do not use question numbers as references, the report for each student must be DIFFERENT or unique, write like you are talking to the student, at the end provide a digit/10 for each potential domain suitable, representing the inclination of the caldidate';
 
   // Combine the questions, answers, and prompt into one text
   const fullText = `${questionsAnswersString}\n\n${prompt}`;
@@ -45,18 +45,23 @@ function ResultGen() {
     run();
   }, []);
 
-  // Typewriter effect function with line breaks
+  // Typewriter effect function with text styling
   const typeWriterEffect = (element, text, speed) => {
-    const sentences = text.split(/(?<=[.!?])\s+/); // Split text into sentences
+    // Replace * and ** with HTML tags for styling
+    const formattedText = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
+      .replace(/\*(.*?)\*/g, '<em>$1</em>'); // Italic text
+
+    const sentences = formattedText.split(/(?<=[.!?])\s+/); // Split text into sentences
     let currentIndex = 0;
     let currentText = '';
-    
+
     const typeSentence = () => {
       if (currentIndex < sentences.length) {
         const sentence = sentences[currentIndex];
         let charIndex = 0;
         let currentLine = '';
-        
+
         const typeCharacter = () => {
           if (charIndex < sentence.length) {
             currentLine += sentence[charIndex];
@@ -70,7 +75,7 @@ function ResultGen() {
             setTimeout(typeSentence, speed); // Move to next sentence
           }
         };
-        
+
         typeCharacter();
       }
     };
@@ -86,14 +91,13 @@ function ResultGen() {
     }
   }, [response]);
 
-  return (<div className="mega">
-      <h1 className='heading'>Quiz Results</h1>
-    <div className='result_container'>
-      <div className="typewriter">
-        
+  return (
+    <div className="mega">
+      <h1 className="heading">Quiz Results</h1>
+      <div className="result_container">
+        <div className="typewriter"></div>
+        <div id="typewriter-response" className="typewriter"></div>
       </div>
-      <div id="typewriter-response" className="typewriter"></div>
-    </div>
     </div>
   );
 }

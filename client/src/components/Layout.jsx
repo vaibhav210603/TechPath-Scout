@@ -10,7 +10,11 @@ const Layout = () => {
       <div className='navbar_container'>
         
           <Link to="/" className='r'>Home</Link>
-          <Link to="/contact" className='r' >Contact</Link>
+          <Link to="/assistant" className='r'>Assistant</Link>
+          <Link to="/assistant" className='r'>Contact</Link>
+          <Link to="/assistant" className='r'>Blueprint</Link>
+          <Link to="/login" className='r signin'>SignIn</Link>
+          
        
       </div>
       <div className='page-content'>
