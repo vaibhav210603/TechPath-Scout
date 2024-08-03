@@ -11,6 +11,7 @@ import {
   import Layout from './components/Layout.jsx';
   import Assistant from './components/Assistant.jsx';
 import ResultGen from './components/ResultGen.jsx';
+import SignIn from './components/SignIn.jsx';
   
 
 
@@ -37,6 +38,10 @@ import ResultGen from './components/ResultGen.jsx';
     {
         path: "/resultgen",
         element: <ResultGen/>
+      },
+    {
+        path: "/signin",
+        element: <SignIn/>
       },
    
       

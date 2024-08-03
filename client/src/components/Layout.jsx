@@ -13,7 +13,9 @@ const Layout = () => {
           <Link to="/assistant" className='r'>Assistant</Link>
           <Link to="/assistant" className='r'>Contact</Link>
           <Link to="/assistant" className='r'>Blueprint</Link>
-          <Link to="/login" className='r signin'>SignIn</Link>
+         
+          <Link to="/signin" className='r signin'>SignIn</Link>
+
           
        
       </div>

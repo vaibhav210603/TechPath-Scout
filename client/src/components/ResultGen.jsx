@@ -6,6 +6,7 @@ import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-
 function ResultGen() {
   const location = useLocation();
   const { results } = location.state || { results: [] };
+  const { user_details } = location.state || { user_details: [] };
   const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(true); // Add loading state
 
@@ -19,7 +20,20 @@ function ResultGen() {
 
   // Attaching the prompt to the string
   const prompt =
-    'Consider yourself as a computer science domain counselor and you gave a student a set of questions and the following are his answers for each question. Give a detailed analysis of the student mindset and qualities and justify which computer science domain he should be choosing and why, in detail, in 100 words or more, do not use question numbers as references, the report for each student must be DIFFERENT or unique, write like you are talking to the student, at the end provide a digit/10 representing the inclination for each potential domain suitable, bold the flaws like incorrect logical reasoning and strong points of the candidate; also mention what should he do to improve overall;;PLEASE BOLD THE KEYWORDS IN BETWEEEN TEXT ';
+    ` Consider yourself a computer science domain counselor. You have just evaluated a student named ${user_details.name} based on a series of responses to questions designed to assess their interests, skills, and mindset. Your task is to provide a comprehensive analysis of the student's mindset and qualities, recommending which computer science domain they should pursue and why.
+
+    Begin your response with a friendly greeting using the student's name, such as "Hey [name] in heading,". Then proceed with the analysis:
+    
+    Analysis: Offer an insightful evaluation of the student's strengths and weaknesses. Highlight key attributes, such as problem-solving skills, creativity, logical reasoning, and passion for technology. Provide examples from their answers to illustrate your points.
+    
+    Domain Recommendation: Suggest one or more computer science domains that align with the student's strengths and interests. Include a detailed justification for each recommended domain, explaining how it suits their qualities and aspirations.
+    
+    Improvement Suggestions: Identify areas where the student can improve, such as enhancing their logical reasoning or technical skills. Provide practical advice on how they can develop these areas, such as engaging in specific projects, courses, or activities.
+    
+    Domain Inclination Score: Conclude with a score out of 10 for each potential domain, representing the student's inclination towards it. Use bold formatting for each score and provide a brief justification for each rating.
+    
+    Ensure that the analysis for each student is unique and personalized based on their responses. Your tone should be encouraging and supportive, helping the student feel confident in their path forward.
+    Give extra spaces before and after headings to make it clear`;
 
   const fullText = `${questionsAnswersString}\n\n${prompt}`;
 
@@ -54,7 +68,13 @@ function ResultGen() {
   const typeWriterEffect = (element, text, speed) => {
     const formattedText = text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em>$1</em>');
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/^## (.*)$/gm, '<h2>$1</h2>')
+      .replace(/^- (.*)$/gm, '<ul><li>$1</li></ul>')
+      .replace(/^\d+\. (.*)$/gm, '<ol><li>$1</li></ol>')
+      .replace(/^> (.*)$/gm, '<blockquote>$1</blockquote>')
+      .replace(/(?<!<\/?\w+>)(\r?\n)/g, '<br>')
+      .replace(/^### (.*)$/gm, '<h3>$1</h3>');
 
     const sentences = formattedText.split(/(?<=[.!?])\s+/);
     let currentIndex = 0;
@@ -124,7 +144,7 @@ function ResultGen() {
   const MyDocument = () => (
     <Document>
       <Page size="A4" style={styles.page}>
-        <Text style={styles.heading}>TechPath Scout Analysis Report</Text> {/* Add heading */}
+        <Text style={styles.heading}>TechPath Scout Report</Text> {/* Add heading */}
         <View style={styles.section}>
           <Text style={styles.text}>{response}</Text> {/* Apply the text style */}
         </View>
@@ -134,10 +154,10 @@ function ResultGen() {
 
   return (
     <div className="mega">
-      <h1 className="heading">Quiz Results</h1>
+      <h1 className="heading">Here's your analysis {user_details.name}</h1>
       <div className="result_container">
         {isLoading ? ( 
-          <div className="loading-message">Analysing your results</div>
+          <div className="loading-message">Analysing your responses, please wait...</div>
         ) : (
           <div id="typewriter-response" className="typewriter"></div>
         )}

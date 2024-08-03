@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './mcq.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 export default function Mcq({ setQuizResults }) {
+  const location = useLocation();
+  const { user_details } = location.state || { user_details: [] };
   const [questionsSelected, setQuestionsSelected] = useState([]);
   const [options, setOptions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -70,9 +72,9 @@ export default function Mcq({ setQuizResults }) {
 
     // Use the function passed from the parent to update the results
     setQuizResults(results);
-
+    
     // Navigate to the results page and pass the results as state
-    navigate('/resultgen', { state: { results } });
+    navigate('/resultgen', { state: { results,user_details} });
   };
 
   return (

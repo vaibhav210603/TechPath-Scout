@@ -1,36 +1,45 @@
-.result_container {
-    height: 70vh;
-    width: 50vw;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align content at the top */
-    align-items: center;
-    border: 2px solid #000000;
-    margin-left: 20vw;
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding: 10px; /* Add padding to avoid content touching the edges */
-    box-sizing: border-box; /* Ensure padding is included in width and height calculations */
-  }
-  
-  .typewriter {
-    display: inline-block;
-    text-align: left; /* Ensure text aligns from left to right */
-    white-space: pre-wrap; /* Preserve whitespace and line breaks */
-    margin-left: 10%;
-    margin-right: 10%;
-    font-size: 18px;
-  }
-  
-  .heading {
-    margin-bottom: 10vh;
-    text-align: center;
-    font-size: 60px;
-  }
-  
-  .download
-  {
-    margin-top: 10px;
-    margin-left: 60%;
-  }
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0; /* Optional background color */
+  overflow: hidden; /* Prevent body from scrolling */
+}
+
+.result_container {
+  height: 70vh;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Start content at the top */
+  align-items: center; /* Center content horizontally */
+  border: 2px solid #00000000;
+  overflow-y: auto; /* Enable scrolling */
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #f9f9f9; /* Optional background color */
+}
+
+.typewriter {
+  display: inline-block;
+  white-space: pre-wrap;
+  text-align: left;
+  width: 80%; /* Make sure the text takes 80% of the container width */
+  font-size: 18px;
+  margin-bottom: 20px; /* Add space between typewriter text and other content */
+}
+
+.heading {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 60px;
+}
+
+.download {
+  margin-top: 10px;
+}
