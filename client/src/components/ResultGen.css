@@ -1,5 +1,5 @@
 .result_container {
-    height: 50vh;
+    height: 70vh;
     width: 50vw;
     text-align: center;
     display: flex;
@@ -17,8 +17,8 @@
     display: inline-block;
     text-align: left; /* Ensure text aligns from left to right */
     white-space: pre-wrap; /* Preserve whitespace and line breaks */
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 10%;
+    margin-right: 10%;
     font-size: 18px;
   }
   
@@ -28,3 +28,9 @@
     font-size: 60px;
   }
   
+  .download
+  {
+    margin-top: 10px;
+    margin-left: 60%;
+  }
+

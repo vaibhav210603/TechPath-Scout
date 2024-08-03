@@ -12,15 +12,32 @@ export default function Mcq({ setQuizResults }) {
 
   useEffect(() => {
     const fetchQues = async () => {
-      const resp = await fetch('/assets/ques1.json');
-      const data = await resp.json();
+      // Fetch questions from both files
+      const [resp1, resp2] = await Promise.all([
+        fetch('/assets/ques1.json'),
+        fetch('/assets/ques2.json'),
+      ]);
 
-      const questions = data.questions.map((i) => i.question);
+      const [data1, data2] = await Promise.all([resp1.json(), resp2.json()]);
+
+      // Select 5 random questions from each set
+      const getRandomQuestions = (data, count) => {
+        const shuffled = data.sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+      };
+
+      const selectedQuestions1 = getRandomQuestions(data1.questions, 5);
+      const selectedQuestions2 = getRandomQuestions(data2.questions, 5);
+
+      // Combine questions from both files
+      const selectedQuestions = [...selectedQuestions1, ...selectedQuestions2];
+
+      // Map questions and options
+      const questions = selectedQuestions.map((i) => i.question);
+      const opt = selectedQuestions.map((i) => i.options);
+
       setQuestionsSelected(questions);
-
-      const opt = data.questions.map((i) => i.options);
       setOptions(opt);
-
       setAnswers(new Array(questions.length).fill(null));
     };
 

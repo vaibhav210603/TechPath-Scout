@@ -1,0 +1,41 @@
+{
+    "questions": [
+      {
+        "question": "A man is facing east and turns 90 degrees to his right. He then turns 180 degrees to his left and finally turns 45 degrees to his right. In which direction is he now facing?",
+        "options": [
+          "North-East",
+          "South-East",
+          "South-West",
+          "North-West"
+        ]
+      },
+      {
+        "question": "If all roses are flowers and some flowers fade quickly",
+        "options": [
+          "Some roses fade quickly",
+          "All roses fade quickly",
+          "Zero roses fade quickly",
+          "Inconclusive"
+        ]
+      },
+      {
+        "question": "A scooter has 2 tyres and a Stepney. A tyre can travel maximum 5 kms. How far you can go with that scooter.",
+        "options": [
+          "5",
+          "10",
+          "7.5",
+          "12.5"
+        ]
+      },
+      {
+        "question": "Labours in a field work twice as fast everyday compared to the previous day, 100 bricks have to be laid, and on the first day itself half the work is done, how many days till full completion of the task?",
+        "options": [
+          "2",
+          "2.5",
+          "1.5",
+          "inconclusive"
+        ]
+      }
+    ]
+  }
+  
