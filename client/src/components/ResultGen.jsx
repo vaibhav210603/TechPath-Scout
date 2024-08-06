@@ -43,7 +43,7 @@ function ResultGen() {
   const run = async () => {
     try {
       setIsLoading(true); // Set loading to true
-      const res = await fetch('http://localhost:8000/generate', {
+      const res = await fetch('https://techpath-scout-server.vercel.app/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
