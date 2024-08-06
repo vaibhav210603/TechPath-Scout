@@ -1,48 +1,56 @@
-/* HTML: <div class="loader"></div> */
-.loader {
-  --s: 25px;
-  --g :5px;  
-  
-  width: calc(3*(1.353*var(--s) + var(--g)));
-  display: grid;
-  justify-items: end;
-  aspect-ratio: 3;
-  overflow: hidden;
-  --_m: linear-gradient(90deg,#0000,#000 15px calc(100% - 15px),#0000);
-  -webkit-mask: var(--_m);
-          mask: var(--_m);
-}
-.loader:before { 
-  content: "";
-  width: 200%;
-  background:
-    linear-gradient(90deg,#ff1818 50%,#0000 0),
-    conic-gradient(from -90deg at var(--s) calc(0.353*var(--s)),
-      #fff 135deg,#666 0 270deg,#aaa 0); 
-  background-blend-mode: multiply;
-  --_m:
-    linear-gradient(to bottom right,
-       #0000 calc(0.25*var(--s)),#000 0 calc(100% - calc(0.25*var(--s)) - 1.414*var(--g)),#0000 0),
-    conic-gradient(from -90deg at right var(--g) bottom var(--g),#000 90deg,#0000 0);
-  -webkit-mask: var(--_m);
-          mask: var(--_m);
-  background-size:   calc(100%/3) 100%, calc(100%/6) 100%;
-  -webkit-mask-size: calc(100%/6) 100%;
-          mask-size: calc(100%/6) 100%;
-  -webkit-mask-composite: source-in;
-          mask-composite: intersect;
-  animation: l10 1s infinite linear;
-}
-@keyframes l10 {
-  to {transform:translate(calc(100%/3))}
-}
-.bucket {
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  background-color: rgba(0, 0, 0, 0.9);
+/* src/components/Loading.css */
+
+.loading-screen {
   display: flex;
-  position: relative;
-  z-index: 999;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #282c34; /* Optional background color */
+  color: white; /* Optional text color */
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.loading-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-animation div {
+  width: 1rem;
+  height: 1rem;
+  margin: 0 0.2rem;
+  background-color: #61dafb; /* Color for the animation dots */
+  border-radius: 50%;
+  animation: pulsate 1.5s infinite ease-in-out;
+}
+
+.loading-animation div:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.loading-animation div:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
