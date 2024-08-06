@@ -10,6 +10,10 @@ const key = "AIzaSyBTd5GCKzvM4z7mnR-EqvMbcks8uePQgsY";
 
 const genAI = new GoogleGenerativeAI(key);
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the TechPath Scout Server!");
+});
+
 app.post("/generate", async (req, res) => {
   const userText = req.body.text; // Get text from request body
 
