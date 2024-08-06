@@ -1,0 +1,159 @@
+/* Container */
+.contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0f4f8, #c9d6e3);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Header */
+  .contact-header {
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  /* Circular Photo */
+  .contact-photo {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ffffff;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .contact-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Title and Subtitle */
+  .contact-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .contact-subtitle {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-top: 0;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  /* Card */
+  .contact-card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: zoomIn 1s ease-in-out;
+  }
+  
+  .contact-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .contact-name {
+    font-size: 2rem;
+    color: #34495e;
+    margin-bottom: 10px;
+  }
+  
+  .contact-details {
+    font-size: 1.2rem;
+    color: #34495e;
+    margin: 10px 0;
+  }
+  
+  .contact-details a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .contact-details a:hover {
+    color: #2980b9;
+  }
+  
+  /* Skills Section */
+  .contact-skills {
+    margin-top: 30px;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  .contact-skills h4 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .contact-skills ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .contact-skills li {
+    background-color: #ecf0f1;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 1rem;
+    color: #2c3e50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .contact-skills li:hover {
+    background-color: #bdc3c7;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .contact-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .contact-icon:hover {
+    transform: scale(1.2);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  

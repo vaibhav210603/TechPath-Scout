@@ -12,6 +12,8 @@ import {
   import Assistant from './components/Assistant.jsx';
 import ResultGen from './components/ResultGen.jsx';
 import SignIn from './components/SignIn.jsx';
+import Contact from './components/Contact.jsx';
+  
   
 
 
@@ -44,7 +46,10 @@ import SignIn from './components/SignIn.jsx';
         element: <SignIn/>
       },
    
-      
+      {
+        path: "/contact",
+        element: <Contact/>
+      },
     
     ]
 

@@ -40,7 +40,7 @@ export default function Hero() {
 
           
           <div className='aftertext'>
-            <Link to= "./quiz"> <button className='after_textbox'>Get Started</button></Link>
+            <Link to= "./signin"> <button className='after_textbox'>Get Started</button></Link>
           </div>
 
           

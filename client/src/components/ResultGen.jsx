@@ -22,7 +22,7 @@ function ResultGen() {
   const prompt =
     ` Consider yourself a computer science domain counselor. You have just evaluated a student named ${user_details.name} based on a series of responses to questions designed to assess their interests, skills, and mindset. Your task is to provide a comprehensive analysis of the student's mindset and qualities, recommending which computer science domain they should pursue and why.
 
-    Begin your response with a friendly greeting using the student's name, such as "Hey [name] in heading,". Then proceed with the analysis:
+    Begin your response with a friendly greeting using the student's name, such as "Hey [name], i hope youre doing great"(make this initial line as bold and higher font text). Then proceed with the analysis:
     
     Analysis: Offer an insightful evaluation of the student's strengths and weaknesses. Highlight key attributes, such as problem-solving skills, creativity, logical reasoning, and passion for technology. Provide examples from their answers to illustrate your points.
     
@@ -154,7 +154,7 @@ function ResultGen() {
 
   return (
     <div className="mega">
-      <h1 className="heading">Here's your analysis {user_details.name}</h1>
+      <h1 className="heading">Here's your analysis, {user_details.name.split(' ')[0]}</h1>
       <div className="result_container">
         {isLoading ? ( 
           <div className="loading-message">Analysing your responses, please wait...</div>

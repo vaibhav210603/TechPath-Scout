@@ -11,8 +11,15 @@ const Layout = () => {
         
           <Link to="/" className='r'>Home</Link>
           <Link to="/assistant" className='r'>Assistant</Link>
-          <Link to="/assistant" className='r'>Contact</Link>
-          <Link to="/assistant" className='r'>Blueprint</Link>
+          <Link to="/contact" className='r'>Contact</Link>
+          <a
+  href="https://github.com/vaibhav210603/TechPath-Scout/blob/main/Techpath_scout%20blueprint.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="r"
+>
+  Blueprint
+</a>
          
           <Link to="/signin" className='r signin'>SignIn</Link>
 
