@@ -31,20 +31,20 @@ function ResultGen() {
 
     Begin your response with a friendly greeting using the student's name, such as "Hey [name], I hope you're doing great" (make this initial line as bold and higher font text). Then proceed with the analysis:
     
-    **Analysis:** 
+    ## Analysis:
     - Offer an insightful evaluation of the student's strengths and weaknesses.
     - Highlight key attributes, such as problem-solving skills, creativity, logical reasoning, and passion for technology.
     - Provide examples from their answers to illustrate your points.
     
-    **Domain Recommendation:**
+    ## Domain Recommendation:
     - Suggest one or more computer science domains that align with the student's strengths and interests.
     - Include a detailed justification for each recommended domain, explaining how it suits their qualities and aspirations.
     
-    **Improvement Suggestions:**
+    ## Improvement Suggestions:
     - Identify areas where the student can improve, such as enhancing their logical reasoning or technical skills.
     - Provide practical advice on how they can develop these areas, such as engaging in specific projects, courses, or activities.
     
-    **Domain Inclination Score:**
+    ## Domain Inclination Score:
     - Provide a clearly formatted list of scores, with each domain on a new line in the following format:
       - **Software Engineering**: Score (e.g., 8/10)
       - **Data Science/Machine Learning**: Score (e.g., 7/10)
