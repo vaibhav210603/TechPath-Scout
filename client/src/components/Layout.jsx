@@ -9,16 +9,16 @@ const Layout = () => {
     <div>
       <div className='navbar_container'>
         
-          <Link to="/" className='r'>Home</Link>
-          <Link to="/assistant" className='r'>Assistant</Link>
-          <Link to="/contact" className='r'>Contact</Link>
+          <Link to="/" className='r '><img className='home_icon' src='./../../public/trophy-red.png'></img></Link>
+          <Link to="/assistant" className='r'><p>Assistant</p></Link>
+          <Link to="/contact" className='r'><p>Contact</p></Link>
           <a
   href="https://github.com/vaibhav210603/TechPath-Scout/blob/main/Techpath_scout%20blueprint.pdf"
   target="_blank"
   rel="noopener noreferrer"
   className="r"
 >
-  Blueprint
+<p>Blueprint</p>
 </a>
          
           <Link to="/signin" className='r signin'>SignIn</Link>
