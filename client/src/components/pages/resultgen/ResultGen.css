@@ -1,13 +1,15 @@
 html, body {
   height: 100%;
   margin: 0;
+  width: 100%;
+  background-image:url('../../../../public/backgif5.gif');
 }
 
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff; /* Background color */
+   /* Background color */
   overflow: hidden; /* Prevent body from scrolling */
 }
 
@@ -20,7 +22,7 @@ body {
   align-items: center; /* Center content horizontally */
   border: 2px solid #00000000;
   overflow-y: auto; /* Enable scrolling */
-  padding: 20px; /* Adjust padding for more space */
+  padding: 100px; /* Adjust padding for more space */
   box-sizing: border-box;
   background-color: #ffffff; /* Background color */
   border-radius: 8px; /* Rounded corners */
@@ -29,11 +31,11 @@ body {
 }
 
 .heading {
-  margin-bottom: 20px;
+ margin-bottom: 20px;
   text-align: center;
   font-size: 60px;
   font-weight: bold; /* Heading style */
-  color: #333; /* Dark color for readability */
+  color: rgb(255, 255, 255); /* Dark color for readability */
 }
 
 .typewriter {
@@ -43,7 +45,7 @@ body {
   width: 100%; /* Ensure typewriter text takes full width */
   font-size: 18px;
   margin-bottom: 20px; /* Space between text and chart */
-  color: #333; /* Dark color for readability */
+  color: rgb(10, 10, 10); /* Dark color for readability */
   flex-grow: 1; /* Allow typewriter text to grow and push chart down */
 }
 

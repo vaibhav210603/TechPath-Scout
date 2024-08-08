@@ -19,7 +19,7 @@ const SignIn = () => {
 
   return (
     <div className="signin-container">
-      <h2>Sign In</h2>
+      <div className="typewrite"><h2>Sign In</h2></div>
       <form onSubmit={handleSubmit}> {/* Add onSubmit handler */}
         <div className="form-group">
           <label htmlFor="name">Name:</label>

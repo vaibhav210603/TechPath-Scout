@@ -12,11 +12,17 @@ html, body {
   
   .signin-container {
     width: 140%;
+    
     max-width: 400px;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .signin-container:hover
+  {
+
   }
   
   h2 {

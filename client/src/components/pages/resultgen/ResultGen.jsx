@@ -201,7 +201,7 @@ function ResultGen() {
 
   return (
     <div className="mega">
-      <h1 className="heading">Here's your analysis, {user_details.name.split(' ')[0]}</h1>
+      <div div className="heading typewrite"><h2>Here's your analysis,{user_details.name.split(' ')[0]}</h2></div>
       <div className="result_container">
         {isLoading ? (
           <div className="loading-message">Analysing your responses, please wait...</div>
