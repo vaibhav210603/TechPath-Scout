@@ -25,7 +25,7 @@ body {
   padding: 100px; /* Adjust padding for more space */
   box-sizing: border-box;
   background-color: #ffffff; /* Background color */
-  border-radius: 8px; /* Rounded corners */
+  border-radius: 15px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for better separation */
   position: relative; /* Make the container relative */
 }
@@ -39,6 +39,7 @@ body {
 }
 
 .typewriter {
+  margin-top: -50px;
   display: inline-block;
   white-space: pre-wrap;
   text-align: left;
@@ -59,4 +60,10 @@ body {
 
 .download {
   margin-top: 20px; /* Space above the download button */
+}
+
+
+/* For WebKit browsers (Chrome, Safari) */
+.result_container::-webkit-scrollbar {
+  display: none;
 }

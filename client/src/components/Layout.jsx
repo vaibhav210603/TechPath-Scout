@@ -21,7 +21,7 @@ const Layout = () => {
 <p>Blueprint</p>
 </a>
          
-          <Link to="/signin" className='r signin'>SignIn</Link>
+
 
           
        
