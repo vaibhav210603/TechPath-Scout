@@ -1,0 +1,89 @@
+/* assistant.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+body {
+  font-family: 'Roboto Mono', monospace;
+   background-image: url('../../../../public/backgif5.gif');
+   
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .assistant-container {
+    background-color:rgba(255,255,255,0.9);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  .assistant-title {
+    font-size: 24px;
+    color: rgb(2, 2, 2);
+    margin-bottom: 20px;
+  }
+  
+  .assistant-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .assistant-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 3px solid rgb(254, 249, 249);
+    margin-bottom: 15px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+  }
+  
+  .assistant-input:hover {
+    border-color: #bfe72e;
+    outline: none;
+  }
+  
+  .assistant-button {
+    background-color: #4a90e2;
+    color: rgb(209, 178, 178);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .assistant-button:hover {
+    background-color: #357ab7;
+  }
+  
+  .assistant-response {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .assistant-response h3 {
+    font-size: 18px;
+    color: rgb(59, 55, 55);
+  }
+  
+  .assistant-response p {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: rgb(249, 249, 249);
+    white-space: pre-wrap;
+    border: 1px solid #ddd;
+  }
+  

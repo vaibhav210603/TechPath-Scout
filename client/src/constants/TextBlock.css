@@ -1,0 +1,48 @@
+/* Font import */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+/* General styling */
+#textblock-container {
+    font-family: 'Roboto Mono', monospace;
+    margin: 20px;
+}
+
+/* Styles for the title with typing effect */
+#textblock-title {
+    font-size: 2rem;
+    font-weight: bold;
+    display: inline-block;
+    border-right: 2px solid rgb(171, 33, 33); /* Caret color */
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 4s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+}
+
+/* Styles for the content */
+#textblock-content {
+    font-size: 1rem;
+    margin-top: 20px;
+    line-height: 2.5;
+}
+
+/* Keyframes for typing effect */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* Keyframes for the blinking caret */
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: rgb(171, 33, 33); }
+}
+
+/* Footer styles */
+#textblock-footer {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px 0;
+    color: #555;
+}
