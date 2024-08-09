@@ -50,11 +50,11 @@ function TextBlock() {
 
     While many students navigate their academic paths without clear guidance, you can confidently explore your true potential.
     
-    My goal with TechPath Scout, is to ensure that you choose your career wisely, find personalized insights, and make well-informed decisions, turning confusion into a clear vision for your future in the dynamic world of computer science.
+    I am designed to ensure that you choose your career wisely, find personalized insights, and make well-informed decisions, turning confusion into a clear vision for your future in the dynamic world of computer science.
     
     Get a personalised report on yourself and analyze to find what suits you best.
     
-    FREE ROADMAPS AND RESOURCES FOR YOUR JOURNEY TOO😎!..
+    FREE ROADMAPS AND RESOURCES FOR YOUR JOURNEY TOO😎!
     
     
     >>Click below to get started⭐<<`;
