@@ -1,47 +1,115 @@
-/* Layout.css */
-
 .navbar_container {
-    width: 100vw;
-    background-color: rgb(255, 255, 255);
-    height: 8vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid black;
-    
-    padding: 0 20px;
-    z-index: 1000;
-  }
-  
-  .page-content {
-    margin-top: 5vh; /* Adjust to the height of your navbar */
-    padding: 20px;
-  }
-  
- .r  {
-    z-index: 1001;
-    margin-right: 40px; 
-    margin-left: 20px;
-    font-size:18px;
-    color: black;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;/* Ensure the button is always on top */
-  }
+  margin-top: 10px;
+  width: 120px; /* Start with a small width */
+  height: 40px; /* Make it circular initially */
+  justify-content: center;
+  background-color: rgb(208, 205, 205);
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 50px;
+  z-index: 1000;
+  transition: width 0.5s ease, height 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+  overflow: hidden; /* Hide text initially */
+  padding: 0;
+}
 
-  .r:hover{
-    font-size: 19px;
-    color: rgb(116, 63, 6);
-    font-weight: bold;
-  }
+.navbar_container::before, .navbar_container::after {
+  content: "";
+  display: block;
+  width: 10px; /* Width of each "eye" */
+  height: 10px; /* Height of each "eye" */
+  
+  background-color: rgb(135, 10, 124);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: eye-movement 15s infinite;
+}
 
-  .home_icon{
-    width: 40px;
-    margin-bottom: 10px;
-    
+.navbar_container::before {
+  left: 45%; /* Position left eye */
+}
+
+.navbar_container::after {
+  right: 45%; /* Position right eye */
+}
+
+@keyframes eye-movement {
+  0%, 20%, 40%, 60%, 80%, 100% {
+    transform: translateY(-50%) translateX(-30px); /* Looking straight */
+  }
+ 
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateY(-50%) translateX(30px); /* Looking sideways */
   }
   
-  .signin{
-    margin-left: 70%;
+  15%, 35%, 55%, 75%, 95% {
+    transform: translateY(-50%) scaleY(0.1); /* Blinking */
   }
-  
+}
+
+.navbar_container:hover::before, .navbar_container:hover::after {
+  display: none; /* Hide the blinking eyes on hover */
+}
+
+.navbar_container:hover {
+  width: 70%; /* Expand width on hover */
+  height: 8vh; /* Adjust height to your original design */
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 8px 15px rgba(70, 3, 51, 0.9);
+  padding: 0 10px; /* Add padding back */
+}
+
+.page-content {
+  margin-top: 10vh; /* Adjust to the height of your navbar */
+  padding: 20px;
+}
+
+.r {
+  z-index: 1001;
+  margin-right: 40px;
+  margin-top: 10px;
+  margin-left: 20px;
+  font-size: 18px;
+  color: transparent; /* Make text transparent initially */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; /* Ensure the button is always on top */
+  transition: color 0.5s ease, font-size 0.5s ease;
+}
+
+.navbar_container:hover .r {
+  color: black; /* Reveal text on hover */
+}
+
+.r:hover {
+  font-size: 19px;
+  color: rgb(113, 24, 125);
+  font-weight: bold;
+}
+
+.home_icon {
+  width: 40px;
+  margin-bottom: 10px;
+  transition: opacity 0.5s ease; /* Smooth transition for opacity */
+  opacity: 0; /* Hide icon initially */
+}
+
+.navbar_container:hover .home_icon {
+  opacity: 1; /* Show icon on hover */
+}
+
+.signin {
+  margin-left: auto; /* Pushes the signin element to the far right */
+  color: transparent; /* Hide text initially */
+  transition: color 0.5s ease;
+}
+
+.navbar_container:hover .signin {
+  color: black; /* Reveal text on hover */
+}

@@ -45,8 +45,8 @@ function TextBlock() {
         return () => clearTimeout(delayTimeout);
     }, []);
 
-    const title = "Why Tech-Path Scout?";
-    const content = `An AI integrated platform designed to help you find software domains ideal for you !
+    const title = "Welcome to TechPath Scout!";
+    const content = ` I'm an AI integrated platform designed to help you find software domains ideal for you !
 
     While many students navigate their academic paths without clear guidance, you can confidently explore your true potential.
     
@@ -54,7 +54,10 @@ function TextBlock() {
     
     Get a personalised report on yourself and analyze to find what suits you best.
     
-    FREE ROADMAPS AND RESOURCES FOR YOUR JOURNEY TOO!😎`;
+    FREE ROADMAPS AND RESOURCES FOR YOUR JOURNEY TOO😎!..
+    
+    
+    >>Click below to get started⭐<<`;
 
     return (
         <div id="textblock">
@@ -77,7 +80,7 @@ function TextBlock() {
                     <p id="textblock-content">
                         <Typewriter 
                             text={content} 
-                            speed={15} 
+                            speed={10} 
                             delayAfterPunctuation={500} // Adjust delay as needed
                         />
                     </p>

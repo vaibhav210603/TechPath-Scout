@@ -81,7 +81,7 @@ export default function Mcq({ setQuizResults }) {
     <div className="bigger_container">
       <div className="contain">
         <div className="ques">
-          <p>{questionsSelected[currentQuestionIndex]}</p>
+          <h2>{questionsSelected[currentQuestionIndex]}</h2>
         </div>
         {options.length > 0 &&
           options[currentQuestionIndex].map((option, index) => (

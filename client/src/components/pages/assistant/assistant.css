@@ -4,7 +4,7 @@
 
 body {
   font-family: 'Roboto Mono', monospace;
-   background-image: url('../../../../public/backgif5.gif');
+   background-image: url('/backgif5.gif');
    
     margin: 0;
     padding: 0;

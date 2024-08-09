@@ -1,12 +1,14 @@
 /* Quiz.css */
 
+ 
 .container_quiz {
+  background-image: url('./../../public/back_quiz.gif');
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start; /* Align items at the top */
     
-    background-color: #ffffff;
+   
     max-height: 100vh; /* Make sure the container takes at least the full height of the viewport */
     box-sizing: border-box; /* Ensure padding is included in the height calculation */
     overflow: hidden; /* Prevent scrolling within the container */
@@ -15,8 +17,8 @@
   .time {
     width: 100%;
     max-width: 200px;
-    background-color: #e9e1e1;
-    border: 1px solid rgb(169, 163, 163);
+    background-color: #efd7d7;
+    border: 1px solid rgb(156, 141, 141);
     border-radius: 10px;
     padding: 10px;
    margin-top: 100px;

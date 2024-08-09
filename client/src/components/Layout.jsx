@@ -9,7 +9,7 @@ const Layout = () => {
     <div>
       <div className='navbar_container'>
         
-          <Link to="/" className='r '>HOME</Link>
+          <Link to="/" className='r'><p>Home</p></Link>
           <Link to="/assistant" className='r'><p>Assistant</p></Link>
           <Link to="/contact" className='r'><p>Contact</p></Link>
           <a

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "html2canvas": "^1.4.1",
     "react-simple-chatbot": "^0.6.1"
   }
 }

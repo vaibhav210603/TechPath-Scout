@@ -33,7 +33,7 @@ function Contact() {
         </ul>
       </div>
       <h2 className="contact-title">Let's Connect!</h2>
-        <p className="contact-subtitle">"Full stack MERN developer with a passion for expanding beyond web development."</p>
+        <p className="contact-subtitle">"Full stack developer with a passion for expanding beyond web development."</p>
     </div>
   );
 }
