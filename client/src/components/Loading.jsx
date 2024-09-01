@@ -18,7 +18,7 @@ const Loading = ({ onLoadingComplete }) => {
 
   return (
     <div className="loading-screen" style={{ display: loading ? 'flex' : 'none' }}>
-      <div className="loading-text">Loading</div>
+      <div className="loading-text">Mobile version soon...</div>
       <div className="loading-animation">
         <div></div>
         <div></div>

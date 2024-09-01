@@ -10,13 +10,7 @@
         ]
       },
       {
-        "question": "If all roses are flowers and some flowers fade quickly",
-        "options": [
-          "Some roses fade quickly",
-          "All roses fade quickly",
-          "Zero roses fade quickly",
-          "Inconclusive"
-        ]
+         
       },
       {
         "question": "A scooter has 2 tyres and a Stepney. A tyre can travel maximum 5 kms. How far you can go with that scooter.",
@@ -30,7 +24,7 @@
       {
         "question": "Labours in a field work twice as fast everyday compared to the previous day, 100 bricks have to be laid, and on the first day itself half the work is done, how many days till full completion of the task?",
         "options": [
-          "2",
+          "2", 
           "2.5",
           "1.5",
           "inconclusive"
