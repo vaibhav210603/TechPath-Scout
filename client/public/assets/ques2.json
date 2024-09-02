@@ -10,7 +10,13 @@
         ]
       },
       {
-         
+        "question": "If all roses are flowers and some flowers fade quickly",
+        "options": [
+          "Some roses fade quickly",
+          "All roses fade quickly",
+          "Zero roses fade quickly",
+          "Inconclusive"
+        ]
       },
       {
         "question": "A scooter has 2 tyres and a Stepney. A tyre can travel maximum 5 kms. How far you can go with that scooter.",
