@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './ResultGen.css';
-import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from '@react-pdf/renderer';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
@@ -15,9 +15,9 @@ function ResultGen() {
   const [isLoading, setIsLoading] = useState(true);
   const [scores, setScores] = useState([]);
   const [isTypingComplete, setIsTypingComplete] = useState(false);
-  const [showChart, setShowChart] = useState(false); // Track chart visibility // Track typewriter effect completion
+  const [showChart, setShowChart] = useState(false);
+  const [chartImage, setChartImage] = useState(null);
 
-  // Converting the prop ques, ans to string
   const questionsAnswersString = results
     .map(
       (item, index) =>
@@ -25,20 +25,22 @@ function ResultGen() {
     )
     .join('\n\n');
 
-  // Attaching the prompt to the string
-  const prompt =
-    ` Consider yourself a computer science domain counselor. You have just evaluated a student named ${user_details.name} based on a series of responses to questions designed to assess their interests, skills, and mindset. Your task is to provide a comprehensive analysis of the student's mindset and qualities, recommending which computer science domain they should pursue and why.
+  const prompt = `Consider yourself a computer science domain counselor. You have just evaluated a student named ${user_details.name} based on a series of responses to questions designed to assess their interests, skills, and mindset. Your task is to provide a comprehensive analysis of the student's mindset and qualities, recommending which computer science domain they should pursue and why.
 
     Begin your response with a friendly greeting using the student's name, such as "Hey [name], I hope you're doing great" (make this initial line as bold and higher font text). Then proceed with the analysis:
     
     ## Analysis:
-    - Offer an insightful evaluation of the student's strengths and weaknesses.
-    - Highlight key attributes, such as problem-solving skills, creativity, logical reasoning, and passion for technology.
-    - Provide examples from their answers to illustrate your points.
+   
+    - Offer an insightful evaluation of the student's strengths and weaknesses in bullet points.
+
+    Use numbers and statistics in the result for better engagement and captivation and to amke it more presentable
+    Like in what percentage of students does the user lie, focus more on comparision withteh average masses with numbers(start analysis with this)
     
     ## Domain Recommendation:
-    - Suggest one or more computer science domains that align with the student's strengths and interests.
-    - Include a detailed justification for each recommended domain, explaining how it suits their qualities and aspirations.
+    - Suggest two or more computer science domains that align with the student's strengths and interests.
+    - Include a detailed justification for each recommended domain and also include links for resources to learn the domain from(free)
+    the link font should be smaller and unbolded
+    bold the statment that says"Here are some best FREE resources on the internet"
     
     ## Improvement Suggestions:
     - Identify areas where the student can improve, such as enhancing their logical reasoning or technical skills.
@@ -50,18 +52,19 @@ function ResultGen() {
       - **Data Science/Machine Learning**: Score (e.g., 7/10)
       - **Cybersecurity**: Score (e.g., 7/10)
     - Use consistent bold formatting for each domain name and score.
+
+    Do not use these exact domains in the exmaple above
+    use apropriate domains according to user answers(can be 2-5 domain recommendations)
+
+
     
-    Ensure that the analysis for each student is unique and personalized based on their responses. Your tone should be encouraging and supportive, helping the student feel confident in their path forward. Give extra spaces before and after headings to make them clear.
-    `;
+    Ensure that the analysis for each student is unique and personalized based on their responses. Your tone should be encouraging and supportive, helping the student feel confident in their path forward. Give extra spaces before and after headings to make them clear.`;
 
   const fullText = `${questionsAnswersString}\n\n${prompt}`;
 
-  console.log(fullText);
-
-  // Sending the string of response to backend
   const run = async () => {
     try {
-      setIsLoading(true); // Set loading to true
+      setIsLoading(true);
       const res = await fetch('https://techpath-scout-server.vercel.app/generate', {
         method: 'POST',
         headers: {
@@ -73,7 +76,6 @@ function ResultGen() {
       const data = await res.json();
       setResponse(data.story);
 
-      // Extract scores from the response
       const scoreMatches = data.story.match(/\*\*(.*?)\*\*:\s*(\d+)\/10/g) || [];
       const extractedScores = scoreMatches.map(match => {
         const parts = match.match(/\*\*(.*?)\*\*:\s*(\d+)/);
@@ -86,7 +88,7 @@ function ResultGen() {
     } catch (error) {
       console.error('Error fetching the analysis:', error);
     } finally {
-      setIsLoading(false); // Set loading to false
+      setIsLoading(false);
     }
   };
 
@@ -94,9 +96,6 @@ function ResultGen() {
     run();
   }, []);
 
-  
-
-  // Typewriter effect
   const typeWriterEffect = (element, text, speed) => {
     const formattedText = text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -134,7 +133,6 @@ function ResultGen() {
 
         typeCharacter();
       } else {
-        // Set typing complete to true when finished
         setIsTypingComplete(true);
       }
     };
@@ -150,45 +148,57 @@ function ResultGen() {
     }
   }, [response]);
 
-  console.log('Response:', response);
-  console.log('Extracted Scores:', scores);
-
-  // Define styles for PDF with heading
   const styles = StyleSheet.create({
     page: {
       flexDirection: 'column',
-      backgroundColor: '#E4E4E4',
-      padding: 20,
-    },
-    heading: {
-      fontSize: 20,
-      marginBottom: 10,
-      textAlign: 'center',
-      fontWeight: 'bold',
+      backgroundColor: '#FFFFFF',
+      padding: 30,
     },
     section: {
       margin: 10,
       padding: 10,
-      flexGrow: 1,
+    },
+    heading: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 10,
+    },
+    subheading: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      marginTop: 15,
+      marginBottom: 5,
     },
     text: {
       fontSize: 12,
-      fontFamily: 'Times-Roman',
+      marginBottom: 5,
+    },
+    listItem: {
+      fontSize: 12,
+      marginLeft: 10,
+    },
+    chartContainer: {
+      marginTop: 20,
+      alignItems: 'center',
+    },
+    chart: {
+      width: 300,
+      height: 300,
     },
   });
 
-  const MyDocument = () => (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <Text style={styles.heading}>TechPath Scout Report</Text> {/* Add heading */}
-        <View style={styles.section}>
-          <Text style={styles.text}>{response}</Text> {/* Apply the text style */}
-        </View>
-      </Page>
-    </Document>
-  );
+  const formatResponseText = (text) => {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, (_, p1) => `<strong>${p1}</strong>`)
+      .replace(/\*(.*?)\*/g, (_, p1) => `<em>${p1}</em>`)
+      .replace(/^## (.*)$/gm, (_, p1) => `\n<h2>${p1}</h2>\n`)
+      .replace(/^### (.*)$/gm, (_, p1) => `\n<h3>${p1}</h3>\n`)
+      .replace(/^- (.*)$/gm, (_, p1) => `\n• ${p1}`)
+      .replace(/^\d+\. (.*)$/gm, (_, p1) => `\n${p1}`)
+      .replace(/^> (.*)$/gm, (_, p1) => `\n"${p1}"\n`)
+      .split('<br>');
+  };
 
-  // Prepare data for Doughnut chart
   const chartData = {
     labels: scores.map(score => score.domain),
     datasets: [
@@ -199,9 +209,41 @@ function ResultGen() {
     ],
   };
 
+  useEffect(() => {
+    if (scores.length > 0) {
+      const chart = document.createElement('canvas');
+      new ChartJS(chart, {
+        type: 'doughnut',
+        data: chartData,
+        options: { responsive: false, width: 300, height: 300 }
+      });
+      setChartImage(chart.toDataURL());
+    }
+  }, [scores]);
+
+  const MyDocument = () => (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <Text style={styles.heading}>TechPath Scout Report</Text>
+        {formatResponseText(response).map((paragraph, index) => {
+          if (paragraph.startsWith('<h2>')) {
+            return <Text key={index} style={styles.subheading}>{paragraph.replace(/<\/?h2>/g, '')}</Text>;
+          } else if (paragraph.startsWith('<h3>')) {
+            return <Text key={index} style={[styles.subheading, { fontSize: 16 }]}>{paragraph.replace(/<\/?h3>/g, '')}</Text>;
+          } else if (paragraph.startsWith('•')) {
+            return <Text key={index} style={styles.listItem}>{paragraph}</Text>;
+          } else {
+            return <Text key={index} style={styles.text}>{paragraph}</Text>;
+          }
+        })}
+       
+      </Page>
+    </Document>
+  );
+
   return (
     <div className="mega">
-      <div div className="heading typewrite"><h2>Here's your analysis,{user_details.name.split(' ')[0]}</h2></div>
+      <div className="heading typewrite"><h2>Here's your analysis, {user_details.name.split(' ')[0]}</h2></div>
       <div className="result_container">
         {isLoading ? (
           <div className="loading-message">Analysing your responses, please wait...</div>
@@ -216,7 +258,7 @@ function ResultGen() {
           </>
         )}
       </div>
-      <PDFDownloadLink document={<MyDocument />} fileName="report.pdf">
+      <PDFDownloadLink document={<MyDocument />} fileName="TechPathScoutReport.pdf">
         {({ blob, url, loading, error }) =>
           loading ? 'Preparing document...' : <button className='download'>Download PDF</button>
         }

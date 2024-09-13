@@ -11,9 +11,8 @@ function Typewriter({ text, speed, delayAfterPunctuation, onComplete }) {
             let delay = speed;
 
             // Add extra delay after punctuation marks
-            if (char === '.' || char === '!' || char === '?') {
+            if (char === '.' || char === ',' || char === '!' || char === '?') {
                 delay += delayAfterPunctuation;
-                // Insert a line break after punctuation
                 setDisplayedText((prev) => prev + char + '<br />');
             } else {
                 setDisplayedText((prev) => prev + char);
@@ -25,19 +24,18 @@ function Typewriter({ text, speed, delayAfterPunctuation, onComplete }) {
 
             return () => clearTimeout(timeout);
         } else if (onComplete) {
-            onComplete();
+            onComplete(); // Notify when typing is complete
         }
     }, [index, text, speed, delayAfterPunctuation, onComplete]);
 
     return <span dangerouslySetInnerHTML={{ __html: displayedText }} />;
 }
 
-function TextBlock() {
+function TextBlock({ onContentComplete }) {
     const [startTyping, setStartTyping] = useState(false);
     const [headingTyped, setHeadingTyped] = useState(false);
 
     useEffect(() => {
-        // Start typing after a 2-second delay
         const delayTimeout = setTimeout(() => {
             setStartTyping(true);
         }, 2000);
@@ -45,19 +43,12 @@ function TextBlock() {
         return () => clearTimeout(delayTimeout);
     }, []);
 
-    const title = "Welcome to TechPath Scout!";
-    const content = ` I'm an AI integrated platform designed to help you find software domains ideal for you !
-
-    While many students navigate their academic paths without clear guidance, you can confidently explore your true potential.
-    
-    I am designed to ensure that you choose your career wisely, find personalized insights, and make well-informed decisions, turning confusion into a clear vision for your future in the dynamic world of computer science.
-    
-    Get a personalised report on yourself and analyze to find what suits you best.
-    
-    FREE ROADMAPS AND RESOURCES FOR YOUR JOURNEY TOO😎!
-    
-    
-    >>Click below to get started⭐<<`;
+    const title = "8/10 students are clueless!";
+    const content = `Let's bulletproof your future!. 
+        While 80% students regret after randomly choosing their career paths, you can confidently explore your true potential.
+        AI/ML, Web Development, Cybersecurity, Game Development-- don't know what to pick?
+        I will help you find your ideal domain of excellence so that you can get ahead of 99% coders.
+        Click to get started ⭐`;
 
     return (
         <div id="textblock">
@@ -67,12 +58,7 @@ function TextBlock() {
                         <Typewriter 
                             text={title} 
                             speed={10} 
-                           // Adjust delay as needed
-                            onComplete={() => {
-                                setTimeout(() => {
-                                    setHeadingTyped(true);
-                                }, 2000); // Wait for 2 seconds before starting the paragraph
-                            }}
+                            onComplete={() => setTimeout(() => setHeadingTyped(true), 2000)} 
                         />
                     </p>
                 )}
@@ -81,11 +67,13 @@ function TextBlock() {
                         <Typewriter 
                             text={content} 
                             speed={10} 
-                            delayAfterPunctuation={500} // Adjust delay as needed
+                            delayAfterPunctuation={500} 
+                            onComplete={onContentComplete} // Notify when the content is fully typed
                         />
                     </p>
                 )}
             </div>
+            
             <footer id='textblock-footer'>Created With 🧡 By Vaibhav Upadhyay</footer>
         </div>
     );

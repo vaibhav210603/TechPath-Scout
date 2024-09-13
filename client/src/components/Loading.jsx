@@ -18,11 +18,9 @@ const Loading = ({ onLoadingComplete }) => {
 
   return (
     <div className="loading-screen" style={{ display: loading ? 'flex' : 'none' }}>
-      <div className="loading-text">Mobile version soon...</div>
-      <div className="loading-animation">
-        <div></div>
-        <div></div>
-        <div></div>
+
+      <div className="image">
+      <img src="https://i.pinimg.com/originals/b8/3e/c9/b83ec9d8ac7a6f2dfaa93fa4f150e3b6.gif"></img>
       </div>
     </div>
   );

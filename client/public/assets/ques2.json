@@ -1,35 +1,67 @@
 {
-    "questions": [
-      {
-        "question": "A man is facing east and turns 90 degrees to his right. He then turns 180 degrees to his left and finally turns 45 degrees to his right. In which direction is he now facing?",
-        "options": [
-          "North-East",
-          "South-East",
-          "South-West",
-          "North-West"
-        ]
-      },
-      {
-         
-      },
-      {
-        "question": "A scooter has 2 tyres and a Stepney. A tyre can travel maximum 5 kms. How far you can go with that scooter.",
-        "options": [
-          "5",
-          "10",
-          "7.5",
-          "12.5"
-        ]
-      },
-      {
-        "question": "Labours in a field work twice as fast everyday compared to the previous day, 100 bricks have to be laid, and on the first day itself half the work is done, how many days till full completion of the task?",
-        "options": [
-          "2", 
-          "2.5",
-          "1.5",
-          "inconclusive"
-        ]
-      }
-    ]
-  }
-  
+  "questions": [
+    {
+      "question": "A man is facing east and turns 90 degrees to his right. He then turns 180 degrees to his left and finally turns 45 degrees to his right. In which direction is he now facing?",
+      "options": [
+        "North-East",
+        "South-East",
+        "South-West",
+        "North-West"
+      ]
+    },
+    {
+      "question": "If all roses are flowers and some flowers fade quickly",
+      "options": [
+        "Some roses fade quickly",
+        "All roses fade quickly",
+        "Zero roses fade quickly",
+        "Inconclusive"
+      ]
+    },
+    {
+      "question": "A scooter has 2 tyres and a Stepney. A tyre can travel maximum 5 kms. How far you can go with that scooter.",
+      "options": [
+        "5",
+        "10",
+        "7.5",
+        "12.5"
+      ]
+    },
+    {
+      "question": "If labours work 2X faster everyday & 100 bricks have to be laid. On day 1, half the work is done, how many total days till all the bricks are laid?",
+      "options": [
+        "2", 
+        "2.5",
+        "1.5",
+        "inconclusive"
+      ]
+    },
+    {
+      "question": "A clock shows the time as 3:30 PM. If the minute hand moves 90 degrees counterclockwise, what time will it show?",
+      "options": [
+        "3:15 PM",
+        "3:00 PM",
+        "2:45 PM",
+        "2:30 PM"
+      ]
+    },
+    {
+      "question": "If a train travels 60 km in 1.5 hours, what is its average speed?",
+      "options": [
+        "30 km/h",
+        "40 km/h",
+        "50 km/h",
+        "60 km/h"
+      ]
+    },
+    {
+      "question": "A person buys 3 apples for Rs. 10 and sells 2 apples for Rs. 10. What is the profit percentage?",
+      "options": [
+        "25%",
+        "33.33%",
+        "50%",
+        "20%"
+      ]
+    }
+  ]
+}

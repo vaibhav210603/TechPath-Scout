@@ -15,15 +15,17 @@ body {
   }
   
   .assistant-container {
-    background-color:rgba(255,255,255,0.9);
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 500px;
     text-align: center;
-  }
-  
+    max-height: 80vh; /* Set a maximum height */
+    overflow-y: auto; /* Enable scrolling when content exceeds the height */
+}
+
   .assistant-title {
     font-size: 24px;
     color: rgb(2, 2, 2);
@@ -54,7 +56,7 @@ body {
   
   .assistant-button {
     background-color: #4a90e2;
-    color: rgb(209, 178, 178);
+    color: rgb(255, 255, 255);
     padding: 10px 20px;
     border: none;
     border-radius: 8px;

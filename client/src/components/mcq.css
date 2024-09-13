@@ -1,12 +1,12 @@
 
 
 .contain {
-    max-height: 70vh; /* Adjust height to fit the container */
-    width: 90vw;
-    max-width: 600px; /* Maximum width for larger screens */
+    max-height: 100vh; /* Adjust height to fit the container */
+    width: 100vw;
+    max-width: 700px; /* Maximum width for larger screens */
     border-radius: 10px;
     
-    border: 1px solid white;
+    border: 1px solid rgb(202, 199, 199);
     text-align: left;
     box-sizing: border-box;
     padding: 20px;
