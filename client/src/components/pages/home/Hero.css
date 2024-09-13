@@ -1,3 +1,4 @@
+/* Desktop/Laptop Styles */
 #textblock {
   background-color: #ffffff;
   height: 100vh;
@@ -96,6 +97,7 @@
 }
 
 .aftertext {
+  margin-top: -2px;
   padding-top: 100px;
   text-align: center;
   background-color: #ffffff;
@@ -117,4 +119,53 @@
   background-color: #c21585;
   border-radius: 20px;
   padding: 15px;
+}
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .animation, .animation_layer {
+    height: auto; /* Adjust height for mobile */
+  }
+
+  .animation_layer {
+    background-size: auto 100px; /* Adjust background size for smaller screens */
+  }
+
+  #textblock {
+    height: auto;
+    margin-top: -500px; /* Adjust margin */
+    background-color: #ffffff; /* Ensure white background is applied */
+  }
+
+  #textblock-container {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 20px;
+    font-size: 16px; /* Adjust font size */
+  }
+
+  #textblock-content {
+    font-size: 14px; /* Adjust font size */
+  }
+
+  #textblock-title {
+    font-size: 18px; /* Adjust font size */
+  }
+
+  #textblock-footer {
+    font-size: 12px; /* Adjust font size */
+    margin-bottom: 10px;
+  }
+
+  .aftertext {
+    margin-top: -20px; /* Reset margin */
+    padding-top: 150px;
+    padding-bottom: 600px; /* Adjust padding for better spacing */
+    height: auto; /* Adjust height */
+    background-color: #ffffff; /* Ensure white background is applied */
+  }
+
+  .after_textbox {
+    font-size: 14px; /* Adjust font size */
+    padding: 10px; /* Adjust padding */
+  }
 }

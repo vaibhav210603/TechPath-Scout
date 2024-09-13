@@ -38,7 +38,7 @@ function TextBlock({ onContentComplete }) {
     useEffect(() => {
         const delayTimeout = setTimeout(() => {
             setStartTyping(true);
-        }, 2000);
+        }, 1000);
 
         return () => clearTimeout(delayTimeout);
     }, []);
@@ -74,7 +74,7 @@ function TextBlock({ onContentComplete }) {
                 )}
             </div>
             
-            <footer id='textblock-footer'>Created With 🧡 By Vaibhav Upadhyay</footer>
+            <footer id='textblock-footer'>...</footer>
         </div>
     );
 }
