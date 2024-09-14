@@ -31,10 +31,10 @@ function ResultGen() {
     
     ## Analysis:
    
-    - Offer an insightful evaluation of the student's strengths and weaknesses in bullet points.
+    - Offer an insightful evaluation of the student's strengths and core competencies you coould identify
+    rate them with  their respective scores/10 too.
 
-    Use numbers and statistics in the result for better engagement and captivation and to amke it more presentable
-    Like in what percentage of students does the user lie, focus more on comparision withteh average masses with numbers(start analysis with this)
+      for each competencies, also mention" youre in the top x % of students
     
     ## Domain Recommendation:
     - Suggest two or more computer science domains that align with the student's strengths and interests.

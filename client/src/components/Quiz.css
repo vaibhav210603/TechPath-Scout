@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: flex-start; /* Align items at the top */
     
-   
+    margin-top: 10vh;
     max-height: 100vh; /* Make sure the container takes at least the full height of the viewport */
     box-sizing: border-box; /* Ensure padding is included in the height calculation */
     overflow: hidden; /* Prevent scrolling within the container */
@@ -21,7 +21,7 @@
     border: 1px solid rgb(156, 141, 141);
     border-radius: 10px;
     padding: 4px;
-   margin-top: 1%;
+   margin-top: 4%;
     position:absolute;
     z-index: 99;
     text-align: center;

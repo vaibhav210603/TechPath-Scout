@@ -16,7 +16,7 @@
 }
 
 .ques {
-    font-size: 1.8em; /* Relative font size */
+    font-size: 1.2em; /* Relative font size */
     margin-bottom: 10px; /* Margin to separate from options */
     word-wrap: break-word; /* Ensure long words break properly */
 }
@@ -48,6 +48,13 @@
     background-color: rgba(0, 128, 0, 0.2);
     border-color: #007bff;
 }
+
+.question_number {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+  }
+  
 
 .next,
 .prev,

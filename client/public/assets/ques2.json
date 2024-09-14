@@ -1,6 +1,78 @@
 {
   "questions": [
     {
+      "question": "You are given a list of numbers where each number represents the number of people in a line for each hour of the day. How would you determine the busiest hour?",
+      "options": [
+        "Calculate the average number of people per hour and identify the hour closest to this average.",
+        "Look for the maximum number in the list.",
+        "Create a graph of the numbers and visually inspect the peak.",
+        "Sum all the numbers and divide by the number of hours."
+      ]
+    },
+    {
+      "question": "A man is looking at a picture of someone. His friend asks who it is. The man replies, 'Brothers and sisters, I have none. But that man in the picture is my father’s son.' Who is in the picture?",
+      "options": [
+        "His father",
+        "His son",
+        "Himself",
+        "His friend"
+      ]
+    },
+    {
+      "question": "In a town of 100 people, 60 people are male and 40 people are female. If 25 people are both employed and female, and 20 people are employed and male, how many people are employed in total?",
+      "options": [
+        "40",
+        "50",
+        "60",
+        "70"
+      ]
+    },
+    {
+      "question": "You have a 3-gallon jug and a 5-gallon jug. You need to measure out exactly 4 gallons of water. How can you do it?",
+      "options": [
+        "Fill the 5-gallon jug and pour it into the 3-gallon jug twice.",
+        "Fill the 3-gallon jug, pour it into the 5-gallon jug, and then refill the 3-gallon jug.",
+        "Fill the 5-gallon jug and pour it into the 3-gallon jug until the 3-gallon jug is full.",
+        "Fill the 3-gallon jug, pour it into the 5-gallon jug, and then refill the 3-gallon jug again."
+      ]
+    },
+    {
+      "question": "A clock shows the time as 3:15. What is the angle between the hour and the minute hands?",
+      "options": [
+        "30 degrees",
+        "37.5 degrees",
+        "45 degrees",
+        "52.5 degrees"
+      ]
+    },
+    {
+      "question": "A sequence of numbers follows a pattern: 2, 6, 12, 20, 30, ___. What is the next number in the sequence?",
+      "options": [
+        "42",
+        "48",
+        "56",
+        "72"
+      ]
+    },
+    {
+      "question": "In a normal distribution, what percentage of data falls within one standard deviation of the mean?",
+      "options": [
+        "68%",
+        "75%",
+        "80%",
+        "95%"
+      ]
+    },
+    {
+      "question": "A data set has a mean of 50 and a standard deviation of 5. If a data point is 60, how many standard deviations away from the mean is this data point?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
       "question": "A man is facing east and turns 90 degrees to his right. He then turns 180 degrees to his left and finally turns 45 degrees to his right. In which direction is he now facing?",
       "options": [
         "North-East",
@@ -10,7 +82,7 @@
       ]
     },
     {
-      "question": "If all roses are flowers and some flowers fade quickly",
+      "question": "If all roses are flowers and some flowers fade quickly, what can be concluded?",
       "options": [
         "Some roses fade quickly",
         "All roses fade quickly",
@@ -19,7 +91,7 @@
       ]
     },
     {
-      "question": "A scooter has 2 tyres and a Stepney. A tyre can travel maximum 5 kms. How far you can go with that scooter.",
+      "question": "A scooter has 2 tyres and a Stepney. A tyre can travel maximum 5 kms. How far you can go with that scooter?",
       "options": [
         "5",
         "10",
@@ -30,10 +102,10 @@
     {
       "question": "If labours work 2X faster everyday & 100 bricks have to be laid. On day 1, half the work is done, how many total days till all the bricks are laid?",
       "options": [
-        "2", 
+        "2",
         "2.5",
         "1.5",
-        "inconclusive"
+        "Inconclusive"
       ]
     },
     {

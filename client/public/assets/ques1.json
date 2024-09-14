@@ -3,7 +3,7 @@
     {
       "question": "You are planning a vacation with friends. How do you contribute to the planning?",
       "options": [
-        "Design a informative and easy-to-use itinerary document.",
+        "Design an informative and easy-to-use itinerary document.",
         "Analyze past vacation data to pick the best destination.",
         "Organize the trip details and solve any logistical issues.",
         "Ensure all travel bookings and information are secure and legit."
@@ -13,54 +13,153 @@
       "question": "You are given the task of organizing a community event. What would be your main focus?",
       "options": [
         "Creating a stunning webpage to promote the event.",
-        "Collecting and analyzing data on community preferences for the event",
-        "Implementing security measures to protect attendee information",
-        "Try to automate tasks/systems as much as possible like guest management/verification, a chatbot for assistance etc"
+        "Collecting and analyzing data on community preferences for the event.",
+        "Implementing security measures to protect attendee information.",
+        "Try to automate tasks/systems as much as possible like guest management/verification, a chatbot for assistance, etc."
       ]
     },
     {
       "question": "You are working on a group project for a school fair. Which role would you prefer?",
       "options": [
-        "Designing and setting up a visually appealing booth",
-        "Analyzing survey data to understand what attracts visitors",
-        "Solving technical problems to ensure everything works smoothly",
-        "Making sure all project materials are secure from tampering"
+        "Designing and setting up a visually appealing booth.",
+        "Analyzing survey data to understand what attracts visitors.",
+        "Solving technical problems to ensure everything works smoothly.",
+        "Making sure all project materials are secure from tampering."
       ]
     },
     {
       "question": "When faced with a challenging problem, how do you typically respond?",
       "options": [
-        "Look for creative and visually appealing solutions",
-        "Research and analyze the problem from all angles",
-        "Break it down into smaller, manageable parts",
-        "Think about potential risks and how to mitigate them"
+        "Look for creative and visually appealing solutions.",
+        "Research and analyze the problem from all angles.",
+        "Break it down into smaller, manageable parts.",
+        "Think about potential risks and how to mitigate them."
       ]
     },
     {
       "question": "You have been asked to improve the efficiency of your school’s cafeteria. What do you do first?",
       "options": [
-        "I redesign the menu layout to make it more appealing and easier to read.",
-        "I analyze past sales data to see which meals are most popular.",
-        "I work on streamlining the order and payment processes and the security of the payment systems and student data.",
-        "I suggest using a smart system to predict food demand and reduce waste."
+        "Redesign the menu layout to make it more appealing and easier to read.",
+        "Analyze past sales data to see which meals are most popular.",
+        "Work on streamlining the order and payment processes and the security of the payment systems and student data.",
+        "Suggest using a smart system to predict food demand and reduce waste."
       ]
     },
     {
       "question": "Your friend wants to start a YouTube channel. How do you help them?",
       "options": [
-        "I create an attractive channel banner and thumbnails.",
-        "I research and analyze trends to choose the best topics and keywords.",
-        "I ensure their content and account are secure from hackers.",
-        "I explore automated tools for video editing and content creation which makes it easier"
+        "Create an attractive channel banner and thumbnails.",
+        "Research and analyze trends to choose the best topics and keywords.",
+        "Ensure their content and account are secure from hackers.",
+        "Explore automated tools for video editing and content creation which makes it easier."
       ]
     },
     {
-      "question": "What fascinated you the most, as a child?",
+      "question": "What fascinated you the most as a child?",
       "options": [
-        "Hacking into a website/app, cracking someone's password, exploiting game applications",
-        "Designing a base in Clash of Clans that was hard to beat.(likewise games)",
-        "Having a collection of different sized/shaped pebbles or other objects and keeping them systematically",
-        "Solving Rubics Cube, crosswords, sudoku or other brainstorming games."
+        "Hacking into a website/app, cracking someone's password, exploiting game applications.",
+        "Designing a base in Clash of Clans that was hard to beat (likewise games).",
+        "Having a collection of different sized/shaped pebbles or other objects and keeping them systematically.",
+        "Solving Rubik's Cube, crosswords, Sudoku or other brainstorming games."
+      ]
+    },
+    {
+      "question": "Imagine you're leading a team building a self-driving car. What role would you take?",
+      "options": [
+        "Writing code to make sure the car's sensors communicate seamlessly with its decision-making algorithms.",
+        "Designing the dashboard and controls that the user interacts with.",
+        "Managing the cloud infrastructure to ensure the car can update itself over-the-air with new data.",
+        "Developing the machine learning models that allow the car to understand and adapt to road conditions."
+      ]
+    },
+    {
+      "question": "If you could redesign a popular app or website, which part would you focus on improving?",
+      "options": [
+        "Making the backend faster and more efficient.",
+        "Giving it a cleaner, more intuitive design.",
+        "Ensuring it can handle millions of users without crashing.",
+        "Adding intelligent features that predict what the user needs next."
+      ]
+    },
+    {
+      "question": "You’re tasked with developing a new feature for a social media app. What’s your approach?",
+      "options": [
+        "Write efficient code that processes large amounts of user data quickly.",
+        "Create a visually appealing interface that users love to interact with.",
+        "Ensure that the app can scale and remain secure as it grows.",
+        "Use machine learning to recommend new content to users based on their interests."
+      ]
+    },
+    {
+      "question": "You’ve been hired to solve a city’s traffic congestion problem. How would you approach it?",
+      "options": [
+        "Build a simulation that analyzes traffic patterns and suggests optimal routes.",
+        "Design a user-friendly app that provides real-time traffic updates to drivers.",
+        "Create a cloud-based system that monitors all the traffic lights and adjusts them in real-time.",
+        "Develop an AI that can predict future traffic jams based on historical data."
+      ]
+    },
+    {
+      "question": "If you could enhance a video game with one cool new feature, what would it be?",
+      "options": [
+        "Optimize the game’s engine to handle faster and smoother gameplay.",
+        "Improve the user interface to make it more immersive and easy to navigate.",
+        "Make the game’s servers more robust to prevent downtime during peak hours.",
+        "Add AI characters that learn from the player’s actions and adjust their strategies in real-time."
+      ]
+    },
+    {
+      "question": "Which futuristic technology excites you the most?",
+      "options": [
+        "Quantum computing and its ability to solve complex problems faster than ever before.",
+        "Augmented reality (AR) and creating experiences that blend the digital and real world.",
+        "Autonomous systems that manage themselves with little human intervention.",
+        "Artificial general intelligence (AGI) that can learn, think, and make decisions like humans."
+      ]
+    },
+    {
+      "question": "Which area do you excel in or enjoy working on the most?",
+      "options": [
+        "Working with numerical data and statistical models to drive decisions.",
+        "Evaluating systems and approaches through rigorous logical reasoning and problem-solving.",
+        "Finding and addressing errors or weaknesses in software or systems.",
+        "Creating and optimizing user interfaces and experiences based on human behavior insights."
+      ]
+    },
+    {
+      "question": "What drives your sense of accomplishment at the end of a project?",
+      "options": [
+        "Delivering a solution that is both efficient and elegant in its performance.",
+        "Seeing how people interact with and appreciate the design you’ve created.",
+        "Knowing that the system you built is secure, reliable, and scalable.",
+        "Having your model or algorithm solve a real-world problem based on data."
+      ]
+    },
+    {
+      "question": "In your learning process, which of the following do you gravitate towards or feel most adept at?",
+      "options": [
+        "Analyzing and interpreting numerical data to gain insights.",
+        "Applying logical reasoning to dissect and solve complex problems.",
+        "Spotting and resolving flaws in software or systems.",
+        "Designing and refining user experiences based on interaction patterns."
+      ]
+    },
+    {
+      "question": "When learning something new, what excites you the most?",
+      "options": [
+        "Understanding how different components work together efficiently.",
+        "Discovering new ways to create visually engaging and interactive designs.",
+        "Finding ways to make systems faster, more secure, or more reliable.",
+        "Uncovering patterns and insights from large sets of data."
+      ]
+    },
+    {
+      "question": "Imagine you’re working on an online store. What part of the store would you be most excited to improve?",
+      "options": [
+        "Ensuring that the store loads quickly even when traffic spikes.",
+        "Designing an appealing layout that guides users to products seamlessly.",
+        "Creating a secure checkout system that scales during sales events.",
+        "Developing personalized product recommendations for users based on their browsing history."
       ]
     }
   ]

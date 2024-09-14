@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './mcq.css';
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 export default function Mcq({ setQuizResults }) {
@@ -28,8 +28,8 @@ export default function Mcq({ setQuizResults }) {
         return shuffled.slice(0, count);
       };
 
-      const selectedQuestions1 = getRandomQuestions(data1.questions, 5);
-      const selectedQuestions2 = getRandomQuestions(data2.questions, 5);
+      const selectedQuestions1 = getRandomQuestions(data1.questions, 8);
+      const selectedQuestions2 = getRandomQuestions(data2.questions, 7);
 
       // Combine questions from both files
       const selectedQuestions = [...selectedQuestions1, ...selectedQuestions2];
@@ -74,14 +74,19 @@ export default function Mcq({ setQuizResults }) {
     setQuizResults(results);
     
     // Navigate to the results page and pass the results as state
-    navigate('/resultgen', { state: { results,user_details} });
+    navigate('/resultgen', { state: { results, user_details } });
   };
 
   return (
     <div className="bigger_container">
       <div className="contain">
         <div className="ques">
-          <h2>{questionsSelected[currentQuestionIndex]}</h2>
+          <h2>
+            {questionsSelected[currentQuestionIndex]}
+          </h2>
+          <p className="question_number">
+            Question {currentQuestionIndex + 1} / {questionsSelected.length}
+          </p>
         </div>
         {options.length > 0 &&
           options[currentQuestionIndex].map((option, index) => (
