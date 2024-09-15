@@ -10,7 +10,6 @@ function Typewriter({ text, speed, delayAfterPunctuation, onComplete }) {
             let char = text.charAt(index);
             let delay = speed;
 
-            // Add extra delay after punctuation marks
             if (char === '.' || char === ',' || char === '!' || char === '?') {
                 delay += delayAfterPunctuation;
                 setDisplayedText((prev) => prev + char + '<br />');
@@ -34,6 +33,7 @@ function Typewriter({ text, speed, delayAfterPunctuation, onComplete }) {
 function TextBlock({ onContentComplete }) {
     const [startTyping, setStartTyping] = useState(false);
     const [headingTyped, setHeadingTyped] = useState(false);
+    const [contentTyped, setContentTyped] = useState(false);
 
     useEffect(() => {
         const delayTimeout = setTimeout(() => {
@@ -44,9 +44,9 @@ function TextBlock({ onContentComplete }) {
     }, []);
 
     const title = "8/10 students are clueless!";
-    const content = `Let's bulletproof your future!. 
+    const content = `Let's bulletproof your future💪!. 
         While 80% students regret after randomly choosing their career paths, you can confidently explore your true potential.
-        AI/ML, Web Development, Cybersecurity, Game Development-- don't know what to pick?
+        AI/ML🤖,Data Science🔭 , Web Development🛜, Cybersecurity🪪, Game Development🎮-- don't know what to pick💁‍♂️?
         I will help you find your ideal domain of excellence so that you can get ahead of 99% coders.
         Click to get started ⭐`;
 
@@ -68,9 +68,17 @@ function TextBlock({ onContentComplete }) {
                             text={content} 
                             speed={10} 
                             delayAfterPunctuation={500} 
-                            onComplete={onContentComplete} // Notify when the content is fully typed
+                            onComplete={() => {
+                                setContentTyped(true);
+                                if (onContentComplete) {
+                                    onContentComplete(); // Notify the parent or another component
+                                }
+                            }} 
                         />
                     </p>
+                )}
+                {contentTyped && (
+                    <div id="arrow">↓</div> // Arrow appears after the content is fully typed
                 )}
             </div>
             

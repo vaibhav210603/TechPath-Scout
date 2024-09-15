@@ -46,3 +46,23 @@
     padding: 10px 0;
     color: #555;
 }
+
+
+
+
+/* TextBlock.css */
+#arrow {
+   
+    font-size: 4rem;
+    color: rgb(90, 89, 89);
+    animation: blink 1s infinite;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  

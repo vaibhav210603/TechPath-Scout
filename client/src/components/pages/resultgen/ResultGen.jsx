@@ -31,16 +31,17 @@ function ResultGen() {
     
     ## Analysis:
    
-    - Offer an insightful evaluation of the student's strengths and core competencies you coould identify
-    rate them with  their respective scores/10 too.
+    -Give 1 liner aobut each core competencies you could identify
+   - rate them with their respective scores/10 for each one and BE HONEST WITH your scores wrt the answers given by ythe user
+    -At lsat of this section, Also mention 2 weak spots with scores and a line aoubt it
 
-      for each competencies, also mention" youre in the top x % of students
+    for each competency, also mention "you're in the top x % of students"
     
     ## Domain Recommendation:
     - Suggest two or more computer science domains that align with the student's strengths and interests.
-    - Include a detailed justification for each recommended domain and also include links for resources to learn the domain from(free)
+    - Include a detailed justification for each recommended domain and also include links for resources to learn the domain from (free)
     the link font should be smaller and unbolded
-    bold the statment that says"Here are some best FREE resources on the internet"
+    bold the statement that says "Here are some best FREE resources on the internet"
     
     ## Improvement Suggestions:
     - Identify areas where the student can improve, such as enhancing their logical reasoning or technical skills.
@@ -53,11 +54,9 @@ function ResultGen() {
       - **Cybersecurity**: Score (e.g., 7/10)
     - Use consistent bold formatting for each domain name and score.
 
-    Do not use these exact domains in the exmaple above
-    use apropriate domains according to user answers(can be 2-5 domain recommendations)
+    Do not use these exact domains in the example above
+    use appropriate domains according to user answers (can be 2-5 domain recommendations)
 
-
-    
     Ensure that the analysis for each student is unique and personalized based on their responses. Your tone should be encouraging and supportive, helping the student feel confident in their path forward. Give extra spaces before and after headings to make them clear.`;
 
   const fullText = `${questionsAnswersString}\n\n${prompt}`;
@@ -75,6 +74,8 @@ function ResultGen() {
 
       const data = await res.json();
       setResponse(data.story);
+      console.log(data.story);
+
 
       const scoreMatches = data.story.match(/\*\*(.*?)\*\*:\s*(\d+)\/10/g) || [];
       const extractedScores = scoreMatches.map(match => {
@@ -173,6 +174,12 @@ function ResultGen() {
       fontSize: 12,
       marginBottom: 5,
     },
+    bold: {
+      fontWeight: 'bold',
+    },
+    italic: {
+      fontStyle: 'italic',
+    },
     listItem: {
       fontSize: 12,
       marginLeft: 10,
@@ -189,14 +196,32 @@ function ResultGen() {
 
   const formatResponseText = (text) => {
     return text
-      .replace(/\*\*(.*?)\*\*/g, (_, p1) => `<strong>${p1}</strong>`)
-      .replace(/\*(.*?)\*/g, (_, p1) => `<em>${p1}</em>`)
-      .replace(/^## (.*)$/gm, (_, p1) => `\n<h2>${p1}</h2>\n`)
-      .replace(/^### (.*)$/gm, (_, p1) => `\n<h3>${p1}</h3>\n`)
-      .replace(/^- (.*)$/gm, (_, p1) => `\n• ${p1}`)
-      .replace(/^\d+\. (.*)$/gm, (_, p1) => `\n${p1}`)
-      .replace(/^> (.*)$/gm, (_, p1) => `\n"${p1}"\n`)
-      .split('<br>');
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/^## (.*)$/gm, '<h2>$1</h2>')
+      .replace(/^### (.*)$/gm, '<h3>$1</h3>')
+      .replace(/^- (.*)$/gm, '• $1')
+      .replace(/^\d+\. (.*)$/gm, '$1')
+      .replace(/^> (.*)$/gm, '"$1"')
+      .split('\n')
+      .filter(line => line.trim() !== '');
+  };
+
+  const renderFormattedText = (text) => {
+    const parts = text.split(/(<\/?(?:strong|em|h[23])>)/);
+    return parts.map((part, index) => {
+      if (part.startsWith('<strong>')) {
+        return <Text key={index} style={styles.bold}>{part.replace(/<\/?strong>/g, '')}</Text>;
+      } else if (part.startsWith('<em>')) {
+        return <Text key={index} style={styles.italic}>{part.replace(/<\/?em>/g, '')}</Text>;
+      } else if (part.startsWith('<h2>')) {
+        return <Text key={index} style={styles.subheading}>{part.replace(/<\/?h2>/g, '')}</Text>;
+      } else if (part.startsWith('<h3>')) {
+        return <Text key={index} style={[styles.subheading, { fontSize: 16 }]}>{part.replace(/<\/?h3>/g, '')}</Text>;
+      } else {
+        return <Text key={index}>{part}</Text>;
+      }
+    });
   };
 
   const chartData = {
@@ -226,17 +251,17 @@ function ResultGen() {
       <Page size="A4" style={styles.page}>
         <Text style={styles.heading}>TechPath Scout Report</Text>
         {formatResponseText(response).map((paragraph, index) => {
-          if (paragraph.startsWith('<h2>')) {
-            return <Text key={index} style={styles.subheading}>{paragraph.replace(/<\/?h2>/g, '')}</Text>;
-          } else if (paragraph.startsWith('<h3>')) {
-            return <Text key={index} style={[styles.subheading, { fontSize: 16 }]}>{paragraph.replace(/<\/?h3>/g, '')}</Text>;
-          } else if (paragraph.startsWith('•')) {
-            return <Text key={index} style={styles.listItem}>{paragraph}</Text>;
+          if (paragraph.startsWith('•')) {
+            return <Text key={index} style={styles.listItem}>{renderFormattedText(paragraph)}</Text>;
           } else {
-            return <Text key={index} style={styles.text}>{paragraph}</Text>;
+            return <View key={index} style={styles.text}>{renderFormattedText(paragraph)}</View>;
           }
         })}
-       
+        {chartImage && (
+          <View style={styles.chartContainer}>
+            <Image style={styles.chart} src={chartImage} />
+          </View>
+        )}
       </Page>
     </Document>
   );

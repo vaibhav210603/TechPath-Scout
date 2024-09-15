@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function Timer() {
-  const [time, setTime] = useState(120); // Initialize the timer with 20 seconds
+  const [time, setTime] = useState(300); // Initialize the timer with 20 seconds
 
   useEffect(() => {
     if (time > 0) {
