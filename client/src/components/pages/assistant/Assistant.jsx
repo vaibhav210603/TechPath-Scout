@@ -103,6 +103,7 @@ function Assistant() {
     };
 
     return (
+        <div className="assistant-wrapper">
         <div className="assistant-container">
             <h2 className="assistant-title">Feel free to ask any questions!</h2>
             <form onSubmit={handleSubmit} className="assistant-form">
@@ -129,6 +130,7 @@ function Assistant() {
                     />
                 )}
             </div>
+        </div>
         </div>
     );
 }

@@ -1,42 +1,6 @@
-/* Desktop/Laptop Styles */
-#textblock {
-  background-color: #ffffff;
-  height: 100vh;
-  position: relative;
-  margin-top: -50vh;
-}
 
-#textblock-container {
-  width: 50%;
-  margin: -270px auto;
-  text-align: justify;
-  padding-top: 70px;
-}
 
-#textblock-content {
-  color: #000000;
-  font-size: 20px;
-}
 
-#textblock-footer {
-  color: #ffaf1b;
-  font-size: 15px;
-  font-weight: 400;
-  position: fixed;
-  width: 100%;
-  bottom: 0px;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-#textblock-devsense {
-  text-decoration: none;
-  color: #ffaf1b;
-  font-size: 15px;
-  font-weight: 600;
-}
 
 .animation, .animation_layer {
   height: 1000px;
@@ -97,8 +61,8 @@
 }
 
 .aftertext {
-  margin-top: -2px;
-  padding-top: 300px;
+  margin-top: -5%;
+  padding-top: 400px;
   text-align: center;
   background-color: #ffffff;
   height: 100vh;
@@ -130,31 +94,7 @@
     background-size: auto 100px; /* Adjust background size for smaller screens */
   }
 
-  #textblock {
-    height: auto;
-    margin-top: -500px; /* Adjust margin */
-    background-color: #ffffff; /* Ensure white background is applied */
-  }
 
-  #textblock-container {
-    width: 90%;
-    margin: 0 auto;
-    padding-top: 20px;
-    font-size: 16px; /* Adjust font size */
-  }
-
-  #textblock-content {
-    font-size: 14px; /* Adjust font size */
-  }
-
-  #textblock-title {
-    font-size: 18px; /* Adjust font size */
-  }
-
-  #textblock-footer {
-    font-size: 12px; /* Adjust font size */
-    margin-bottom: 10px;
-  }
 
   .aftertext {
     margin-top: -20px; /* Reset margin */
@@ -166,14 +106,11 @@
 
   .after_textbox {
     font-size: 14px; /* Adjust font size */
-    padding: 10px; /* Adjust padding */
+    padding: 5px; /* Adjust padding */
   }
 }
 
 
-/* Existing styles... */
-
-/* Existing styles... */
 
 /* Updated Review Section Styles */
 .review-section {
@@ -307,3 +244,16 @@
     flex: 0 0 calc(25% - 20px);
   }
 }
+
+.banner{
+  color: white;
+  background-color: #333;
+  height: 30vh;
+  width: 100vw;
+  padding-top: 5%;
+  font-size: 50px;
+  padding-left: 25%;
+  margin-top: -7%;
+
+}
+

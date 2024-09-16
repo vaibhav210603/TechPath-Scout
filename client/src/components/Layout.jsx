@@ -5,6 +5,7 @@ import './Layout.css';
 
 const Layout = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -16,7 +17,12 @@ const Layout = () => {
 
   return (
     <div>
-      <div className='navbar_container'>
+      <div 
+        className={`navbar_container ${isHovered ? 'hovered' : ''}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {!isHovered && <div className="hover-text">HOVER</div>}
         {/* Dropdown for mobile */}
         <button className='dropdown_icon' onClick={toggleMobileMenu}>
           ☰

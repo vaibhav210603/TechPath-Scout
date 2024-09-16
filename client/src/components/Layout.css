@@ -2,9 +2,9 @@
 .navbar_container {
   margin-top: 10px;
   width: 120px;
-  height: 40px;
+  height: 50px;
   justify-content: center;
-  background-color: rgb(208, 205, 205);
+  background-color: rgb(25, 162, 247);
   position: fixed;
   top: 0;
   left: 50%;
@@ -17,14 +17,16 @@
   transition: width 0.5s ease, height 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
   padding: 0;
+  overflow: hidden;
 }
 
 .navbar_links {
   display: flex;
 }
 
-.navbar_container:hover {
-  width: 70%; /* Expand width on hover */
+.navbar_container:hover,
+.navbar_container.hovered {
+  width: 70%;
   height: 8vh;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 8px 15px rgba(70, 3, 51, 0.9);
@@ -41,22 +43,40 @@
   transition: color 0.5s ease, font-size 0.5s ease;
 }
 
-.navbar_container:hover .r {
+.navbar_container:hover .r,
+.navbar_container.hovered .r {
   color: black;
+}
+
+/* Hover text styles */
+.hover-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 19px;
+  letter-spacing: 2px;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* Mobile-specific styles */
 @media screen and (max-width: 768px) {
   .navbar_container {
     justify-content: flex-start;
-    width: 80%; /* Make it full-width on mobile */
+    width: 80%;
     height: 40px;
     padding-left: 10px;
   }
 
   .navbar_links {
-    display: none; /* Hide links by default */
-    flex-direction:column;
+    display: none;
+    flex-direction: column;
     position: absolute;
     top: 60px;
     left: -10px;
@@ -67,37 +87,40 @@
   }
 
   .navbar_links.open {
-    display: flex; /* Show when dropdown is active */
+    display: flex;
   }
 
   .r {
     font-size: 14px;
     margin: 10px;
     text-align: center;
-    color: rgb(87, 85, 85); /* Make text visible on mobile */
+    color: rgb(87, 85, 85);
   }
 
-  /* Dropdown icon */
   .dropdown_icon {
-    display: block; /* Show dropdown icon on mobile */
+    display: block;
     background: none;
     border: none;
     font-size: 8px;
     cursor: pointer;
     color: black;
-    outline: none; /* Remove blue focus box */
+    outline: none;
   }
 
   .dropdown_icon:focus {
-    outline: none; /* Ensure no outline on focus */
+    outline: none;
   }
 
   .dropdown_icon:hover {
     color: rgb(113, 24, 125);
   }
 
-  /* Hide original navbar container on mobile */
-  .navbar_container:hover {
-    width: 80%; /* Prevent navbar from expanding on hover */
+  .navbar_container:hover,
+  .navbar_container.hovered {
+    width: 80%;
+  }
+
+  .hover-text {
+    font-size: 12px;
   }
 }

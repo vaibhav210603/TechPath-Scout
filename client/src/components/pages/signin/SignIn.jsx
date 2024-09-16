@@ -18,6 +18,7 @@ const SignIn = () => {
   };
 
   return (
+    <div className="signin-wrapper">
     <div className="signin-container">
       <div className="typewrite"><h2>And you are?</h2></div>
       <form onSubmit={handleSubmit}> {/* Add onSubmit handler */}
@@ -46,6 +47,7 @@ const SignIn = () => {
 
         <button type="submit" className="submit-button">Submit</button>
       </form>
+    </div>
     </div>
   );
 };

@@ -2,28 +2,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
 /* General styling */
-#textblock-container {
-    font-family: 'Roboto Mono', monospace;
-    margin: 20px;
-}
 
-/* Styles for the title with typing effect */
-#textblock-title {
-    font-size: 2rem;
-    font-weight: bold;
-    display: inline-block;
-    border-right: 2px solid rgb(171, 33, 33); /* Caret color */
-    white-space: nowrap;
-    overflow: hidden;
-    animation: typing 4s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
-}
-
-/* Styles for the content */
-#textblock-content {
-    font-size: 1rem;
+/* Desktop/Laptop Styles */
+#textblock {
+    background-color: #ffffff;
+    height: 100vh;
+    position: relative;
+    margin-top: -50vh;
+  }
+  
+  #textblock-container {
+   
+    margin: -270px auto;
+    padding-top: 5vh;
+    
+  }
+  
+  #textblock-content {
+    text-align: justify;
+    margin-left: 25%;
+    width: 50%;
+    color: #000000;
+    font-size: 20px;
     margin-top: 20px;
     line-height: 2.5;
+  }
+  
+ 
+
+
+.textblock-head{
+    font-size: 50px;
+    font-weight: 700;
+    background-color:#8B0000;
+    
+    color: white;
+    padding-left: 25%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+
 }
+
+.n1{
+    color:rgb(247, 110, 110);
+    }
+
+#textblock-footer {
+    color: #ffaf1b;
+    font-size: 15px;
+    font-weight: 400;
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+
+
+
 
 /* Keyframes for typing effect */
 @keyframes typing {
@@ -37,15 +76,7 @@
     50% { border-color: rgb(171, 33, 33); }
 }
 
-/* Footer styles */
-#textblock-footer {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1rem;
-    margin-top: 20px;
-    text-align: center;
-    padding: 10px 0;
-    color: #555;
-}
+
 
 
 

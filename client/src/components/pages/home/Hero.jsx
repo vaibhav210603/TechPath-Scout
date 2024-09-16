@@ -139,20 +139,20 @@ export default function Hero() {
                     <div className="animation_layer parallax" id="jungle5"></div>
                 </ParallaxLayer>
                 <ParallaxLayer offset={1} speed={0.25}>
+                    
                     <TextBlock onContentComplete={() => setButtonVisible(true)} />
                     <div className='aftertext'>
                         <Link to="./signin">
-                            <button 
-                                className={`after_textbox ${buttonVisible ? 'visible' : ''}`}
-                            >
+                            <button className={`after_textbox ${buttonVisible ? 'visible' : ''}`}>
                                 Get Started
                             </button>
-                        </Link>
-                    </div>
+                        </Link>   
+                    </div>  
                 </ParallaxLayer>
                 <ParallaxLayer offset={2} speed={0.1}>
-                    <div className="review-section">
-                        <h2>What genuine students think</h2>
+                <div className="banner"><p className='text1'>How 50+ students saved themselves!</p></div>
+                <div className="review-section">
+                        
                         <div className="review-scroll-container">
                             <button 
                                 className="scroll-button left" 

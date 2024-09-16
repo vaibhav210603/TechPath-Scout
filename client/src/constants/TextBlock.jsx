@@ -38,36 +38,28 @@ function TextBlock({ onContentComplete }) {
     useEffect(() => {
         const delayTimeout = setTimeout(() => {
             setStartTyping(true);
-        }, 1000);
+        }, 2000);
 
         return () => clearTimeout(delayTimeout);
     }, []);
 
     const title = "8/10 students are clueless!";
-    const content = `Let's bulletproof your future💪!. 
+    const content = `..Let's bulletproof your future💪!. 
         While 80% students regret after randomly choosing their career paths, you can confidently explore your true potential.
         AI/ML🤖,Data Science🔭 , Web Development🛜, Cybersecurity🪪, Game Development🎮-- don't know what to pick💁‍♂️?
-        I will help you find your ideal domain of excellence so that you can get ahead of 99% coders.
-        Click to get started ⭐`;
+        I will help you find your ideal domain of excellence so that you can get ahead of 99% coders👑⚔️.
+        ⭐ Click to get started ⭐`;
 
     return (
         <div id="textblock">
             <div id="textblock-container">
-                {startTyping && (
-                    <p id="textblock-title">
-                        <Typewriter 
-                            text={title} 
-                            speed={10} 
-                            onComplete={() => setTimeout(() => setHeadingTyped(true), 2000)} 
-                        />
-                    </p>
-                )}
-                {headingTyped && (
+                
+                <p className='textblock-head'><span className='n1'>8/10</span> CODERS ARE CLUELESS!</p>
                     <p id="textblock-content">
                         <Typewriter 
                             text={content} 
-                            speed={10} 
-                            delayAfterPunctuation={500} 
+                            speed={6} 
+                            delayAfterPunctuation={350} 
                             onComplete={() => {
                                 setContentTyped(true);
                                 if (onContentComplete) {
@@ -76,7 +68,7 @@ function TextBlock({ onContentComplete }) {
                             }} 
                         />
                     </p>
-                )}
+                
                 {contentTyped && (
                     <div id="arrow">↓</div> // Arrow appears after the content is fully typed
                 )}

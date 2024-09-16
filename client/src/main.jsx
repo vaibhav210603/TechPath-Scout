@@ -14,6 +14,7 @@ import ResultGen from './components/pages/resultgen/ResultGen';
 import SignIn from './components/pages/signin/SignIn.jsx';
 import Contact from './components/pages/contact/Contact.jsx';
 import Loading from './components/Loading'; // Import the Loading component
+import Payment from'./components/pages/payment/Payment.jsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path: "/payment",
+        element: <Payment/>
+      }
     ],
   },
 ]);

@@ -1,27 +1,33 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden; /* Prevent scrolling */
-}
-
-body {
+.signin-wrapper
+{
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;    /* Center vertically */
-  background-color: #f0f0f0; /* Optional background color */
+  align-items: center;
+  justify-content: center;
+  background-color: #F3EFE0;
+  background-image: url('D:\project\TechPath-scout\client\public\comp_5.gif');
+  background-repeat: no-repeat;
 }
-
 .signin-container {
   width: 100%;
-  max-width: 400px; /* Adjust max-width as needed */
+  max-width: 400px;
+  max-height: 350px;
   padding: 20px;
-  border: 1px solid #ccc;
+  
+  /* Box design */
+  background-color: rgba(255, 255, 255, 0.368); /* Changed to white */
   border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 10px rgba(123, 122, 122, 0.7); /* Added shadow */
+
+  /* Color used from previous request */
+  border: 1px solid #F3EFE0; /* Optional: add a border with the previous color */
+  
   box-sizing: border-box; /* Include padding in width calculation */
-  /* Prevent overflow */
-  overflow: hidden;
+  overflow: hidden; /* Prevent overflow */
 }
+
+
 
 h2 {
   text-align: center;
@@ -40,11 +46,12 @@ label {
 input[type="text"],
 input[type="email"] {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   box-sizing: border-box; /* Ensure padding is included in width */
 }
 
 .submit-button {
+  margin-top: 10px;
   width: 100%;
   padding: 10px;
   background-color: #4CAF50;

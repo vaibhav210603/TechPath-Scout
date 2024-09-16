@@ -2,20 +2,30 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
-body {
-  font-family: 'Roboto Mono', monospace;
-   background-image: url('/backgif5.gif');
-   
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+.assistant-wrapper {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  
+  /* White background behind the image */
+  background-color: white;
+
+  /* Applying the image */
+  background-image: url('D:/project/TechPath-scout/client/public/nig_coder.jpg');
+  
+  /* Positioning and sizing */
+  background-position: 95vh 20vh; /* Adjusted for centering the image */
+  background-repeat: no-repeat;
+  background-size: 50%; /* This ensures the image scales properly */
+}
+
   
   .assistant-container {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.562);
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
