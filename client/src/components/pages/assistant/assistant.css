@@ -15,7 +15,7 @@
   background-color: white;
 
   /* Applying the image */
-  background-image: url('D:/project/TechPath-scout/client/public/nig_coder.jpg');
+  background-image: url('/nig_coder.jpg');
   
   /* Positioning and sizing */
   background-position: 95vh 20vh; /* Adjusted for centering the image */

@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   background-color: #F3EFE0;
-  background-image: url('D:\project\TechPath-scout\client\public\comp_5.gif');
+  background-image: url('/comp_5.gif');
   background-repeat: no-repeat;
 }
 .signin-container {
