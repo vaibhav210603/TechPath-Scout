@@ -33,7 +33,7 @@ const Layout = () => {
           <Link to="/assistant" className='r' onClick={closeMobileMenu}><p>Assistant</p></Link>
           <Link to="/contact" className='r' onClick={closeMobileMenu}><p>Contact</p></Link>
           <a
-            href="https://github.com/vaibhav210603/TechPath-Scout/blob/main/Techpath_scout%20blueprint.pdf"
+            href="https://drive.google.com/file/d/1V4t2h0_JCPFTXbkSvVElto6hxTX4UnrK/view"
             target="_blank"
             rel="noopener noreferrer"
             className="r"

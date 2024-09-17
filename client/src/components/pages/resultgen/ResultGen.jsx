@@ -145,7 +145,7 @@ function ResultGen() {
     const typewriterElement = document.getElementById('typewriter-response');
     if (response && typewriterElement) {
       typewriterElement.innerHTML = '';
-      typeWriterEffect(typewriterElement, response, 10);
+      typeWriterEffect(typewriterElement, response, 5);
     }
   }, [response]);
 
