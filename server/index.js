@@ -1,103 +1,105 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
 const express = require("express");
+const cors = require("cors");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const Razorpay = require('razorpay');
 
 const app = express();
 
+// Comprehensive CORS Configuration
+const corsOptions = {
+  origin: [
+    'http://localhost:5173',  // Local development frontend
+    'https://your-production-frontend.vercel.app',  // Replace with your actual frontend URL
+    /\.vercel\.app$/  // Matches Vercel app domains if needed
+  ],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization',
+    'Access-Control-Allow-Origin'
+  ],
+  credentials: true
+};
 
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
+
+// Middleware
 app.use(express.json());
 
-const cors = require("cors");
-app.use(cors({
-  origin: true, // Allows all origins
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"]
-}));
-
-
-// Add this before your other routes
-app.options('*', cors()); // Enable preflight requests for all routes
-const key = "AIzaSyBTd5GCKzvM4z7mnR-EqvMbcks8uePQgsY";
-
+// Google Generative AI Configuration
+const key = process.env.GOOGLE_API_KEY || "AIzaSyBTd5GCKzvM4z7mnR-EqvMbcks8uePQgsY";
 const genAI = new GoogleGenerativeAI(key);
 
+// Razorpay Configuration
+const razorpayInstance = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID || 'rzp_live_sgeda5ZnM4PhGA',
+  key_secret: process.env.RAZORPAY_KEY_SECRET || 'ZmwYboqnnfcHzJB8H9vIxLad'
+});
+
+// Routes
 app.get("/", (req, res) => {
   res.send("Welcome to the TechPath Scout Server!");
 });
 
 app.post("/generate", async (req, res) => {
-  const userText = req.body.text; // Get text from request body
+  try {
+    const userText = req.body.text;
+    console.log("User Text:", userText);
 
-  console.log("User Text:", userText);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const result = await model.generateContent(userText);
+    const response = await result.response;
+    const text = response.text();
 
-  async function run() {
-    try {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    console.log("Generated Response:", text);
 
-      // Use the text sent from the client as the prompt
-      const result = await model.generateContent(userText);
-
-      const response = await result.response;
-      const text = response.text();
-      console.log(text);// Adjust based on the actual API response structure
-
-      console.log("Generated Response:", text);
-
-      return text;
-    } catch (error) {
-      console.error("Error generating content:", error);
-      return "Failed to generate content.";
-    }
+    res.json({
+      message: "Response from server",
+      story: text,
+    });
+  } catch (error) {
+    console.error("Error generating content:", error);
+    res.status(500).json({
+      message: "Failed to generate content",
+      error: error.message
+    });
   }
-
-  const story = await run();
-
-  res.json({
-    message: "Response from server",
-    story,
-  });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-const Razorpay = require('razorpay');
-const razorpayInstance = new Razorpay({
-  key_id: 'rzp_live_sgeda5ZnM4PhGA',
-  key_secret: 'ZmwYboqnnfcHzJB8H9vIxLad'
 });
 
 app.post('/create-order', async (req, res) => {
-  const options = {
-    amount: req.body.amount * 100, // Amount in paise
-    currency: 'INR',
-    receipt: 'receipt_order_74394'
-  };
-
   try {
+    const options = {
+      amount: req.body.amount * 100, // Amount in paise
+      currency: 'INR',
+      receipt: `receipt_order_${Date.now()}` // Dynamic receipt number
+    };
+
     const order = await razorpayInstance.orders.create(options);
     res.json(order);
   } catch (error) {
-    res.status(500).send(error);
+    console.error('Razorpay Order Creation Error:', error);
+    res.status(500).json({
+      message: 'Failed to create Razorpay order',
+      error: error.message
+    });
   }
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    message: 'Something went wrong!',
+    error: err.message
+  });
+});
 
-
-
-
-
-
-
-
-
-app.listen(8000, () => {
-  console.log(`Server is running on port 8000.`);
+// Server setup
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
