@@ -42,7 +42,7 @@ export default function Preresultgen() {
      9
 
       // Create order using your backend endpoint
-      const orderResponse = await fetch('http://localhost:8000/create-order', {
+      const orderResponse = await fetch('https://techpath-scout-server.vercel.app/create-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
