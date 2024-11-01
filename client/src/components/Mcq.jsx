@@ -74,7 +74,7 @@ export default function Mcq({ setQuizResults }) {
     setQuizResults(results);
     
     // Navigate to the results page and pass the results as state
-    navigate('/resultgen', { state: { results, user_details } });
+    navigate('/preresultgen', { state: { results, user_details } });
   };
 
   return (

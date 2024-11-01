@@ -61,7 +61,7 @@
 }
 
 .aftertext {
-  margin-top: -5%;
+  margin-top: -15%;
   padding-top: 400px;
   text-align: center;
   background-color: #ffffff;
@@ -71,6 +71,8 @@
 .after_textbox {
   opacity: 0;
   visibility: hidden;
+  margin-top: 30px;
+ background-color: rgb(96, 96, 96);
   transition: background-color 0.3s ease, border-radius 0.3s ease, padding 0.3s ease, opacity 2s ease, visibility 0.5s ease;
 }
 
@@ -80,7 +82,7 @@
 }
 
 .after_textbox:hover {
-  background-color: #c21585;
+  background-color: #0da155;
   border-radius: 20px;
   padding: 15px;
 }
@@ -99,7 +101,7 @@
   .aftertext {
     margin-top: -20px; /* Reset margin */
     padding-top: 150px;
-    padding-bottom: 600px; /* Adjust padding for better spacing */
+    padding-bottom: 500px; /* Adjust padding for better spacing */
     height: auto; /* Adjust height */
     background-color: #ffffff; /* Ensure white background is applied */
   }
@@ -132,7 +134,7 @@
 }
 
 .review-container {
-  padding-top: 10%;
+  padding-top: 1%;
   padding-bottom: 40%;
   display: flex;
   overflow-x: hidden;
@@ -252,8 +254,8 @@
   width: 100vw;
   padding-top: 5%;
   font-size: 50px;
-  padding-left: 25%;
-  margin-top: -7%;
+  padding-left: 20%;
+  margin-top: -5%;
 
 }
 

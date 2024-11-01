@@ -9,8 +9,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 function ResultGen() {
   const location = useLocation();
-  const { results } = location.state || { results: [] };
-  const { user_details } = location.state || { user_details: [] };
+  const { results = [] } = location.state || {};
+  const { user_details = {} } = location.state || {};
   const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [scores, setScores] = useState([]);
@@ -54,16 +54,65 @@ function ResultGen() {
       - **Cybersecurity**: Score (e.g., 7/10)
     - Use consistent bold formatting for each domain name and score.
 
-    Do not use these exact domains in the example above
-    use appropriate domains according to user answers (can be 2-5 domain recommendations)
-
     Ensure that the analysis for each student is unique and personalized based on their responses. Your tone should be encouraging and supportive, helping the student feel confident in their path forward. Give extra spaces before and after headings to make them clear.`;
 
   const fullText = `${questionsAnswersString}\n\n${prompt}`;
 
+  const extractScoresFromResponse = (responseText) => {
+    const scoreMatches = responseText.match(/\*\*(.*?)\*\*:\s*(\d+)\/10/g) || [];
+    return scoreMatches.map(match => {
+      const parts = match.match(/\*\*(.*?)\*\*:\s*(\d+)/);
+      return {
+        domain: parts[1],
+        score: parseInt(parts[2], 10),
+      };
+    });
+  };
+
+  const getCacheKey = () => {
+    // Create a unique cache key based on the user's responses
+    return `techpath_analysis_${JSON.stringify(results)}_${user_details.name}`;
+  };
+
+  const getCachedResult = () => {
+    const cacheKey = getCacheKey();
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      try {
+        const parsedData = JSON.parse(cachedData);
+        const currentTime = new Date().getTime();
+        
+        // Check if cache is less than 24 hours old
+        if (currentTime - parsedData.timestamp < 24 * 60 * 60 * 1000) {
+          return parsedData;
+        } else {
+          localStorage.removeItem(cacheKey);
+        }
+      } catch (error) {
+        console.error('Error parsing cached data:', error);
+        localStorage.removeItem(cacheKey);
+      }
+    }
+    return null;
+  };
+
   const run = async () => {
     try {
       setIsLoading(true);
+      
+      // Check for cached results first
+      const cachedResult = getCachedResult();
+      
+      if (cachedResult) {
+        console.log('Using cached result');
+        setResponse(cachedResult.response);
+        setScores(cachedResult.scores);
+        setIsLoading(false);
+        return;
+      }
+
+      console.log('Fetching new result');
+      // If no cached result, fetch from API
       const res = await fetch('https://techpath-scout-server.vercel.app/generate', {
         method: 'POST',
         headers: {
@@ -72,30 +121,50 @@ function ResultGen() {
         body: JSON.stringify({ text: fullText }),
       });
 
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
       const data = await res.json();
-      setResponse(data.story);
-      console.log(data.story);
+      console.log('Received data:', data);
 
+      if (!data.story) {
+        throw new Error('No story in response');
+      }
 
-      const scoreMatches = data.story.match(/\*\*(.*?)\*\*:\s*(\d+)\/10/g) || [];
-      const extractedScores = scoreMatches.map(match => {
-        const parts = match.match(/\*\*(.*?)\*\*:\s*(\d+)/);
-        return {
-          domain: parts[1],
-          score: parseInt(parts[2], 10),
-        };
-      });
+      const responseText = data.story;
+      const extractedScores = extractScoresFromResponse(responseText);
+      
+      // Cache the results with a unique key
+      const cacheData = {
+        response: responseText,
+        scores: extractedScores,
+        timestamp: new Date().getTime()
+      };
+      
+      localStorage.setItem(getCacheKey(), JSON.stringify(cacheData));
+      
+      setResponse(responseText);
       setScores(extractedScores);
+
     } catch (error) {
       console.error('Error fetching the analysis:', error);
+      // Try to get any previous cache as fallback
+      const cachedResult = getCachedResult();
+      if (cachedResult) {
+        setResponse(cachedResult.response);
+        setScores(cachedResult.scores);
+      }
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    run();
-  }, []);
+    if (results.length > 0 && user_details.name) {
+      run();
+    }
+  }, [results, user_details.name]);
 
   const typeWriterEffect = (element, text, speed) => {
     const formattedText = text
@@ -266,12 +335,20 @@ function ResultGen() {
     </Document>
   );
 
+  if (!results.length || !user_details.name) {
+    return <div className="loading-message">No data available. Please try again.</div>;
+  }
+
   return (
     <div className="mega">
-      <div className="heading typewrite"><h2>Here's your analysis, {user_details.name.split(' ')[0]}</h2></div>
+      <div className="heading typewrite">
+        <h2>Here's your analysis, {user_details.name.split(' ')[0]}</h2>
+      </div>
       <div className="result_container">
         {isLoading ? (
-          <div className="loading-message">Analysing your responses, please wait...</div>
+          <div className="loading-message">
+            {getCachedResult() ? 'Loading cached analysis...' : 'Analysing your responses, please wait...'}
+          </div>
         ) : (
           <>
             <div id="typewriter-response" className="typewriter"></div>
@@ -283,11 +360,13 @@ function ResultGen() {
           </>
         )}
       </div>
-      <PDFDownloadLink document={<MyDocument />} fileName="TechPathScoutReport.pdf">
-        {({ blob, url, loading, error }) =>
-          loading ? 'Preparing document...' : <button className='download'>Download PDF</button>
-        }
-      </PDFDownloadLink>
+      {response && (
+        <PDFDownloadLink document={<MyDocument />} fileName="TechPathScoutReport.pdf">
+          {({ blob, url, loading, error }) =>
+            loading ? 'Preparing document...' : <button className='download'>Download PDF</button>
+          }
+        </PDFDownloadLink>
+      )}
     </div>
   );
 }

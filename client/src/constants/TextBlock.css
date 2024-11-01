@@ -3,97 +3,58 @@
 
 /* General styling */
 
-/* Desktop/Laptop Styles */
 #textblock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #ffffff;
     height: 100vh;
     position: relative;
     margin-top: -50vh;
-  }
-  
-  #textblock-container {
-   
-    margin: -270px auto;
-    padding-top: 5vh;
-    
-  }
-  
-  #textblock-content {
-    text-align: justify;
-    margin-left: 25%;
-    width: 50%;
-    color: #000000;
-    font-size: 20px;
-    margin-top: 20px;
-    line-height: 2.5;
-  }
-  
- 
+    padding: 0 5%;
+    gap: 20px; /* Space between image and text */
+}
 
+.graphix {
+    flex: 1;
+}
 
-.textblock-head{
+.graphix img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Optional: adds rounded corners */
+}
+
+#textblock-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  min-height: 100vh; /* Ensures consistent height */
+}
+
+#textblock-content {
+  text-align: justify;
+  color: #000000;
+  font-size: 16px;
+  line-height: 2.5;
+  width: 100%;
+  min-height: 30vh; /* Add enough space for content */
+}
+
+.textblock-head {
     font-size: 50px;
     font-weight: 700;
-    background-color:#8B0000;
-    
+    background-color: #8B0000;
     color: white;
-    padding-left: 25%;
-    padding-top: 5%;
-    padding-bottom: 5%;
-
-}
-
-.n1{
-    color:rgb(247, 110, 110);
-    }
-
-#textblock-footer {
-    color: #ffaf1b;
-    font-size: 15px;
-    font-weight: 400;
-    position: fixed;
+    padding: 10px 20px;
     width: 100%;
-    bottom: 0px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-
-
-
-
-
-/* Keyframes for typing effect */
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+    margin-bottom: 20px;
+    margin-top: 7%;
 }
 
-/* Keyframes for the blinking caret */
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: rgb(171, 33, 33); }
+.n1 {
+    color: rgb(247, 110, 110);
 }
-
-
-
-
-
-
-/* TextBlock.css */
-#arrow {
-   
-    font-size: 4rem;
-    color: rgb(90, 89, 89);
-    animation: blink 1s infinite;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  @keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-  

@@ -144,7 +144,7 @@ export default function Hero() {
                     <div className='aftertext'>
                         <Link to="./signin">
                             <button className={`after_textbox ${buttonVisible ? 'visible' : ''}`}>
-                                Get Started
+                                Whatever it takes!
                             </button>
                         </Link>   
                     </div>  

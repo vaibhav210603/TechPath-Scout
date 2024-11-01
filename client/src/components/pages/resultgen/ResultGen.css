@@ -46,7 +46,7 @@ body {
   white-space: pre-wrap;
   text-align: left;
   width: 100%; /* Ensure typewriter text takes full width */
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 20px; /* Space between text and chart */
   color: rgb(10, 10, 10); /* Dark color for readability */
   flex-grow: 1; /* Allow typewriter text to grow and push chart down */

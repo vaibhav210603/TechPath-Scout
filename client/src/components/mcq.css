@@ -5,7 +5,6 @@
     width: 100vw;
     max-width: 700px; /* Maximum width for larger screens */
     border-radius: 10px;
-    
     border: 1px solid rgb(202, 199, 199);
     text-align: left;
     box-sizing: border-box;
@@ -16,7 +15,7 @@
 }
 
 .ques {
-    font-size: 1.2em; /* Relative font size */
+    font-size: 1em  ; /* Relative font size */
     margin-bottom: 10px; /* Margin to separate from options */
     word-wrap: break-word; /* Ensure long words break properly */
 }
@@ -24,7 +23,7 @@
 .options_container {
     max-height: 50vh; /* Limit height for options */
     overflow-y: auto; /* Allow scrolling within options if needed */
-    margin-bottom: 20px; /* Space below options */
+    margin-bottom: 10px; /* Space below options */
 }
 
 .option {

@@ -1,0 +1,40 @@
+.preresult_container{
+    background-image: url('./public/BURR.png');
+   background-position: center;
+   background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: column;
+    
+
+}
+
+/* preresultgen.css */
+.text1 {
+    text-align: left; /* Aligns text to the left */
+    white-space: pre-wrap;
+     /* Ensures line breaks are respected */
+  }
+  
+
+.pay_button{
+    margin-top: 1%;
+
+}
+
+.back{
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 10px;
+    padding: 10%;
+    color: white;
+    text-align: center;
+    min-width: 100vw;
+   
+}
+
+.pay{
+    background-color: green;
+}

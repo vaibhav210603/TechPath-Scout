@@ -11,6 +11,7 @@ import Quiz from './components/Quiz';
 import Layout from './components/Layout.jsx';
 import Assistant from './components/pages/assistant/Assistant.jsx';
 import ResultGen from './components/pages/resultgen/ResultGen';
+import Preresultgen from './components/pages/preresultgen/Preresultgen';
 import SignIn from './components/pages/signin/SignIn.jsx';
 import Contact from './components/pages/contact/Contact.jsx';
 import Loading from './components/Loading'; // Import the Loading component
@@ -27,10 +28,17 @@ const router = createBrowserRouter([
         path: "/quiz",
         element: <Quiz />,
       },
+
       {
         path: "/assistant",
         element: <Assistant />,
       },
+
+      {
+        path: "/preresultgen",
+        element: <Preresultgen/>,
+      },
+
       {
         path: "/resultgen",
         element: <ResultGen />,

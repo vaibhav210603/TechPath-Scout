@@ -38,28 +38,31 @@ function TextBlock({ onContentComplete }) {
     useEffect(() => {
         const delayTimeout = setTimeout(() => {
             setStartTyping(true);
-        }, 2000);
+        }, 100);
 
         return () => clearTimeout(delayTimeout);
     }, []);
 
-    const title = "8/10 students are clueless!";
-    const content = `..Let's bulletproof your future💪!. 
-        While 80% students regret after randomly choosing their career paths, you can confidently explore your true potential.
-        AI/ML🤖,Data Science🔭 , Web Development🛜, Cybersecurity🪪, Game Development🎮-- don't know what to pick💁‍♂️?
-        I will help you find your ideal domain of excellence so that you can get ahead of 99% coders👑⚔️.
-        ⭐ Click to get started ⭐`;
+    const title = "";
+    const content = `Now's the time -- "OWN" your future..
+     80% coders are regretting their decisions so make sure you select wisely and "not" follow others blindly when it comes to your career..
+        AI/ML | Data Science | Web Dev | Cybersecurity | Game Dev  .--don't know what to pick?
+        .We will help you find your ideal domain of excellence so that you can get ahead of 99% coders.
+        .But first do you "want to" help yourself?
+        `;
 
     return (
         <div id="textblock">
+            
+            
             <div id="textblock-container">
                 
                 <p className='textblock-head'><span className='n1'>8/10</span> CODERS ARE CLUELESS!</p>
                     <p id="textblock-content">
                         <Typewriter 
                             text={content} 
-                            speed={6} 
-                            delayAfterPunctuation={350} 
+                            speed={2} 
+                            delayAfterPunctuation={10} 
                             onComplete={() => {
                                 setContentTyped(true);
                                 if (onContentComplete) {
@@ -69,12 +72,15 @@ function TextBlock({ onContentComplete }) {
                         />
                     </p>
                 
-                {contentTyped && (
-                    <div id="arrow">↓</div> // Arrow appears after the content is fully typed
-                )}
+                
+            </div>
+
+
+            <div className="graphix">
+            <img src='./public/coder_confusednw.png'></img>
             </div>
             
-            <footer id='textblock-footer'>...</footer>
+            
         </div>
     );
 }
