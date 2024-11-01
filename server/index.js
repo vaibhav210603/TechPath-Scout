@@ -13,6 +13,9 @@ app.use(cors({
   allowedHeaders: ["Content-Type"]
 }));
 
+
+// Add this before your other routes
+app.options('*', cors()); // Enable preflight requests for all routes
 const key = "AIzaSyBTd5GCKzvM4z7mnR-EqvMbcks8uePQgsY";
 
 const genAI = new GoogleGenerativeAI(key);
