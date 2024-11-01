@@ -1,10 +1,18 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const express = require("express");
-const cors = require("cors");
+
 const app = express();
 
-app.use(cors());
+
 app.use(express.json());
+
+const cors = require("cors");
+
+const allowedOrigins = ["https://techpath-scout.vercel.app"]; // Allow only this origin
+app.use(cors({
+  origin: allowedOrigins
+}));
+
 
 const key = "AIzaSyBTd5GCKzvM4z7mnR-EqvMbcks8uePQgsY";
 
