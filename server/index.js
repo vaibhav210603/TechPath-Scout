@@ -47,6 +47,47 @@ app.post("/generate", async (req, res) => {
   });
 });
 
+
+
+
+
+
+
+
+
+
+
+
+const Razorpay = require('razorpay');
+const razorpayInstance = new Razorpay({
+  key_id: 'rzp_live_sgeda5ZnM4PhGA',
+  key_secret: 'ZmwYboqnnfcHzJB8H9vIxLad'
+});
+
+app.post('/create-order', async (req, res) => {
+  const options = {
+    amount: req.body.amount * 100, // Amount in paise
+    currency: 'INR',
+    receipt: 'receipt_order_74394'
+  };
+
+  try {
+    const order = await razorpayInstance.orders.create(options);
+    res.json(order);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+
+
+
+
+
+
+
+
+
 app.listen(8000, () => {
   console.log(`Server is running on port 8000.`);
 });
