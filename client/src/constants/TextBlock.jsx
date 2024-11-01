@@ -77,7 +77,7 @@ function TextBlock({ onContentComplete }) {
 
 
             <div className="graphix">
-            <img src='./public/coder_confusednw.png'></img>
+            <img src='/coder_confusednw.png'></img>
             </div>
             
             

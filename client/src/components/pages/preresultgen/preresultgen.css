@@ -1,5 +1,5 @@
 .preresult_container{
-    background-image: url('./public/BURR.png');
+    background-image: url('/BURR.png');
    background-position: center;
    background-size: cover;
     height: 100vh;
