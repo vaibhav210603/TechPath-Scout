@@ -9,7 +9,7 @@ const app = express();
 const corsOptions = {
   origin: [
     'http://localhost:5173',  // Local development frontend
-    'https://your-production-frontend.vercel.app',  // Replace with your actual frontend URL
+    'https://techpath-scout.vercel.app',  // Replace with your actual frontend URL
     /\.vercel\.app$/  // Matches Vercel app domains if needed
   ],
   methods: ['GET', 'POST', 'OPTIONS'],
@@ -31,7 +31,7 @@ app.options('*', cors(corsOptions));
 app.use(express.json());
 
 // Google Generative AI Configuration
-const key = process.env.GOOGLE_API_KEY || "AIzaSyBTd5GCKzvM4z7mnR-EqvMbcks8uePQgsY";
+const key =  "AIzaSyBTd5GCKzvM4z7mnR-EqvMbcks8uePQgsY";
 const genAI = new GoogleGenerativeAI(key);
 
 // Razorpay Configuration
