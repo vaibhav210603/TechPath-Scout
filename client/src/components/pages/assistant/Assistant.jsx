@@ -112,7 +112,7 @@ function Assistant() {
                     value={userInput}
                     onChange={(e) => setUserInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="Ask me anything... (Press Enter to submit)"
+                    placeholder="How can we help... (Press Enter to submit)"
                     rows={5}
                     cols={30}
                 />
