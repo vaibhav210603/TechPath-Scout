@@ -31,7 +31,7 @@ app.options('*', cors(corsOptions));
 app.use(express.json());
 
 // Google Generative AI Configuration
-const key =  "AIzaSyBTd5GCKzvM4z7mnR-EqvMbcks8uePQgsY";
+const key =  "AIzaSyCRBV5UWsxiORXpLiWEfToWBrpB0tlP6Uk";
 const genAI = new GoogleGenerativeAI(key);
 
 // Razorpay Configuration
