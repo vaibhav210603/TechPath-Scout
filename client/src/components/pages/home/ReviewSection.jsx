@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './ReviewSection.css'
 const Star = ({ filled }) => (
   <svg 
     width="16" 
@@ -13,7 +13,7 @@ const Star = ({ filled }) => (
 
 const ReviewCard = ({ name, rating, description }) => (
   <div className="review-card">
-    <h3>{name}</h3>
+    <p className='reviewer_name'>{name}</p>
     <div className="stars">
       {[...Array(5)].map((_, i) => (
         <Star key={i} filled={i < rating} />

@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import TextBlock from '../../../constants/TextBlock';
 import { Link } from "react-router-dom";
 
-
+import Feature from './Feature';
 import './Hero.css'
 import ReviewSection from './ReviewSection'
 
@@ -15,17 +15,17 @@ export default function Hero() {
         <div className="hero-container">
            
             <div className="top-banner">
-                <h1>TechPath Scout</h1>
+                <p>TechPath Scout</p>
             </div>
 
             {/* Middle TextBlock */}
             <div className="text-block">
 
                 <div className="text">
-                    <h2 className='heading_text'><span className='red'>97%</span> of coders are clueless! </h2>
+                    <h1 className='heading_text'><span className='red'>97%</span> of coders are clueless! </h1>
                 Now's the time -- "OWN" your future<br></br><br></br>
                 80% coders are regretting their decisions so make sure you select wisely and "not" follow others blindly when it comes to your career<br></br>
-                don't know what to pick?----AI/ML | Data Science | Web Dev | Cybersecurity | Game Dev <br></br><br></br>
+                Don't know what to pick?----AI/ML | Data Science | Web Dev | Cybersecurity | Game Dev <br></br><br></br>
                 We will help you find your ideal domain of excellence so that you can get ahead of 99% coders<br></br>
                 <br></br>But first do you "want to" help yourself?
                 </div>
@@ -53,12 +53,30 @@ export default function Hero() {
 
             {/* Reviews Section */}
             <div className="reviews">
-
-
             <ReviewSection/>
-               
+                <div className="features_banner"><h2>What you'll get for 𝟻̶𝟶̶𝟶̶𝟶̶ 250</h2></div>
             </div>
 
+
+
+
+
+            {/* features Section */}
+
+                    {/* features 1 */}
+                    
+                        <Feature text="Personalized career analysis with the experience of 5,000+ coders and market trends." img="./linkedin.png" orient="left"/>
+
+                    {/* features 2 */}
+
+                       <Feature text="Unique recommendations based on your personality types, IQ and more." img="./github.png" orient="right" />
+
+                    {/* features 3 */}
+                        <Feature text=" Free assistant/chatbot to aid with career related doubts." img ="./trophy-red.png" orient="left"/>
+
+                    {/* features 4 */}
+
+                        <Feature text="Free resources & downloadable result for recommended domains." img="./nig_coder.jpg" orient="right"/>
 
 
 
@@ -71,10 +89,9 @@ export default function Hero() {
                     </div>
                     <div className="footer-links">
                         <ul>
-                            <li><Link to="/about">About Us</Link></li>
-                            <li><Link to="/services">Services</Link></li>
+                            <li><Link to="/AboutUs">About Us</Link></li>
                             <li><Link to="/contact">Contact</Link></li>
-                            <li><Link to="/faq">FAQ</Link></li>
+                            <li><Link to="/FAQ">FAQ</Link></li>
                         </ul>
                     </div>
                     <div className="footer-socials">

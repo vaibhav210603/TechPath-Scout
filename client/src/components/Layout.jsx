@@ -23,10 +23,8 @@ const Layout = () => {
         onMouseLeave={() => setIsHovered(false)}
       >
         {!isHovered && <div className="hover-text">HOVER</div>}
-        {/* Dropdown for mobile */}
-        <button className='dropdown_icon' onClick={toggleMobileMenu}>
-          ☰
-        </button>
+       
+        
         {/* Original navbar for desktop */}
         <div className={`navbar_links ${isMobileMenuOpen ? 'open' : ''}`}>
           <Link to="/" className='r' onClick={closeMobileMenu}><p>Home</p></Link>
