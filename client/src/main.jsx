@@ -15,6 +15,8 @@ import Preresultgen from './components/pages/preresultgen/Preresultgen';
 import SignIn from './components/pages/signin/SignIn.jsx';
 import Contact from './components/pages/contact/Contact.jsx';
 import Loading from './components/Loading'; // Import the Loading component
+import FAQ from './components/pages/FAQ/Faq.jsx';
+import AboutUs from './components/pages/aboutus/AboutUs.jsx';
 
 const router = createBrowserRouter([
   {
@@ -51,6 +53,16 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+
+      {
+        path:"/FAQ",
+        element:<FAQ></FAQ>
+      }
+      ,
+      {
+        path:"/AboutUs",
+        element:<AboutUs></AboutUs>
+      }
       
     ],
   },

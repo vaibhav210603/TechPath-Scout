@@ -2,6 +2,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.16.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.19.2",
     "puppeteer": "^23.3.0",
     "razorpay": "^2.9.5"

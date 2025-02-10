@@ -11,7 +11,7 @@ const Loading = ({ onLoadingComplete }) => {
       if (onLoadingComplete) {
         onLoadingComplete();
       }
-    },1000); // 3000ms = 3 seconds
+    },100); // 3000ms = 3 seconds
 
     return () => clearTimeout(timer); // Clean up the timer on component unmount
   }, [onLoadingComplete]);
