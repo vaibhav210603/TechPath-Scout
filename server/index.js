@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const Razorpay = require('razorpay');
+require('dotenv').config();
+
+
 
 const app = express();
 
@@ -31,13 +34,13 @@ app.options('*', cors(corsOptions));
 app.use(express.json());
 
 // Google Generative AI Configuration
-const key =  "AIzaSyCXGup9b5cWJDDyb7kcZeGrEr044pfjqOA";
+const key = process.env.GEMINI_KEY;
 const genAI = new GoogleGenerativeAI(key);
 
 // Razorpay Configuration
 const razorpayInstance = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID || 'rzp_live_sgeda5ZnM4PhGA',
-  key_secret: process.env.RAZORPAY_KEY_SECRET || 'ZmwYboqnnfcHzJB8H9vIxLad'
+  key_id: process.env.RAZORPAY_KEY_ID  ,
+  key_secret: process.env.RAZORPAY_KEY_SECRET 
 });
 
 // Routes
