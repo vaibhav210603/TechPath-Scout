@@ -54,7 +54,7 @@ export default function Hero() {
             {/* Reviews Section */}
             <div className="reviews">
             <ReviewSection/>
-                <div className="features_banner"><h2>What you'll get for 𝟻̶𝟶̶𝟶̶𝟶̶ 250</h2></div>
+                <div className="features_banner"><h2>What you'll get for 𝟻̶𝟶̶𝟶̶𝟶̶ 199</h2></div>
             </div>
 
 
@@ -121,4 +121,4 @@ export default function Hero() {
 
         </div>
     );
-}
+} 

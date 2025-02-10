@@ -61,7 +61,7 @@ function Assistant() {
         const fullText = `${prompt}${userInput}`;
 
         try {
-            const res = await fetch('http://localhost:8000/generate', {
+            const res = await fetch('https://techpath-scout-server.vercel.app/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
