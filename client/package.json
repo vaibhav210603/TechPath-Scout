@@ -32,7 +32,8 @@
     "react-markdown": "^10.1.0",
     "react-native-parallax-scroll-view": "^0.21.3",
     "react-router-dom": "^6.25.1",
-    "rellax": "^1.12.1"
+    "rellax": "^1.12.1",
+    "swiper": "^11.2.8"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
