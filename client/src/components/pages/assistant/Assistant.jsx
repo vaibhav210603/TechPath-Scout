@@ -72,7 +72,7 @@ function Assistant() {
         setIsLoading(true);
 
         try {
-            const res = await fetch('http://localhost:8000/api/chat', {
+            const res = await fetch('https://techpath-scout-server.vercel.app/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
