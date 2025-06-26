@@ -4,6 +4,7 @@
     { "src": "index.js", "use": "@vercel/node" }
   ],
   "routes": [
+    { "src": "/api/chat", "dest": "/index.js" },
     { "src": "/generate", "dest": "/index.js" },
     { "src": "/create-order", "dest": "/index.js" },
     { "src": "/", "dest": "/index.js" }
