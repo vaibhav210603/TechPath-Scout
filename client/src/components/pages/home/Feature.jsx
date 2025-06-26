@@ -1,27 +1,48 @@
 // Feature.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 import './Feature.css';
 
-const Feature = props => {
-    const containerClass = props.orient === 'left' ? 'feature_container_left' : 'feature_container_right';
-    
+const Feature = ({ icon, title, description }) => {
+    const cardVariants = {
+        offscreen: {
+            y: 50,
+            opacity: 0
+        },
+        onscreen: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.8
+            }
+        }
+    };
+
     return (
-        <div className={containerClass}>
-            <div className={`text_${props.orient}`}>
-                <p>{props.text}</p>
+        <motion.div 
+            className="feature-card"
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.8 }}
+            variants={cardVariants}
+        >
+            <div className="feature-icon-wrapper">
+                <span className={icon}></span>
             </div>
-            <div className={`img_${props.orient}`}>
-                {props.img && <img src={props.img} alt={props.text} />}
-            </div>
-        </div>
+            <h3 className="feature-title">{title}</h3>
+            <p className="feature-description">{description}</p>
+            <a href="#" className="feature-learn-more">Learn more →</a>
+        </motion.div>
     );
 };
 
 Feature.propTypes = {
-    orient: PropTypes.oneOf(['left', 'right']).isRequired,
-    text: PropTypes.string.isRequired,
-    img: PropTypes.string
+    icon: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
 };
 
 export default Feature;

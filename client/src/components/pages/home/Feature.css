@@ -1,14 +1,24 @@
-/* Add these specific styles while keeping others unchanged */
-
+/* Modernized Feature Cards */
 .feature_container_left,
 .feature_container_right {
     display: flex;
     align-items: center;
     width: 90%;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 2rem auto;
-    gap: 1rem;
-    font-size: 18px;
+    gap: 2rem;
+    font-size: 1.1rem;
+    background: #fff;
+    border-radius: 1.5em;
+    box-shadow: 0 4px 24px rgba(10,85,132,0.10);
+    transition: box-shadow 0.2s, transform 0.2s;
+    padding: 2.2rem 2.5rem;
+    position: relative;
+}
+.feature_container_left:hover,
+.feature_container_right:hover {
+    box-shadow: 0 8px 32px rgba(10,85,132,0.18);
+    transform: translateY(-4px) scale(1.02);
 }
 
 .feature_container_left {
@@ -21,17 +31,18 @@
 
 .text_left, .text_right {
     flex: 4;
-    padding: 2%;
-    border-radius: 20px;
+    padding: 2% 3%;
+    border-radius: 1em;
+    font-weight: 500;
+    color: #0a5584;
+    font-size: 1.15rem;
+    background: none;
 }
-
 .text_left{
-    background-color: rgb(223, 247, 241);
+    background-color: transparent;
 }
-
 .text_right{
-    background-color: rgb(223, 236, 243);
-
+    background-color: transparent;
 }
 
 .img_left, .img_right {
@@ -39,21 +50,107 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
-
 .img_left img, .img_right img {
-    max-width: 100%;
+    max-width: 120px;
     height: auto;
     object-fit: contain;
-    max-width: 100px;
-    max-height: 100px;
+    max-height: 120px;
+    border-radius: 1em;
+    background: #f7fafc;
+    box-shadow: 0 2px 8px rgba(10,85,132,0.08);
+    padding: 0.5em;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     .feature_container_left,
     .feature_container_right {
         flex-direction: column;
-        width: 95%;
+        width: 98vw;
+        padding: 1.2rem 1rem;
+        gap: 1.2rem;
     }
+    .img_left img, .img_right img {
+        max-width: 90px;
+        max-height: 90px;
+    }
+}
+
+/* --- FEATURES SECTION --- */
+.features-section {
+  width: 100%;
+  max-width: 1400px;
+  padding: 6rem 3rem;
+  background-color: #f9f9f9;
+  text-align: center;
+  font-family: 'Inter', 'Poppins', 'Montserrat', Arial, sans-serif;
+}
+.section-title {
+  font-size: 4.2rem;
+  font-weight: 800;
+  color: #181818;
+  letter-spacing: -2px;
+  margin-bottom: 0.8rem;
+}
+.section-subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 4rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  text-align: left;
+}
+.feature-card {
+  background: #fff;
+  border-radius: 1.2rem;
+  padding: 2.5rem 2rem;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+.feature-icon-wrapper {
+  background-color: #eaf2f8;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.8rem;
+}
+.feature-icon-wrapper span {
+  font-size: 40px;
+  color: #0a5584;
+  line-height: 1;
+}
+.feature-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.8rem;
+}
+.feature-description {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.feature-learn-more {
+  color: #0a5584;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.feature-learn-more:hover {
+  color: #00bcd4;
 }

@@ -1,136 +1,146 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 import './assistant.css';
 
-function Typewriter({ text, speed, delayAfterPunctuation, onComplete }) {
-    const [displayedText, setDisplayedText] = useState('');
-    const [index, setIndex] = useState(0);
+// New AI Message component with stable typing animation
+const AiChatMessage = ({ message }) => {
+    const [visibleText, setVisibleText] = useState('');
+    const [isTyping, setIsTyping] = useState(true);
 
     useEffect(() => {
-        if (index < text.length) {
-            let char = text.charAt(index);
-            let delay = speed;
-
-            // Add extra delay after punctuation marks
-            if (char === '.' || char === '!' || char === '?') {
-                delay += delayAfterPunctuation;
-                // Insert a line break after punctuation
-                setDisplayedText((prev) => prev + char + '<br />');
+        setVisibleText('');
+        setIsTyping(true);
+        let i = 0;
+        const intervalId = setInterval(() => {
+            if (i < message.length) {
+                setVisibleText(message.substring(0, i + 1));
+                i++;
             } else {
-                setDisplayedText((prev) => prev + char);
+                clearInterval(intervalId);
+                setIsTyping(false);
             }
+        }, 20); // Typing speed
 
-            const timeout = setTimeout(() => {
-                setIndex((prev) => prev + 1);
-            }, delay);
+        return () => clearInterval(intervalId);
+    }, [message]);
 
-            return () => clearTimeout(timeout);
-        } else if (onComplete) {
-            onComplete();
-        }
-    }, [index, text, speed, delayAfterPunctuation, onComplete]);
+    return (
+        <div className="chat-message ai">
+            {/* Render the full message but make the untyped part invisible */}
+            <div className="markdown-body">
+                <ReactMarkdown>{visibleText + (isTyping ? '▍' : '')}</ReactMarkdown>
+                <span style={{ visibility: 'hidden', height: 0, display: 'block' }}>
+                    <ReactMarkdown>{message}</ReactMarkdown>
+                </span>
+            </div>
+        </div>
+    );
+};
 
-    return <span dangerouslySetInnerHTML={{ __html: displayedText }} />;
-}
+const UserChatMessage = ({ message }) => {
+    return (
+        <div className="chat-message user">
+            <p>{message}</p>
+        </div>
+    );
+};
 
 function Assistant() {
-    const [userInput, setUserInput] = useState('');
-    const [response, setResponse] = useState('');
-    const [startTyping, setStartTyping] = useState(false);
+    const [messages, setMessages] = useState([
+        { text: "Hello! I'm your AI career assistant. How can I help you navigate your tech path today?", sender: 'ai' }
+    ]);
+    const [input, setInput] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const messagesEndRef = useRef(null);
 
-    // Define a prompt to attach to the user input
-    const prompt = `As a computer science advisor, provide concise, clear, and point-based answers to the student's query. Keep responses under 50 words and focus on brevity and clarity.\n\n`;
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        await submitQuery();
+    useEffect(() => {
+        if (!isLoading) {
+            scrollToBottom();
+        }
+    }, [messages, isLoading]);
+
+    const handleSend = async () => {
+        if (input.trim() === '' || isLoading) return;
+
+        const userMessage = { text: input, sender: 'user' };
+        setMessages(prev => [...prev, userMessage]);
+        setInput('');
+        setIsLoading(true);
+
+        try {
+            const res = await fetch('http://localhost:8000/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: input }),
+            });
+
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await res.json();
+            const aiMessage = { text: data.reply, sender: 'ai' };
+            setMessages(prev => [...prev, aiMessage]);
+
+        } catch (error) {
+            console.error("Failed to fetch AI response:", error);
+            const errorMessage = { text: "Sorry, I'm having trouble connecting. Please try again later.", sender: 'ai' };
+            setMessages(prev => [...prev, errorMessage]);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault();
-            submitQuery();
+            handleSend();
         }
-    };
-
-    const submitQuery = async () => {
-        // Clear the previous response and stop typing
-        setResponse('');
-        setStartTyping(false);
-
-        // Concatenate the prompt with the user input
-        const fullText = `${prompt}${userInput}`;
-
-        try {
-            const res = await fetch('https://techpath-scout-server.vercel.app/generate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ text: fullText }),
-            });
-
-            const data = await res.json();
-            if (data && data.story) {
-                const formattedResponse = parseResponse(data.story);
-                setResponse(formattedResponse);
-                setStartTyping(true);
-            } else {
-                console.error('Invalid response data:', data);
-                setResponse('Error: No valid response from the server.');
-                setStartTyping(false);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            setResponse('Error: Could not fetch response.');
-            setStartTyping(false);
-        }
-    };
-
-    // Parse the response to format the text
-    const parseResponse = (text) => {
-        if (!text) return ''; // Handle undefined or null text
-
-        return text
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // bold
-            .replace(/\*(.*?)\*/g, '<em>$1</em>') // italic
-            .replace(/^### (.*)$/gm, '<h3>$1</h3>') // heading 3
-            .replace(/^## (.*)$/gm, '<h2>$1</h2>') // heading 2
-            .replace(/^# (.*)$/gm, '<h1>$1</h1>') // heading 1
-            .replace(/^- (.*)$/gm, '<ul><li>$1</li></ul>') // unordered list
-            .replace(/^\d+\. (.*)$/gm, '<ol><li>$1</li></ol>') // ordered list
-            .replace(/^> (.*)$/gm, '<blockquote>$1</blockquote>') // blockquote
-            .replace(/(?<!<\/?\w+>)(\r?\n)/g, '<br>'); // line breaks
     };
 
     return (
         <div className="assistant-wrapper">
-        <div className="assistant-container">
-            <h2 className="assistant-title">Feel free to ask any questions!</h2>
-            <form onSubmit={handleSubmit} className="assistant-form">
-                <textarea
-                    className="assistant-input"
-                    value={userInput}
-                    onChange={(e) => setUserInput(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="How can we help... (Press Enter to submit)"
-                    rows={5}
-                    cols={30}
-                />
-                <button type="submit" className="assistant-button">
-                    Submit
-                </button>
-            </form>
-            <div className="assistant-response">
-                <h3>Response:</h3>
-                {startTyping && (
-                    <Typewriter 
-                        text={response} 
-                        speed={10} // Adjust speed as needed
-                        delayAfterPunctuation={500} // Adjust delay as needed
+            <div className="chat-container">
+                <div className="chat-header">
+                    <h2>Your AI Career Assistant</h2>
+                </div>
+                <div className="chat-messages">
+                    {messages.map((msg, index) =>
+                        msg.sender === 'ai' ? (
+                            <AiChatMessage key={index} message={msg.text} />
+                        ) : (
+                            <UserChatMessage key={index} message={msg.text} />
+                        )
+                    )}
+                    {isLoading && (
+                        <div className="chat-message ai">
+                            <div className="typing-indicator">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+                    )}
+                    <div ref={messagesEndRef} />
+                </div>
+                <div className="chat-input-area">
+                    <textarea
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        placeholder="Ask me anything about tech careers..."
+                        rows={1}
+                        disabled={isLoading}
                     />
-                )}
+                    <button onClick={handleSend} disabled={isLoading}>
+                        Send
+                    </button>
+                </div>
             </div>
-        </div>
         </div>
     );
 }

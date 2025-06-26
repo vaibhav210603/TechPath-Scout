@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Layout.css';
 
 const Layout = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const location = useLocation(); // Get current location
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -14,6 +15,11 @@ const Layout = () => {
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
   };
+
+  // Determine the class based on the current path
+  const pageContentClass = location.pathname === '/assistant' 
+    ? 'page-content-full-width' 
+    : 'page-content';
 
   return (
     <div>
@@ -31,7 +37,7 @@ const Layout = () => {
           <Link to="/assistant" className='r' onClick={closeMobileMenu}><p>Assistant</p></Link>
           <Link to="/contact" className='r' onClick={closeMobileMenu}><p>Contact</p></Link>
           <a
-            href="https://drive.google.com/file/d/1V4t2h0_JCPFTXbkSvVElto6hxTX4UnrK/view"
+            href="/Techpath_scout blueprint.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="r"
@@ -41,7 +47,7 @@ const Layout = () => {
           </a>
         </div>
       </div>
-      <div className='page-content'>
+      <div className={pageContentClass}>
         <Outlet />
       </div>
     </div>

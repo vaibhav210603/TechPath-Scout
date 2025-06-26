@@ -1,4 +1,9 @@
+/* Apply Poppins font to the entire app */
+body {
+  font-family: 'Poppins', sans-serif;
+}
 
+/* You can keep other global styles here */
 
   
 

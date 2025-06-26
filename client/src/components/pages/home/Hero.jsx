@@ -1,124 +1,142 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import TextBlock from '../../../constants/TextBlock';
 import { Link } from "react-router-dom";
-
 import Feature from './Feature';
-import './Hero.css'
-import ReviewSection from './ReviewSection'
-
+import './Hero.css';
+import ReviewSection from './ReviewSection';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
-
-
-   
     return (
         <div className="hero-container">
-           
-            <div className="top-banner">
-                <p>TechPath Scout</p>
-            </div>
-
-            {/* Middle TextBlock */}
-            <div className="text-block">
-
-                <div className="text">
-                    <h1 className='heading_text'><span className='red'>97%</span> of coders are clueless! </h1>
-                Now's the time -- "OWN" your future<br></br><br></br>
-                80% coders are regretting their decisions so make sure you select wisely and "not" follow others blindly when it comes to your career<br></br>
-                Don't know what to pick?----AI/ML | Data Science | Web Dev | Cybersecurity | Game Dev <br></br><br></br>
-                We will help you find your ideal domain of excellence so that you can get ahead of 99% coders<br></br>
-                <br></br>But first do you "want to" help yourself?
+            {/* Modern Hero Section */}
+            <section className="hero-modern-bg">
+                <div className="hero-navbar">
+                    <div className="hero-logo">TechPath Scout</div>
+                    <nav className="hero-nav-links">
+                        <Link to="/">Home</Link>
+                        <Link to="/assistant">Assistant</Link>
+                        <Link to="/contact">Contact</Link>
+                        <a href="/Techpath_scout blueprint.pdf" target="_blank" rel="noopener noreferrer">Blueprint</a>
+                    </nav>
+                    <Link to="/signin" className="hero-app-btn">
+                        <span>Get Started</span>
+                    </Link>
                 </div>
-
-                <div className="graphix">
-                <img src='/coder_confusednw.png'></img>
+                <div className="hero-main-content">
+                    <motion.div
+                        className="hero-left"
+                        initial={{ opacity: 0, x: -60 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <div className="hero-badge">
+                            <img src="/github.png" alt="badge" className="hero-badge-icon" />
+                            <span>Free forever. No credit card</span>
+                        </div>
+                        <h1 className="hero-title-main">
+                            Choose  what<br /><br />You  are<br /><br />Made  for!
+                            <span className="hero-avatars">
+                                <img src="/mephotocropped.jpeg" alt="avatar1" />
+                                <img src="/nig_coder.jpg" alt="avatar2" />
+                                <img src="/assets/images/logo_land.png" alt="avatar3" />
+                            </span>
+                        </h1>
+                        <div className="hero-btn-row">
+                            <Link to="/signin" className="hero-getstarted-btn">Get Started</Link>
+                            <a href="#features" className="hero-features-link">Our Features</a>
+                        </div>
+                    </motion.div>
+                    <motion.div
+                        className="hero-right"
+                        initial={{ opacity: 0, x: 60 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                        <div className="hero-image-card">
+                            <img src="/nig_coder.jpg" alt="hero-person" className="hero-person-img" />
+                            <div className="hero-stat-card">
+                                <span className="hero-stat-label">1,451</span>
+                                <span className="hero-stat-desc">Students helped</span>
+                                <img src="/trophy-red.png" alt="stat-graph" className="hero-stat-graph" />
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
-      
-            </div>
-
-            {/* Students Banner */}
-            <section className="registration_banner">
-
-                <div className="students-banner">
-                <h2>How 50+ students saved themselves!</h2>
-                </div>
-
-                <div className="register">
-                    <Link to='/signin'><button className='reg'>Register</button></Link>
-                </div>   
             </section>
 
-
-
-
-            {/* Reviews Section */}
-            <div className="reviews">
-            <ReviewSection/>
-                <div className="features_banner"><h2>What you'll get for 𝟻̶𝟶̶𝟶̶𝟶̶ 199</h2></div>
-            </div>
-
-
-
-
-
-            {/* features Section */}
-
-                    {/* features 1 */}
-                    
-                        <Feature text="Personalized career analysis with the experience of 5,000+ coders and market trends." img="./linkedin.png" orient="left"/>
-
-                    {/* features 2 */}
-
-                       <Feature text="Unique recommendations based on your personality types, IQ and more." img="./github.png" orient="right" />
-
-                    {/* features 3 */}
-                        <Feature text=" Free assistant/chatbot to aid with career related doubts." img ="./trophy-red.png" orient="left"/>
-
-                    {/* features 4 */}
-
-                        <Feature text="Free resources & downloadable result for recommended domains." img="./nig_coder.jpg" orient="right"/>
-
-
+            {/* New Features Section */}
+            <section id="features" className="features-section">
+                <h2 className="section-title">Take Control Of Your Career</h2>
+                <p className="section-subtitle">We provide the best tools for you to excel in your career.</p>
+                <div className="features-grid">
+                    <Feature 
+                        icon="lnr lnr-chart-bars"
+                        title="Personalized Analysis"
+                        description="Career analysis based on 5,000+ coder experiences and market trends."
+                    />
+                    <Feature 
+                        icon="lnr lnr-diamond"
+                        title="Unique Recommendations"
+                        description="Recommendations based on your personality, IQ, and other metrics."
+                    />
+                    <Feature 
+                        icon="lnr lnr-bubble"
+                        title="AI Career Assistant"
+                        description="A free assistant/chatbot to help with any career-related doubts."
+                    />
+                    <Feature 
+                        icon="lnr lnr-download"
+                        title="Free Resources"
+                        description="Access to free resources and downloadable results for recommended domains."
+                    />
+                </div>
+            </section>
+            
+            <ReviewSection />
 
             {/* Footer Section */}
-
-                        <div className="footer">
-                <div className="footer-content">
-                    <div className="footer-logo">
-                        <h2>TechPath Scout</h2>
+            <footer className="footer-modern">
+                <div className="footer-main">
+                    <div className="footer-about">
+                        <h3 className="footer-logo">TechPath Scout</h3>
+                        <p className="footer-description">
+                            Helping you find your ideal domain of excellence to get ahead of 99% of coders.
+                        </p>
                     </div>
-                    <div className="footer-links">
-                        <ul>
-                            <li><Link to="/AboutUs">About Us</Link></li>
-                            <li><Link to="/contact">Contact</Link></li>
-                            <li><Link to="/FAQ">FAQ</Link></li>
-                        </ul>
+                    <div className="footer-links-group">
+                        <div className="footer-links-col">
+                            <h4 className="footer-col-title">Solutions</h4>
+                            <Link to="/#">Career Analysis</Link>
+                            <Link to="/#">Recommendations</Link>
+                            <Link to="/#">AI Assistant</Link>
+                        </div>
+                        <div className="footer-links-col">
+                            <h4 className="footer-col-title">Support</h4>
+                            <Link to="/contact">Contact Us</Link>
+                            <Link to="/faq">FAQ</Link>
+                            <Link to="/#">Help Center</Link>
+                        </div>
+                        <div className="footer-links-col">
+                            <h4 className="footer-col-title">Company</h4>
+                            <Link to="/aboutus">About Us</Link>
+                            <Link to="/#">Blog</Link>
+                            <Link to="/#">Careers</Link>
+                        </div>
                     </div>
+                </div>
+                <div className="footer-bottom-modern">
+                    <p>&copy; 2024 TechPath Scout. All rights reserved.</p>
                     <div className="footer-socials">
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                            <img src="/facebook-icon.png" alt="Facebook" />
-                        </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                            <img src="/twitter-icon.png" alt="Twitter" />
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                            <img src="/github.png" alt="GitHub" />
                         </a>
                         <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                            <img src="/linkedin-icon.png" alt="LinkedIn" />
+                            <img src="/linkedin.png" alt="LinkedIn" />
                         </a>
                     </div>
-                    <div className="footer-contact">
-                        <p>Email: support.techpathscout@gmail.com</p>
-                        <p>Phone: +91 8175966910</p>
-                    </div>
                 </div>
-                <div className="footer-bottom">
-                    <p>&copy; 2024 TechPath Scout. All rights reserved.</p>
-                </div>
-            </div>
-
-
-
-
-
+            </footer>
         </div>
     );
 } 
