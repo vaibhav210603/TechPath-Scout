@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ConversationChain } from "langchain/chains";
 import { BufferMemory } from "langchain/memory";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import Razorpay from 'razorpay';
 
 dotenv.config();
 
@@ -14,10 +16,43 @@ console.log("Attempting to load Gemini API Key:", process.env.GEMINI_API_KEY);
 const app = express();
 const port = process.env.PORT || 8000;
 
+// Comprehensive CORS Configuration
+const corsOptions = {
+  origin: [
+    'http://localhost:5173',  // Local development frontend
+    'https://techpath-scout.vercel.app',  // Replace with your actual frontend URL
+    /\.vercel\.app$/  // Matches Vercel app domains if needed
+  ],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization',
+    'Access-Control-Allow-Origin'
+  ],
+  credentials: true
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Initialize the model
+// Google Generative AI Configuration (for original /generate route)
+const key = process.env.GEMINI_API_KEY;
+const genAI = new GoogleGenerativeAI(key);
+
+// Razorpay Configuration
+const razorpayInstance = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET
+});
+
+// Initialize the LangChain model
 const model = new ChatGoogleGenerativeAI({
   apiKey: process.env.GEMINI_API_KEY,
   model: "gemini-2.5-flash",
@@ -33,7 +68,38 @@ const chain = new ConversationChain({
   memory: memory,
 });
 
-// Define the chat route
+// Routes
+app.get("/", (req, res) => {
+  res.send("Welcome to the TechPath Scout Server!");
+});
+
+// Original /generate route (using raw Gemini API)
+app.post("/generate", async (req, res) => {
+  try {
+    const userText = req.body.text;
+    console.log("User Text:", userText);
+
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const result = await model.generateContent(userText);
+    const response = await result.response;
+    const text = response.text();
+
+    console.log("Generated Response:", text);
+
+    res.json({
+      message: "Response from server",
+      story: text,
+    });
+  } catch (error) {
+    console.error("Error generating content:", error);
+    res.status(500).json({
+      message: "Failed to generate content",
+      error: error.message
+    });
+  }
+});
+
+// LangChain chat route
 app.post("/api/chat", async (req, res) => {
   const { message } = req.body;
   console.log("1. Received request for /api/chat with message:", message);
@@ -58,6 +124,36 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
+// Razorpay order creation route
+app.post('/create-order', async (req, res) => {
+  try {
+    const options = {
+      amount: req.body.amount * 100, // Amount in paise
+      currency: 'INR',
+      receipt: `receipt_order_${Date.now()}` // Dynamic receipt number
+    };
+
+    const order = await razorpayInstance.orders.create(options);
+    res.json(order);
+  } catch (error) {
+    console.error('Razorpay Order Creation Error:', error);
+    res.status(500).json({
+      message: 'Failed to create Razorpay order',
+      error: error.message
+    });
+  }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    message: 'Something went wrong!',
+    error: err.message
+  });
+});
+
+// Server setup
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });

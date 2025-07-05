@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './preresultgen.css';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { API_ENDPOINTS } from '../../../config/api';
 
 export default function Preresultgen() {
   const location = useLocation();
@@ -42,7 +43,7 @@ export default function Preresultgen() {
      9
 
       // Create order using your backend endpoint
-      const orderResponse = await fetch('https://techpath-scout-server.vercel.app/create-order', {
+      const orderResponse = await fetch(API_ENDPOINTS.CREATE_ORDER, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

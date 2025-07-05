@@ -1,34 +1,36 @@
 
   
 .mega {
-  width: 200%;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: scroll; 
   background-image:url('../../../../public/backgif5.gif');
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 
 .result_container {
-
-  height: 70vh;
-  width: 50vw;
+  max-height: 70vh;
+  width: 80%;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Start content at the top */
   align-items: center; /* Center content horizontally */
   border: 2px solid #00000000;
   overflow-y: auto; /* Enable scrolling */
-  padding: 100px; /* Adjust padding for more space */
+  padding: 40px; /* Reduced padding for better spacing */
   box-sizing: border-box;
   background-color: #ffffff; /* Background color */
   border-radius: 15px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for better separation */
   position: relative; /* Make the container relative */
+  margin: 0 auto; /* Center the container */
 }
 
 .heading {
@@ -41,15 +43,18 @@
 }
 
 .typewriter {
-  margin-top: -50px;
-  display: inline-block;
+  margin-top: 0;
+  display: block;
   white-space: pre-wrap;
   text-align: left;
   width: 100%; /* Ensure typewriter text takes full width */
   font-size: 16px;
+  line-height: 1.6;
   margin-bottom: 20px; /* Space between text and chart */
   color: rgb(10, 10, 10); /* Dark color for readability */
   flex-grow: 1; /* Allow typewriter text to grow and push chart down */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .chart-container {

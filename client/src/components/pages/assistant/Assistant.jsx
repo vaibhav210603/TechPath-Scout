@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './assistant.css';
+import { API_ENDPOINTS } from '../../../config/api';
 
 // New AI Message component with stable typing animation
 const AiChatMessage = ({ message }) => {
@@ -72,7 +73,7 @@ function Assistant() {
         setIsLoading(true);
 
         try {
-            const res = await fetch('https://techpath-scout-server.vercel.app/api/chat', {
+            const res = await fetch(API_ENDPOINTS.CHAT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

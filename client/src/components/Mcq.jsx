@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './mcq.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import { API_ENDPOINTS } from '../config/api';
 
 export default function Mcq({ setQuizResults }) {
   const location = useLocation();
@@ -16,8 +17,8 @@ export default function Mcq({ setQuizResults }) {
     const fetchQues = async () => {
       // Fetch questions from both files
       const [resp1, resp2] = await Promise.all([
-        fetch('/assets/ques1.json'),
-        fetch('/assets/ques2.json'),
+        fetch(API_ENDPOINTS.QUESTIONS_1),
+        fetch(API_ENDPOINTS.QUESTIONS_2),
       ]);
 
       const [data1, data2] = await Promise.all([resp1.json(), resp2.json()]);

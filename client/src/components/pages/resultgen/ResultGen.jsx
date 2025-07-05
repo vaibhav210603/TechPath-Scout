@@ -4,6 +4,7 @@ import './ResultGen.css';
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from '@react-pdf/renderer';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { API_ENDPOINTS } from '../../../config/api';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -113,7 +114,7 @@ function ResultGen() {
 
       console.log('Fetching new result');
       // If no cached result, fetch from API
-      const res = await fetch('https://techpath-scout-server.vercel.app/generate', {
+      const res = await fetch(API_ENDPOINTS.GENERATE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
