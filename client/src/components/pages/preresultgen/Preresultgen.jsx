@@ -60,10 +60,10 @@ export default function Preresultgen() {
       const orderData = await orderResponse.json();
 
       const options = {
-        key: "rzp_live_sgeda5ZnM4PhGA",
+        key: orderData.razorpay_key, // Use key from backend response
         amount: orderData.amount,
         currency: "INR",
-        name: "Techpath sc0ut",
+        name: "Techpath Scout",
         description: "Career Analysis Report",
         order_id: orderData.id,
         handler: function (response) {

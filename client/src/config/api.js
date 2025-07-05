@@ -27,6 +27,14 @@ export const API_ENDPOINTS = {
   QUESTIONS_2: '/assets/ques2.json'
 };
 
+// Razorpay configuration (this should come from backend)
+export const RAZORPAY_CONFIG = {
+  key: process.env.REACT_APP_RAZORPAY_KEY || 'rzp_live_sgeda5ZnM4PhGA', // Fallback for development
+  currency: 'INR',
+  name: 'Techpath Scout',
+  description: 'Career Analysis Report'
+};
+
 // Helper function to get full URL for any endpoint
 export const getApiUrl = (endpoint) => {
   return `${API_BASE_URL}${endpoint}`;

@@ -134,7 +134,12 @@ app.post('/create-order', async (req, res) => {
     };
 
     const order = await razorpayInstance.orders.create(options);
-    res.json(order);
+    
+    // Return order data along with Razorpay key
+    res.json({
+      ...order,
+      razorpay_key: process.env.RAZORPAY_KEY_ID // Include the key from environment
+    });
   } catch (error) {
     console.error('Razorpay Order Creation Error:', error);
     res.status(500).json({
