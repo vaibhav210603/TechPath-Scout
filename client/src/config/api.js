@@ -1,6 +1,6 @@
 // API Configuration
 // Change this to switch between local and deployed environments
-const ENVIRONMENT = 'deployed'; // Options: 'local' or 'deployed'
+const ENVIRONMENT = 'local'; // Options: 'local' or 'deployed'
 
 // API Base URLs
 const API_URLS = {
@@ -24,12 +24,20 @@ export const API_ENDPOINTS = {
   
   // Static assets (these remain the same)
   QUESTIONS_1: '/assets/ques1.json',
-  QUESTIONS_2: '/assets/ques2.json'
+  QUESTIONS_2: '/assets/ques2.json',
+  // User CRUD
+  USERS: `${API_BASE_URL}/api/users`,
+  // Comment CRUD
+  COMMENTS: `${API_BASE_URL}/api/comments`,
+  // Assistant chat CRUD
+  ASSISTANTS: `${API_BASE_URL}/api/assistants`,
+  // Payment CRUD
+  PAYMENTS: `${API_BASE_URL}/api/payments`,
 };
 
 // Razorpay configuration (this should come from backend)
 export const RAZORPAY_CONFIG = {
-  key: process.env.REACT_APP_RAZORPAY_KEY || 'rzp_live_sgeda5ZnM4PhGA', // Fallback for development
+  key: import.meta.env.VITE_RAZORPAY_KEY, // Use Vite environment variable
   currency: 'INR',
   name: 'Techpath Scout',
   description: 'Career Analysis Report'

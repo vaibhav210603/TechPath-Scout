@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './assistant.css';
 import { API_ENDPOINTS } from '../../../config/api';
+import { useLocation } from 'react-router-dom';
 
 // New AI Message component with stable typing animation
 const AiChatMessage = ({ message }) => {
@@ -47,6 +48,8 @@ const UserChatMessage = ({ message }) => {
 };
 
 function Assistant() {
+    const location = useLocation();
+    const { user_details = {} } = location.state || {};
     const [messages, setMessages] = useState([
         { text: "Hello! I'm your AI career assistant. How can I help you navigate your tech path today?", sender: 'ai' }
     ]);
@@ -63,6 +66,25 @@ function Assistant() {
             scrollToBottom();
         }
     }, [messages, isLoading]);
+
+    // Fetch previous chats on load
+    useEffect(() => {
+        if (user_details.user_id) {
+            fetch(`${API_ENDPOINTS.ASSISTANTS}?user_id=${user_details.user_id}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (Array.isArray(data) && data.length > 0) {
+                        // Assume chat_history is a stringified array of messages
+                        const lastChat = data[data.length - 1];
+                        try {
+                            const parsed = JSON.parse(lastChat.chat_history);
+                            if (Array.isArray(parsed)) setMessages(parsed);
+                        } catch {}
+                    }
+                })
+                .catch(() => {});
+        }
+    }, [user_details.user_id]);
 
     const handleSend = async () => {
         if (input.trim() === '' || isLoading) return;
@@ -87,7 +109,21 @@ function Assistant() {
 
             const data = await res.json();
             const aiMessage = { text: data.reply, sender: 'ai' };
-            setMessages(prev => [...prev, aiMessage]);
+            setMessages(prev => {
+                const newMessages = [...prev, aiMessage];
+                // Save chat history to backend
+                if (user_details.user_id) {
+                    fetch(API_ENDPOINTS.ASSISTANTS, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            user_id: user_details.user_id,
+                            chat_history: JSON.stringify(newMessages)
+                        })
+                    });
+                }
+                return newMessages;
+            });
 
         } catch (error) {
             console.error("Failed to fetch AI response:", error);

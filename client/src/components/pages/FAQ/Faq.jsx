@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_ENDPOINTS } from '../../../config/api';
 
 const FAQ = () => {
   const faqs = [
@@ -42,9 +43,34 @@ const FAQ = () => {
   ];
 
   const [openIndex, setOpenIndex] = useState(null);
+  const [rating, setRating] = useState(5);
+  const [comment, setComment] = useState('');
+  const [feedbackMsg, setFeedbackMsg] = useState('');
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const handleFeedbackSubmit = async (e) => {
+    e.preventDefault();
+    const user = JSON.parse(localStorage.getItem('tp_user') || '{}');
+    try {
+      const res = await fetch(API_ENDPOINTS.COMMENTS, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: user.user_id,
+          rating,
+          comment_text: comment
+        })
+      });
+      if (!res.ok) throw new Error('Failed to submit feedback');
+      setFeedbackMsg('Thank you for your feedback!');
+      setComment('');
+      setRating(5);
+    } catch (err) {
+      setFeedbackMsg('Failed to submit feedback.');
+    }
   };
 
   return (
@@ -66,6 +92,26 @@ const FAQ = () => {
           </div>
         ))}
       </div>
+      <form onSubmit={handleFeedbackSubmit} style={{ marginTop: 40, textAlign: 'center' }}>
+        <h3>Leave Feedback</h3>
+        <label>
+          Rating:
+          <select value={rating} onChange={e => setRating(Number(e.target.value))}>
+            {[1,2,3,4,5].map(r => <option key={r} value={r}>{r}</option>)}
+          </select>
+        </label>
+        <br />
+        <textarea
+          value={comment}
+          onChange={e => setComment(e.target.value)}
+          placeholder="Your feedback..."
+          rows={3}
+          style={{ width: '60%', marginTop: 10 }}
+        />
+        <br />
+        <button type="submit">Submit Feedback</button>
+        <div>{feedbackMsg}</div>
+      </form>
     </div>
   );
 };

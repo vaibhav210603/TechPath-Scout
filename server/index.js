@@ -6,6 +6,10 @@ import { ConversationChain } from "langchain/chains";
 import { BufferMemory } from "langchain/memory";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Razorpay from 'razorpay';
+import userRouter from './api/user.js';
+import commentRouter from './api/comment.js';
+import assistantRouter from './api/assistant.js';
+import paymentRouter from './api/payment.js';
 
 dotenv.config();
 
@@ -148,6 +152,11 @@ app.post('/create-order', async (req, res) => {
     });
   }
 });
+
+app.use('/api/users', userRouter);
+app.use('/api/comments', commentRouter);
+app.use('/api/assistants', assistantRouter);
+app.use('/api/payments', paymentRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

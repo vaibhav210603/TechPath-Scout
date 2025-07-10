@@ -65,11 +65,14 @@ export default function Mcq({ setQuizResults }) {
     }
   };
 
-  const finishQuiz = () => {
+  const finishQuiz = async () => {
     const results = questionsSelected.map((question, index) => ({
       question,
       selectedOption: answers[index],
     }));
+
+    // Store quiz results only in browser memory (localStorage)
+    localStorage.setItem('quiz_results', JSON.stringify(results));
 
     // Use the function passed from the parent to update the results
     setQuizResults(results);

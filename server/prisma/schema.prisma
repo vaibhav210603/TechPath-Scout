@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PaymentStatus {
+  pending
+  failed
+  success
+}
+
+model User {
+  user_id     Int         @id @default(autoincrement())
+  full_name   String
+  email       String      @unique
+  phone       String
+  result      String?
+  created_at  DateTime    @default(now())
+
+  comments    Comment[]   @relation("UserComments")
+  payments    Payment[]   @relation("UserPayments")
+  assistants  Assistant[] @relation("UserAssistants")
+}
+
+model Comment {
+  comment_id   Int      @id @default(autoincrement())
+  user_id      Int
+  user         User     @relation("UserComments", fields: [user_id], references: [user_id])
+  rating       Int
+  comment_text String
+  created_at   DateTime @default(now())
+}
+
+model Payment {
+  payment_id     Int           @id @default(autoincrement())
+  user_id        Int
+  user           User          @relation("UserPayments", fields: [user_id], references: [user_id])
+  amount         Float
+  payment_status PaymentStatus
+  created_at     DateTime      @default(now())
+}
+
+model Assistant {
+  assistant_chat_id Int   @id @default(autoincrement())
+  user_id           Int
+  user              User  @relation("UserAssistants", fields: [user_id], references: [user_id])
+  chat_history      String
+}
