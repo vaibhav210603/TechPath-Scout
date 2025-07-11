@@ -5,7 +5,7 @@ const ENVIRONMENT = 'deployed'; // Options: 'local' or 'deployed'
 // API Base URLs
 const API_URLS = {
   local: 'http://localhost:8000',
-  deployed: 'https://tech.api.vibhaupadhyay.com/'
+  deployed: 'https://tech.api.vibhaupadhyay.com'
 };
 
 // Get the current API base URL
