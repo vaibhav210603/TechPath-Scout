@@ -1,12 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TextBlock from '../../../constants/TextBlock';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Feature from './Feature';
 import './Hero.css';
 import ReviewSection from './ReviewSection';
 import { motion } from 'framer-motion';
 
 export default function Hero() {
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const savedUser = localStorage.getItem('tp_user');
+        if (savedUser) {
+            try {
+                setUser(JSON.parse(savedUser));
+            } catch {
+                setUser(null);
+            }
+        } else {
+            setUser(null);
+        }
+    }, []);
+
+    const handleGetStarted = (e) => {
+        e.preventDefault();
+        if (user) {
+            navigate('/quiz');
+        } else {
+            navigate('/signin');
+        }
+    };
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('tp_user');
+        setUser(null);
+        navigate('/');
+    };
+
     return (
         <div className="hero-container">
             {/* Modern Hero Section */}
@@ -19,9 +51,9 @@ export default function Hero() {
                         <Link to="/contact">Contact</Link>
                         <a href="/Techpath_scout blueprint.pdf" target="_blank" rel="noopener noreferrer">Blueprint</a>
                     </nav>
-                    <Link to="/signin" className="hero-app-btn">
+                    <button className="hero-app-btn" onClick={handleGetStarted}>
                         <span>Get Started</span>
-                    </Link>
+                    </button>
                 </div>
                 <div className="hero-main-content">
                     <motion.div
@@ -30,11 +62,18 @@ export default function Hero() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <div className="hero-badge">
+                        {/* <div className="hero-badge">
                             <img src="/github.png" alt="badge" className="hero-badge-icon" />
                             <span>Free forever. No credit card</span>
-                        </div>
+                        </div> */}
                         <h1 className="hero-title-main">
+                            
+                       Hey  {user && (
+                                <span style={{ color: 'green' }}>
+                                {JSON.parse(localStorage.getItem('tp_user')).full_name.split(' ')[0]}
+                                </span>
+                            )}
+                        <br/>   <br/>
                             Choose  what<br /><br />You  are<br /><br />Made  for!
                             <span className="hero-avatars">
                                 <img src="/mephotocropped.jpeg" alt="avatar1" />
@@ -43,7 +82,13 @@ export default function Hero() {
                             </span>
                         </h1>
                         <div className="hero-btn-row">
-                            <Link to="/signin" className="hero-getstarted-btn">Get Started</Link>
+                            <button className="hero-getstarted-btn" onClick={handleGetStarted}>Get Started</button>
+                            {user ? (
+                                <button className="hero-login-btn" onClick={handleLogout}>Logout</button>
+                            ) : (
+                                <Link to="/login" className="hero-login-btn">Login</Link>
+                            )}
+                            <Link to="/signin" className="hero-signup-btn">Sign Up</Link>
                             <a href="#features" className="hero-features-link">Our Features</a>
                         </div>
                     </motion.div>

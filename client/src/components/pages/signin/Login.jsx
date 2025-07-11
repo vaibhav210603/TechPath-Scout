@@ -3,10 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './signin.css';
 import { API_ENDPOINTS } from '../../../config/api';
 
-const SignIn = () => {
-  const [name, setName] = useState('');
+const Login = () => {
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -18,31 +16,26 @@ const SignIn = () => {
     setError('');
 
     try {
-      // Create or upsert user in backend
-      const res = await fetch(API_ENDPOINTS.USERS, {
+      const res = await fetch(API_ENDPOINTS.USER_LOGIN, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          full_name: name, 
-          email,
-          phone 
-        })
+        body: JSON.stringify({ email })
       });
-      
+
       if (!res.ok) {
         const errorData = await res.json();
-        throw new Error(errorData.error || 'Failed to create user');
+        throw new Error(errorData.error || 'Login failed');
       }
-      
+
       const user = await res.json();
       
-      // Store user in localStorage for later use
+      // Store user in localStorage
       localStorage.setItem('tp_user', JSON.stringify(user));
       
       // Check if there's a redirect destination
       const redirectTo = location.state?.redirectTo || '/';
       
-      // Navigate to the appropriate page and pass user details as state
+      // Navigate to the appropriate page
       navigate(redirectTo, { state: { user_details: user } });
     } catch (err) {
       setError(err.message);
@@ -51,10 +44,11 @@ const SignIn = () => {
     }
   };
 
-  const handleLogin = () => {
-    navigate('/login', { 
+  const handleSignUp = () => {
+    navigate('/signin', { 
       state: { 
-        redirectTo: location.state?.redirectTo || '/' 
+        redirectTo: location.state?.redirectTo || '/',
+        showSignUp: true 
       } 
     });
   };
@@ -63,7 +57,7 @@ const SignIn = () => {
     <div className="signin-wrapper">
       <div className="signin-container">
         <div className="typewrite">
-          <h2>And you are?</h2>
+          <h2>Welcome Back!</h2>
         </div>
         
         {error && (
@@ -81,19 +75,6 @@ const SignIn = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Full Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              placeholder="Enter your full name"
-              disabled={isLoading}
-            />
-          </div>
-          <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input
               type="email"
@@ -106,28 +87,13 @@ const SignIn = () => {
               disabled={isLoading}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="phone">Phone Number:</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-              placeholder="Enter your phone number"
-              pattern="[0-9]{10,}"
-              title="Please enter a valid phone number (minimum 10 digits)"
-              disabled={isLoading}
-            />
-          </div>
 
           <button 
             type="submit" 
-            className="submit-button"
+            className="submit-button" 
             disabled={isLoading}
           >
-            {isLoading ? 'Creating Account...' : 'Sign Up'}
+            {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
 
@@ -138,10 +104,10 @@ const SignIn = () => {
           borderTop: '1px solid #ddd'
         }}>
           <p style={{ marginBottom: '10px', color: '#666' }}>
-            Already have an account?
+            Don't have an account?
           </p>
           <button 
-            onClick={handleLogin}
+            onClick={handleSignUp}
             style={{
               background: 'none',
               border: '2px solid #007bff',
@@ -160,7 +126,7 @@ const SignIn = () => {
               e.target.style.color = '#007bff';
             }}
           >
-            Login
+            Sign Up
           </button>
         </div>
       </div>
@@ -168,4 +134,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login; 

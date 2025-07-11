@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './assistant.css';
 import { API_ENDPOINTS } from '../../../config/api';
-import { useLocation } from 'react-router-dom';
 
 // New AI Message component with stable typing animation
 const AiChatMessage = ({ message }) => {
@@ -49,12 +49,14 @@ const UserChatMessage = ({ message }) => {
 
 function Assistant() {
     const location = useLocation();
-    const { user_details = {} } = location.state || {};
+    const navigate = useNavigate();
+    const [userDetails, setUserDetails] = useState(null);
     const [messages, setMessages] = useState([
         { text: "Hello! I'm your AI career assistant. How can I help you navigate your tech path today?", sender: 'ai' }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingHistory, setIsLoadingHistory] = useState(true);
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -67,27 +69,65 @@ function Assistant() {
         }
     }, [messages, isLoading]);
 
-    // Fetch previous chats on load
+    // Check for user authentication on component mount
     useEffect(() => {
-        if (user_details.user_id) {
-            fetch(`${API_ENDPOINTS.ASSISTANTS}?user_id=${user_details.user_id}`)
-                .then(res => res.json())
+        // First check if user details were passed via navigation state
+        if (location.state?.user_details) {
+            setUserDetails(location.state.user_details);
+            return;
+        }
+
+        // Then check localStorage for saved user
+        const savedUser = localStorage.getItem('tp_user');
+        if (savedUser) {
+            try {
+                const user = JSON.parse(savedUser);
+                setUserDetails(user);
+            } catch (error) {
+                console.error('Error parsing saved user:', error);
+                localStorage.removeItem('tp_user');
+                navigate('/signin', { state: { redirectTo: '/assistant' } });
+            }
+        } else {
+            // No user found, redirect to signin
+            navigate('/signin', { state: { redirectTo: '/assistant' } });
+        }
+    }, [location.state, navigate]);
+
+    // Fetch previous chats when user details are available
+    useEffect(() => {
+        if (userDetails?.user_id) {
+            setIsLoadingHistory(true);
+            fetch(`${API_ENDPOINTS.ASSISTANTS}?user_id=${userDetails.user_id}`)
+                .then(res => {
+                    if (!res.ok) throw new Error('Failed to fetch chat history');
+                    return res.json();
+                })
                 .then(data => {
                     if (Array.isArray(data) && data.length > 0) {
-                        // Assume chat_history is a stringified array of messages
+                        // Get the most recent chat
                         const lastChat = data[data.length - 1];
                         try {
                             const parsed = JSON.parse(lastChat.chat_history);
-                            if (Array.isArray(parsed)) setMessages(parsed);
-                        } catch {}
+                            if (Array.isArray(parsed) && parsed.length > 0) {
+                                setMessages(parsed);
+                            }
+                        } catch (error) {
+                            console.error('Error parsing chat history:', error);
+                        }
                     }
                 })
-                .catch(() => {});
+                .catch(error => {
+                    console.error('Error fetching chat history:', error);
+                })
+                .finally(() => {
+                    setIsLoadingHistory(false);
+                });
         }
-    }, [user_details.user_id]);
+    }, [userDetails?.user_id]);
 
     const handleSend = async () => {
-        if (input.trim() === '' || isLoading) return;
+        if (input.trim() === '' || isLoading || !userDetails) return;
 
         const userMessage = { text: input, sender: 'user' };
         setMessages(prev => [...prev, userMessage]);
@@ -109,19 +149,22 @@ function Assistant() {
 
             const data = await res.json();
             const aiMessage = { text: data.reply, sender: 'ai' };
+            
             setMessages(prev => {
                 const newMessages = [...prev, aiMessage];
+                
                 // Save chat history to backend
-                if (user_details.user_id) {
-                    fetch(API_ENDPOINTS.ASSISTANTS, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            user_id: user_details.user_id,
-                            chat_history: JSON.stringify(newMessages)
-                        })
-                    });
-                }
+                fetch(API_ENDPOINTS.ASSISTANTS, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: userDetails.user_id,
+                        chat_history: JSON.stringify(newMessages)
+                    })
+                }).catch(error => {
+                    console.error('Error saving chat history:', error);
+                });
+                
                 return newMessages;
             });
 
@@ -141,18 +184,45 @@ function Assistant() {
         }
     };
 
+    // Show loading state while checking authentication
+    if (!userDetails) {
+        return (
+            <div className="assistant-wrapper">
+                <div className="chat-container">
+                    <div className="chat-header">
+                        <h2>Your AI Career Assistant</h2>
+                    </div>
+                    <div className="chat-messages">
+                        <div className="chat-message ai">
+                            <p>Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="assistant-wrapper">
             <div className="chat-container">
                 <div className="chat-header">
                     <h2>Your AI Career Assistant</h2>
+                    <p style={{ fontSize: '14px', color: '#666', margin: '5px 0' }}>
+                        Welcome back, {userDetails.full_name}!
+                    </p>
                 </div>
                 <div className="chat-messages">
-                    {messages.map((msg, index) =>
-                        msg.sender === 'ai' ? (
-                            <AiChatMessage key={index} message={msg.text} />
-                        ) : (
-                            <UserChatMessage key={index} message={msg.text} />
+                    {isLoadingHistory ? (
+                        <div className="chat-message ai">
+                            <p>Loading your previous conversations...</p>
+                        </div>
+                    ) : (
+                        messages.map((msg, index) =>
+                            msg.sender === 'ai' ? (
+                                <AiChatMessage key={index} message={msg.text} />
+                            ) : (
+                                <UserChatMessage key={index} message={msg.text} />
+                            )
                         )
                     )}
                     {isLoading && (
@@ -171,9 +241,9 @@ function Assistant() {
                         onKeyDown={handleKeyDown}
                         placeholder="Ask me anything about tech careers..."
                         rows={1}
-                        disabled={isLoading}
+                        disabled={isLoading || isLoadingHistory}
                     />
-                    <button onClick={handleSend} disabled={isLoading}>
+                    <button onClick={handleSend} disabled={isLoading || isLoadingHistory}>
                         Send
                     </button>
                 </div>

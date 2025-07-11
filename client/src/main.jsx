@@ -13,6 +13,7 @@ import Assistant from './components/pages/assistant/Assistant.jsx';
 import ResultGen from './components/pages/resultgen/ResultGen';
 import Preresultgen from './components/pages/preresultgen/Preresultgen';
 import SignIn from './components/pages/signin/SignIn.jsx';
+import Login from './components/pages/signin/Login.jsx';
 import Contact from './components/pages/contact/Contact.jsx';
 import Loading from './components/Loading'; // Import the Loading component
 import FAQ from './components/pages/FAQ/Faq.jsx';
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/signin",
         element: <SignIn />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/contact",

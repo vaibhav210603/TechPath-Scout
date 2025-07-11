@@ -1,138 +1,37 @@
-/* General styles (laptop/desktop) */
-.navbar_container {
-  margin-top: 10px;
-  width: 120px;
-  height: 50px;
-  justify-content: center;
-  background-color: rgb(25, 162, 247);
+.fixed-home-btn {
   position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  border: 1px solid black;
-  border-radius: 50px;
-  z-index: 1000;
-  transition: width 0.5s ease, height 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-  padding: 0;
-  overflow: hidden;
-}
-
-.navbar_links {
-  display: flex;
-}
-
-.navbar_container:hover,
-.navbar_container.hovered {
-  width: 50%;
-  height: 8vh;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 8px 15px rgba(70, 3, 51, 0.9);
-  padding: 0 10px;
-
-}
-
-.r {
-  z-index: 1001;
-  margin-right: 40px;
-  margin-top: 10px;
-  margin-left: 20px;
-  font-size: 16px;
+  top: 18px;
+  left: 18px;
+  z-index: 2000;
+  background: #1890ff;
+  color: #fff;
+  padding: 8px 22px;
+  border-radius: 22px;
+  font-size: 1.1rem;
+  font-weight: 600;
   text-decoration: none;
-
-  
-  color: transparent;
-  transition: color 0.5s ease, font-size 0.5s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s, color 0.2s;
+  border: none;
+  outline: none;
+}
+.fixed-home-btn:hover {
+  background: #005bb5;
+  color: #fff;
 }
 
-.navbar_container:hover .r,
-.navbar_container.hovered .r {
-  color: rgb(0, 0, 0);
-}
-
-/* Hover text styles */
-.hover-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 19px;
-  letter-spacing: 2px;
-  animation: blink 2s infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* Mobile-specific styles */
-@media screen and (max-width: 768px) {
-  .navbar_container {
-    justify-content: flex-start;
-    width: 80%;
-    height: 40px;
-    padding-left: 10px;
-  }
-
-  .navbar_links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    left: -10px;
-    width: 100%;
-    background-color: rgb(229, 226, 226);
-    border: 1px solid black;
-    border-radius: 20px;
-  }
-
-  .navbar_links.open {
-    display: flex;
-  }
-
-  .r {
-    font-size: 14px;
-    margin: 10px;
-    text-align: center;
-    color: rgb(87, 85, 85);
-  }
-
-  .dropdown_icon {
-    display: block;
-    background: none;
-    border: none;
-    font-size: 8px;
-    cursor: pointer;
-    color: black;
-    outline: none;
-  }
-
-  .dropdown_icon:focus {
-    outline: none;
-  }
-
-  .dropdown_icon:hover {
-    color: rgb(113, 24, 125);
-  }
-
-  .navbar_container:hover,
-  .navbar_container.hovered {
-    width: 80%;
-  }
-
-  .hover-text {
-    font-size: 12px;
+@media (max-width: 600px) {
+  .fixed-home-btn {
+    top: 8px;
+    left: 8px;
+    padding: 6px 14px;
+    font-size: 1rem;
   }
 }
 
 /* --- Page Content Styles --- */
 .page-content {
-  padding-top: 10vh; /* Default padding for all pages except assistant */
-  /* Add any other default page constraints here if needed */
+  padding-top: 0;
 }
 
 .page-content-full-width {
@@ -140,7 +39,14 @@
   height: 100vh;
   padding: 0;
   margin: 0;
-  display: flex; /* These are needed to help the child center itself */
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-content {
+    padding-top: 0;
+  }
 }

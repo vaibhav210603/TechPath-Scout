@@ -11,9 +11,9 @@
 }
 .signin-container {
   width: 100%;
-  max-width: 400px;
-  max-height: 350px;
-  padding: 20px;
+  max-width: 450px;
+  min-height: 500px;
+  padding: 30px;
   
   /* Box design */
   background-color: rgba(255, 255, 255, 0.368); /* Changed to white */
@@ -44,7 +44,8 @@ label {
 }
 
 input[type="text"],
-input[type="email"] {
+input[type="email"],
+input[type="tel"] {
   width: 100%;
   padding: 10px;
   box-sizing: border-box; /* Ensure padding is included in width */
@@ -65,6 +66,11 @@ input[type="email"] {
   background-color: #45a049;
 }
 
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
 /* Mobile Styles */
 @media (max-width: 768px) {
   html, body {
@@ -77,5 +83,6 @@ input[type="email"] {
       width: 100%; /* Adjust width for mobile */
       max-width: 100%; /* Ensure it doesn't exceed screen width */
       padding: 30px; /* Adjust padding for smaller screens */
+      min-height: 450px;
   }
 }

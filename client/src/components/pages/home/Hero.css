@@ -443,25 +443,62 @@ width: 100%;
 .hero-btn-row {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-top: 2.2rem;
+  gap: 18px;
+  margin-top: 2rem;
 }
+
 .hero-getstarted-btn {
-  background: #181818;
+  background: #222;
   color: #fff;
-  padding: 0.9rem 2.2rem;
-  border-radius: 2rem;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 32px;
+  font-size: 1.2rem;
   font-weight: 600;
-  font-size: 1.1rem;
+  margin-right: 0;
   text-decoration: none;
-  transition: background 0.2s, transform 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  animation: attention-glow 3s infinite ease-in-out;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
 .hero-getstarted-btn:hover {
-  background: #0a5584;
-  transform: translateY(-2px) scale(1.04);
+  background: #1890ff;
+  color: #fff;
 }
+
+.hero-login-btn {
+  background: #fff;
+  color: #1890ff;
+  border: 2px solid #1890ff;
+  border-radius: 25px;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.hero-login-btn:hover {
+  background: #1890ff;
+  color: #fff;
+}
+
+.hero-signup-btn {
+  background: #1890ff;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.hero-signup-btn:hover {
+  background: #222;
+  color: #fff;
+}
+
 .hero-features-link {
   color: #222;
   font-size: 1.1rem;

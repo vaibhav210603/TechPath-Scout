@@ -32,6 +32,35 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Login user by email
+router.post('/login', async (req, res) => {
+  try {
+    const { email } = req.body;
+    
+    console.log('Login request for email:', email);
+    
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
+    }
+    
+    // Find user by email
+    const user = await prisma.user.findUnique({
+      where: { email: email }
+    });
+    
+    if (!user) {
+      console.log('User not found for email:', email);
+      return res.status(404).json({ error: 'User not found. Please sign up first.' });
+    }
+    
+    console.log('User logged in:', user);
+    res.json(user);
+  } catch (err) {
+    console.error('Login error:', err);
+    res.status(400).json({ error: err.message });
+  }
+});
+
 // Get user by id
 router.get('/:id', async (req, res) => {
   try {

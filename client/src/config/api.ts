@@ -27,7 +27,6 @@ export const API_ENDPOINTS = {
   QUESTIONS_2: '/assets/ques2.json',
   // User CRUD
   USERS: `${API_BASE_URL}/api/users`,
-  USER_LOGIN: `${API_BASE_URL}/api/users/login`,
   // Comment CRUD
   COMMENTS: `${API_BASE_URL}/api/comments`,
   // Assistant chat CRUD
