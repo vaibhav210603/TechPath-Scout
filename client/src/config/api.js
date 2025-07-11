@@ -5,7 +5,7 @@ const ENVIRONMENT = 'deployed'; // Options: 'local' or 'deployed'
 // API Base URLs
 const API_URLS = {
   local: 'http://localhost:8000',
-  deployed: 'https://techpath-scout-server.vercel.app'
+  deployed: 'http://13.61.189.201:8000/'
 };
 
 // Get the current API base URL
