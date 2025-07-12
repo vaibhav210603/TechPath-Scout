@@ -25,6 +25,7 @@ const corsOptions = {
   origin: [
     'http://localhost:5173',  // Local development frontend
     'https://techpath-scout.vercel.app',  // Replace with your actual frontend URL
+    'https://techpath.vibhaupadhyay.com',  // Replace with your actual frontend URL
     /\.vercel\.app$/  // Matches Vercel app domains if needed
   ],
   methods: ['GET', 'POST', 'OPTIONS'],
