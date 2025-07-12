@@ -36,6 +36,10 @@
   border-bottom: 1px solid #333;
 }
 
+.chat-header p {
+  color: #000000; /* Make the welcome back text black */
+}
+
 .chat-messages {
   flex-grow: 1;
   padding: 1.5rem;
