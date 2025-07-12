@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { API_ENDPOINTS } from '../../../config/api';
 
 const FAQ = () => {
+  // Check if device is mobile
+  const isMobile = window.innerWidth <= 768;
+  const currentStyles = isMobile ? mobileStyles : styles;
+  
   const faqs = [
     {
       question: "What is TechPath Scout?",
@@ -74,43 +78,71 @@ const FAQ = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>Frequently Asked Questions</h2>
-      <div style={styles.faqList}>
+    <div style={currentStyles.container}>
+      <h2 style={currentStyles.heading}>Frequently Asked Questions</h2>
+      <div style={currentStyles.faqList}>
         {faqs.map((faq, index) => (
-          <div key={index} style={styles.faqItem}>
+          <div key={index} style={currentStyles.faqItem}>
             <div
-              style={styles.question}
+              style={currentStyles.question}
               onClick={() => toggleFAQ(index)}
             >
               {faq.question}
-              <span style={styles.icon}>{openIndex === index ? "-" : "+"}</span>
+              <span style={currentStyles.icon}>{openIndex === index ? "-" : "+"}</span>
             </div>
             {openIndex === index && (
-              <div style={styles.answer}>{faq.answer}</div>
+              <div style={currentStyles.answer}>{faq.answer}</div>
             )}
           </div>
         ))}
       </div>
-      <form onSubmit={handleFeedbackSubmit} style={{ marginTop: 40, textAlign: 'center' }}>
-        <h3>Leave Feedback</h3>
-        <label>
+      <form onSubmit={handleFeedbackSubmit} style={{ 
+        marginTop: isMobile ? 20 : 40, 
+        textAlign: 'center',
+        padding: isMobile ? '0 10px' : '0'
+      }}>
+        <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.5rem' }}>Leave Feedback</h3>
+        <label style={{ display: 'block', marginBottom: '10px' }}>
           Rating:
-          <select value={rating} onChange={e => setRating(Number(e.target.value))}>
+          <select 
+            value={rating} 
+            onChange={e => setRating(Number(e.target.value))}
+            style={{ marginLeft: '10px', padding: '5px' }}
+          >
             {[1,2,3,4,5].map(r => <option key={r} value={r}>{r}</option>)}
           </select>
         </label>
-        <br />
         <textarea
           value={comment}
           onChange={e => setComment(e.target.value)}
           placeholder="Your feedback..."
           rows={3}
-          style={{ width: '60%', marginTop: 10 }}
+          style={{ 
+            width: isMobile ? '90%' : '60%', 
+            marginTop: 10,
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #ddd'
+          }}
         />
         <br />
-        <button type="submit">Submit Feedback</button>
-        <div>{feedbackMsg}</div>
+        <button 
+          type="submit"
+          style={{
+            marginTop: '10px',
+            padding: '8px 16px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}
+        >
+          Submit Feedback
+        </button>
+        <div style={{ marginTop: '10px', color: feedbackMsg.includes('Thank') ? 'green' : 'red' }}>
+          {feedbackMsg}
+        </div>
       </form>
     </div>
   );
@@ -118,12 +150,13 @@ const FAQ = () => {
 
 const styles = {
   container: {
-    
     maxWidth: "1600px",
     margin: "auto 0%",
     padding: "20px",
     fontFamily: "'Arial', sans-serif",
-    
+    minHeight: "100vh",
+    minHeight: "100dvh", /* Use dynamic viewport height */
+    overflowY: "auto", /* Allow scrolling */
   },
   heading: {
     textAlign: "center",
@@ -153,6 +186,53 @@ const styles = {
   icon: {
     fontWeight: "bold",
     fontSize: "18px",
+    color: "#555",
+  },
+};
+
+// Mobile styles
+const mobileStyles = {
+  container: {
+    maxWidth: "100%",
+    margin: "0",
+    padding: "15px",
+    fontFamily: "'Arial', sans-serif",
+    minHeight: "100vh",
+    minHeight: "100dvh",
+    overflowY: "auto",
+  },
+  heading: {
+    textAlign: "center",
+    marginBottom: "15px",
+    color: "#333",
+    fontSize: "1.5rem",
+  },
+  faqList: {
+    borderTop: "1px solid #ddd",
+  },
+  faqItem: {
+    borderBottom: "1px solid #ddd",
+    padding: "8px 0",
+  },
+  question: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    cursor: "pointer",
+    fontWeight: "bold",
+    color: "#555",
+    fontSize: "0.9rem",
+    padding: "5px 0",
+  },
+  answer: {
+    marginTop: "8px",
+    color: "#666",
+    lineHeight: "1.5",
+    fontSize: "0.85rem",
+  },
+  icon: {
+    fontWeight: "bold",
+    fontSize: "16px",
     color: "#555",
   },
 };

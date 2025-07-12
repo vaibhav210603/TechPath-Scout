@@ -142,23 +142,7 @@ const SignIn = () => {
           </p>
           <button 
             onClick={handleLogin}
-            style={{
-              background: 'none',
-              border: '2px solid #007bff',
-              color: '#007bff',
-              padding: '10px 20px',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              fontSize: '14px'
-            }}
-            onMouseOver={(e) => {
-              e.target.style.background = '#007bff';
-              e.target.style.color = 'white';
-            }}
-            onMouseOut={(e) => {
-              e.target.style.background = 'none';
-              e.target.style.color = '#007bff';
-            }}
+            className="secondary-button"
           >
             Login
           </button>

@@ -3,16 +3,27 @@
  
 .container_quiz {
   background-image: url('./../../public/back_quiz.gif');
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Align items at the top */
-    
-    margin-top: 10vh;
-    max-height: 100vh; /* Make sure the container takes at least the full height of the viewport */
-    box-sizing: border-box; /* Ensure padding is included in the height calculation */
-    overflow: hidden; /* Prevent scrolling within the container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align items at the top */
+  margin-top: 10vh;
+  max-height: 100vh; /* Make sure the container takes at least the full height of the viewport */
+  box-sizing: border-box; /* Ensure padding is included in the height calculation */
+  overflow-y: auto; /* Allow vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Mobile styles for quiz container */
+@media (max-width: 768px) {
+  .container_quiz {
+    margin-top: 5vh;
+    max-height: 100vh;
+    max-height: 100dvh; /* Use dynamic viewport height */
+    padding: 10px;
+    overflow-y: auto;
   }
+}
   
   .time {
     width: 100%;

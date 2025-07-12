@@ -345,6 +345,45 @@ width: 100%;
   padding: 2.5rem 3rem 1.5rem 3rem;
   background: transparent;
   font-family: 'Inter', 'Poppins', 'Montserrat', Arial, sans-serif;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+/* Mobile styles for hero navbar */
+@media (max-width: 768px) {
+  .hero-navbar {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-x: hidden;
+  }
+
+  .hero-nav-links {
+    display: none; /* Hide nav links on mobile */
+  }
+
+  .hero-logo {
+    font-size: 1.5rem;
+  }
+
+  .hero-app-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet styles for navbar */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .hero-navbar {
+    padding: 2rem 1.5rem 1rem 1.5rem;
+  }
+
+  .hero-nav-links {
+    gap: 1.5rem;
+  }
+
+  .hero-nav-links a {
+    font-size: 1rem;
+  }
 }
 .hero-logo {
   font-size: 2rem;
@@ -355,6 +394,8 @@ width: 100%;
 .hero-nav-links {
   display: flex;
   gap: 2.5rem;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  justify-content: center; /* Center the links */
 }
 .hero-nav-links a {
   color: #222;
@@ -389,6 +430,16 @@ width: 100%;
   margin-top: 2.5rem;
   gap: 2rem;
 }
+
+/* Mobile styles for hero main content */
+@media (max-width: 768px) {
+  .hero-main-content {
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+}
 .hero-left {
   flex: 1.2;
   display: flex;
@@ -397,6 +448,15 @@ width: 100%;
   justify-content: flex-start;
   padding-left: 3rem;
   min-width: 350px;
+}
+
+/* Mobile styles for hero left */
+@media (max-width: 768px) {
+  .hero-left {
+    padding-left: 0;
+    min-width: auto;
+    width: 100%;
+  }
 }
 .hero-badge {
   display: flex;
@@ -423,6 +483,16 @@ width: 100%;
   font-family: 'Inter', 'Poppins', 'Montserrat', Arial, sans-serif;
   position: relative;
 }
+
+/* Mobile styles for hero title */
+@media (max-width: 768px) {
+  .hero-title-main {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+}
 .hero-avatars {
   display: inline-flex;
   align-items: center;
@@ -445,6 +515,27 @@ width: 100%;
   align-items: center;
   gap: 18px;
   margin-top: 2rem;
+}
+
+/* Mobile styles for hero button row */
+@media (max-width: 768px) {
+  .hero-btn-row {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+
+  .hero-getstarted-btn,
+  .hero-login-btn,
+  .hero-signup-btn,
+  .hero-features-link {
+    width: 200px; /* Reduced from 100% to fixed width */
+    text-align: center;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    margin: 0 auto; /* Center the buttons */
+  }
 }
 
 .hero-getstarted-btn {

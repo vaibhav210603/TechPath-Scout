@@ -11,6 +11,18 @@
   background-color: #fff;
   padding: 2rem;
   font-family: 'Inter', 'Poppins', 'Montserrat', Arial, sans-serif;
+  overflow-y: auto; /* Allow scrolling */
+}
+
+/* Mobile styles for assistant wrapper */
+@media (max-width: 768px) {
+  .assistant-wrapper {
+    min-height: 100vh;
+    min-height: 100dvh; /* Use dynamic viewport height */
+    padding: 1rem;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
 }
 
 .chat-container {
@@ -24,6 +36,17 @@
   border: 1px solid #e0e0e0;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
   overflow: hidden;
+}
+
+/* Mobile styles for chat container */
+@media (max-width: 768px) {
+  .chat-container {
+    height: 100vh;
+    height: 100dvh; /* Use dynamic viewport height */
+    max-width: 100%;
+    border-radius: 0;
+    margin: 0;
+  }
 }
 
 .chat-header {

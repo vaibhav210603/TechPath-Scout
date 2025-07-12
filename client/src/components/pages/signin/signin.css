@@ -53,13 +53,16 @@ input[type="tel"] {
 
 .submit-button {
   margin-top: 10px;
-  width: 100%;
+  width: 200px; /* Reduced from 100% to fixed width */
   padding: 10px;
   background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  display: block; /* Make it a block element */
+  margin-left: auto; /* Center the button */
+  margin-right: auto;
 }
 
 .submit-button:hover {
@@ -71,18 +74,62 @@ input[type="tel"] {
   cursor: not-allowed;
 }
 
+/* Secondary button styles */
+.secondary-button {
+  background: none;
+  border: 2px solid #007bff;
+  color: #007bff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 150px; /* Fixed width */
+  display: block;
+  margin: 0 auto;
+  transition: background 0.2s, color 0.2s;
+}
+
+.secondary-button:hover {
+  background: #007bff;
+  color: white;
+}
+
 /* Mobile Styles */
 @media (max-width: 768px) {
-  html, body {
-      height: 100%;
-      margin: 0;
-      overflow: hidden; /* Prevent scrolling */
+  .signin-wrapper {
+      height: 100vh;
+      height: 100dvh; /* Use dynamic viewport height */
+      padding: 20px;
+      overflow-y: auto; /* Allow scrolling */
   }
 
   .signin-container {
-      width: 100%; /* Adjust width for mobile */
-      max-width: 100%; /* Ensure it doesn't exceed screen width */
-      padding: 30px; /* Adjust padding for smaller screens */
-      min-height: 450px;
+      width: 100%;
+      max-width: 100%;
+      padding: 20px;
+      min-height: auto;
+      margin: 20px 0;
+  }
+
+  h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+  }
+
+  .form-group {
+      margin-bottom: 12px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"] {
+      padding: 12px;
+      font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  .submit-button {
+      padding: 12px;
+      font-size: 16px;
+      width: 180px; /* Slightly smaller on mobile */
   }
 }

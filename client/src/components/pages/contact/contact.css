@@ -72,6 +72,36 @@
   animation: zoomIn 1s ease-in-out;
 }
 
+/* Mobile styles for contact card */
+@media (max-width: 768px) {
+  .contact-wrapper {
+    padding: 10px;
+    min-height: 100vh;
+    min-height: 100dvh; /* Use dynamic viewport height */
+    overflow-y: auto;
+  }
+
+  .contact-card {
+    width: 95%;
+    max-width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+  }
+
+  .contact-photo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .contact-title {
+    font-size: 1.4rem;
+  }
+
+  .contact-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
 .contact-card:hover {
   transform: scale(1.05);
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);

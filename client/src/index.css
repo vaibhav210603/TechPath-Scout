@@ -24,9 +24,33 @@ a:hover {
 
 body {
   margin: 0;
-  
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Mobile-specific body adjustments */
+@media (max-width: 768px) {
+  body {
+    min-height: 100vh;
+    /* Use dynamic viewport height for mobile */
+    min-height: 100dvh;
+    /* Prevent horizontal scrolling */
+    overflow-x: hidden;
+    /* Improve touch scrolling */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Ensure proper font sizing on mobile */
+  html {
+    font-size: 16px;
+  }
+
+  /* Prevent zoom on input focus on iOS */
+  input, select, textarea {
+    font-size: 16px;
+  }
 }
 
 h1 {
@@ -94,3 +118,4 @@ button:focus-visible {
   from, to { border-color: transparent }
   50% { border-color: orange; }
 }
+
