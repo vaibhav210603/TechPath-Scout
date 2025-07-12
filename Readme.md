@@ -3,7 +3,7 @@
 
 Click image to access the LIVE app
 
-[![npakin_doc](/napkin/t1.png)](https://techpath-scout.vercel.app/)
+[![npakin_doc](/napkin/vidiq_thumbnail_2.png)](https://techpath-scout.vercel.app/)
 
 
 
