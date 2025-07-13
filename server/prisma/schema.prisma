@@ -46,7 +46,7 @@ model Payment {
 
 model Assistant {
   assistant_chat_id Int   @id @default(autoincrement())
-  user_id           Int
+  user_id           Int   @unique
   user              User  @relation("UserAssistants", fields: [user_id], references: [user_id])
   chat_history      String
 }

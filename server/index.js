@@ -6,6 +6,7 @@ import { ConversationChain } from "langchain/chains";
 import { BufferMemory } from "langchain/memory";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Razorpay from 'razorpay';
+import { prisma } from './database/index.js';
 import userRouter from './api/user.js';
 import commentRouter from './api/comment.js';
 import assistantRouter from './api/assistant.js';
@@ -64,14 +65,12 @@ const model = new ChatGoogleGenerativeAI({
   temperature: 0.7,
 });
 
-// Initialize memory
-const memory = new BufferMemory();
-
-// Initialize the conversation chain
-const chain = new ConversationChain({
-  llm: model,
-  memory: memory,
-});
+// Remove the shared memory - we'll create user-specific memory
+// const memory = new BufferMemory();
+// const chain = new ConversationChain({
+//   llm: model,
+//   memory: memory,
+// });
 
 // Routes
 app.get("/", (req, res) => {
@@ -104,25 +103,144 @@ app.post("/generate", async (req, res) => {
   }
 });
 
-// LangChain chat route
+// Get chat history for a specific user
+app.get("/api/chat/:user_id", async (req, res) => {
+  const { user_id } = req.params;
+  
+  try {
+    const assistant = await prisma.assistant.findUnique({
+      where: { user_id: parseInt(user_id) }
+    });
+    
+    if (!assistant || !assistant.chat_history) {
+      return res.json({ chat_history: [] });
+    }
+    
+    try {
+      const chatHistory = JSON.parse(assistant.chat_history);
+      res.json({ chat_history: chatHistory });
+    } catch (e) {
+      console.error("Error parsing chat history:", e);
+      res.json({ chat_history: [] });
+    }
+  } catch (error) {
+    console.error("Error fetching chat history:", error);
+    res.status(500).json({ error: "Failed to fetch chat history" });
+  }
+});
+
+// LangChain chat route with user-specific memory
 app.post("/api/chat", async (req, res) => {
-  const { message } = req.body;
-  console.log("1. Received request for /api/chat with message:", message);
+  const { message, user_id } = req.body;
+  console.log("1. Received request for /api/chat with message:", message, "for user_id:", user_id);
 
   if (!message) {
     console.error("Validation Error: Message is required");
     return res.status(400).json({ error: "Message is required" });
   }
 
+  if (!user_id) {
+    console.error("Validation Error: user_id is required");
+    return res.status(400).json({ error: "user_id is required" });
+  }
+
   try {
+    // Verify user exists
+    const user = await prisma.user.findUnique({
+      where: { user_id: parseInt(user_id) }
+    });
+
+    if (!user) {
+      console.error("User not found:", user_id);
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Get or create user-specific assistant chat
+    let assistant = await prisma.assistant.findUnique({
+      where: { user_id: parseInt(user_id) }
+    });
+
+    let chatHistory = [];
+    if (assistant && assistant.chat_history) {
+      try {
+        chatHistory = JSON.parse(assistant.chat_history);
+      } catch (e) {
+        console.error("Error parsing chat history:", e);
+        chatHistory = [];
+      }
+    }
+
+    // Create user-specific memory with existing chat history
+    const userMemory = new BufferMemory();
+    
+    // Restore previous conversation context
+    for (const entry of chatHistory) {
+      await userMemory.saveContext(
+        { input: entry.input },
+        { output: entry.output }
+      );
+    }
+
+    // Create user-specific conversation chain
+    const userChain = new ConversationChain({
+      llm: model,
+      memory: userMemory,
+    });
+
     const fullInput = `You are TechPath Scout, a friendly and expert career advisor for the tech industry. Provide clear, helpful, and encouraging advice. Keep your responses concise and easy to read.\n\nUser: ${message}`;
     
     console.log("2. Calling the conversation chain with the AI...");
-    const response = await chain.call({ input: fullInput });
+    const response = await userChain.call({ input: fullInput });
     console.log("3. Received response from AI:", response);
 
+    // Get updated memory and save to database
+    const memoryVariables = await userMemory.loadMemoryVariables({});
+    const newChatHistory = memoryVariables.history || [];
+
+    // Parse the history string to extract conversation pairs
+    const conversationPairs = [];
+    const historyLines = newChatHistory.split('\n');
+    let currentInput = '';
+    let currentOutput = '';
+
+    for (const line of historyLines) {
+      if (line.startsWith('Human: ')) {
+        if (currentInput && currentOutput) {
+          conversationPairs.push({ input: currentInput, output: currentOutput });
+        }
+        currentInput = line.substring(7);
+        currentOutput = '';
+      } else if (line.startsWith('AI: ')) {
+        currentOutput = line.substring(4);
+      }
+    }
+    
+    // Add the current conversation
+    if (currentInput && currentOutput) {
+      conversationPairs.push({ input: currentInput, output: currentOutput });
+    }
+
+    // Save updated chat history to database
+    const chatHistoryJson = JSON.stringify(conversationPairs);
+    
+    if (assistant) {
+      // Update existing chat
+      await prisma.assistant.update({
+        where: { assistant_chat_id: assistant.assistant_chat_id },
+        data: { chat_history: chatHistoryJson }
+      });
+    } else {
+      // Create new chat
+      await prisma.assistant.create({
+        data: {
+          user_id: parseInt(user_id),
+          chat_history: chatHistoryJson
+        }
+      });
+    }
+
     res.json({ reply: response.response });
-    console.log("4. Sent AI response back to the client.");
+    console.log("4. Sent AI response back to the client and saved to database.");
   } catch (error) {
     console.error("5. An error occurred in the chat processing chain:", error);
     res.status(500).json({ error: "Failed to get a response from the AI." });

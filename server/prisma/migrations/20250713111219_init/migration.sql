@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "PaymentStatus" AS ENUM ('pending', 'failed', 'success');
+
 -- CreateTable
 CREATE TABLE "User" (
     "user_id" SERIAL NOT NULL,
@@ -26,7 +29,7 @@ CREATE TABLE "Payment" (
     "payment_id" SERIAL NOT NULL,
     "user_id" INTEGER NOT NULL,
     "amount" DOUBLE PRECISION NOT NULL,
-    "payment_status" TEXT NOT NULL,
+    "payment_status" "PaymentStatus" NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Payment_pkey" PRIMARY KEY ("payment_id")
@@ -43,6 +46,9 @@ CREATE TABLE "Assistant" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Assistant_user_id_key" ON "Assistant"("user_id");
 
 -- AddForeignKey
 ALTER TABLE "Comment" ADD CONSTRAINT "Comment_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;

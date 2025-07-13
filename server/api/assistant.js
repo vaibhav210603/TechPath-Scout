@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
     }
 
     // Check if there's already an assistant chat for this user
-    const existingChat = await prisma.assistant.findFirst({
+    const existingChat = await prisma.assistant.findUnique({
       where: { user_id: parseInt(user_id) }
     });
 
@@ -55,12 +55,12 @@ router.get('/', async (req, res) => {
       return res.status(400).json({ error: 'user_id is required' });
     }
 
-    const assistants = await prisma.assistant.findMany({
+    const assistant = await prisma.assistant.findUnique({
       where: { user_id: parseInt(user_id) },
       include: { user: true }
     });
     
-    res.json(assistants);
+    res.json(assistant ? [assistant] : []);
   } catch (err) {
     console.error('Error fetching assistant chats:', err);
     res.status(400).json({ error: err.message });

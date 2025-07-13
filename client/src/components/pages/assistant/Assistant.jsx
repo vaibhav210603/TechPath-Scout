@@ -98,23 +98,22 @@ function Assistant() {
     useEffect(() => {
         if (userDetails?.user_id) {
             setIsLoadingHistory(true);
-            fetch(`${API_ENDPOINTS.ASSISTANTS}?user_id=${userDetails.user_id}`)
+            fetch(`${API_ENDPOINTS.CHAT}/${userDetails.user_id}`)
                 .then(res => {
                     if (!res.ok) throw new Error('Failed to fetch chat history');
                     return res.json();
                 })
                 .then(data => {
-                    if (Array.isArray(data) && data.length > 0) {
-                        // Get the most recent chat
-                        const lastChat = data[data.length - 1];
-                        try {
-                            const parsed = JSON.parse(lastChat.chat_history);
-                            if (Array.isArray(parsed) && parsed.length > 0) {
-                                setMessages(parsed);
-                            }
-                        } catch (error) {
-                            console.error('Error parsing chat history:', error);
+                    if (data.chat_history && Array.isArray(data.chat_history) && data.chat_history.length > 0) {
+                        // Convert the stored format to frontend format
+                        const convertedMessages = [];
+                        for (const entry of data.chat_history) {
+                            convertedMessages.push(
+                                { text: entry.input, sender: 'user' },
+                                { text: entry.output, sender: 'ai' }
+                            );
                         }
+                        setMessages(convertedMessages);
                     }
                 })
                 .catch(error => {
@@ -140,7 +139,10 @@ function Assistant() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: input }),
+                body: JSON.stringify({ 
+                    message: input,
+                    user_id: userDetails.user_id 
+                }),
             });
 
             if (!res.ok) {
@@ -150,23 +152,7 @@ function Assistant() {
             const data = await res.json();
             const aiMessage = { text: data.reply, sender: 'ai' };
             
-            setMessages(prev => {
-                const newMessages = [...prev, aiMessage];
-                
-                // Save chat history to backend
-                fetch(API_ENDPOINTS.ASSISTANTS, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        user_id: userDetails.user_id,
-                        chat_history: JSON.stringify(newMessages)
-                    })
-                }).catch(error => {
-                    console.error('Error saving chat history:', error);
-                });
-                
-                return newMessages;
-            });
+            setMessages(prev => [...prev, aiMessage]);
 
         } catch (error) {
             console.error("Failed to fetch AI response:", error);
