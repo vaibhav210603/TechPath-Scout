@@ -78,7 +78,7 @@ export default function Hero() {
                             <span className="hero-avatars">
                                 <img src="/mephotocropped.jpeg" alt="avatar1" />
                                 <img src="/nig_coder.jpg" alt="avatar2" />
-                                <img src="/assets/images/logo_land.png" alt="avatar3" />
+                                
                             </span>
                         </h1>
                         <div className="hero-btn-row">
