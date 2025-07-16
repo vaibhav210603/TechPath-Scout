@@ -162,6 +162,30 @@ export default function Preresultgen() {
             const analysis = await generateAnalysis();
             
             console.log('Analysis generated, storing in database...');
+
+            // Ensure user_id is present, recover from localStorage if missing
+            if (!user_details.user_id) {
+              const storedUser = localStorage.getItem('tp_user');
+              if (storedUser) {
+                try {
+                  const parsedUser = JSON.parse(storedUser);
+                  user_details.user_id = parsedUser.user_id;
+                  user_details.name = parsedUser.name || parsedUser.full_name;
+                } catch (error) {
+                  console.error('Error parsing stored user:', error);
+                }
+              }
+            }
+            if (!user_details.user_id) {
+              alert('User not logged in. Please sign in again.');
+              return;
+            }
+            console.log('Payment request payload:', {
+              user_id: user_details.user_id,
+              amount: orderData.amount / 100,
+              payment_status: 'success',
+              result: analysis
+            });
             // Store payment and analysis in backend
             const paymentResponse = await fetch(API_ENDPOINTS.PAYMENTS, {
               method: 'POST',
