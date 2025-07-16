@@ -141,18 +141,7 @@ export default function Preresultgen() {
           // Handle successful payment
           console.log('Payment successful!');
           
-          // Navigate immediately to result page
-          navigate('/resultgen', { 
-            state: { 
-              results, 
-              user_details,
-              payment: {
-                paymentId: response.razorpay_payment_id,
-                orderId: response.razorpay_order_id,
-                signature: response.razorpay_signature
-              }
-            } 
-          });
+         
           
           // Handle analysis generation and storage in background
           try {
@@ -197,11 +186,24 @@ export default function Preresultgen() {
                 result: analysis // Store only the analysis result
               })
             });
-
-            if (!paymentResponse.ok) {
-              const errorData = await paymentResponse.json();
-              console.error('Payment storage failed:', errorData);
-              throw new Error(`Payment storage failed: ${errorData.error}`);
+            if (paymentResponse.ok) {
+              // Confirm result is stored before navigating
+              const userId = user_details.user_id;
+              let userResult = null;
+              for (let i = 0; i < 5; i++) { // Try up to 5 times
+                const userRes = await fetch(`${API_ENDPOINTS.USERS}/${userId}`);
+                const user = await userRes.json();
+                if (user.result) {
+                  userResult = user.result;
+                  break;
+                }
+                await new Promise(res => setTimeout(res, 300)); // Wait 300ms before retry
+              }
+              if (userResult) {
+                navigate('/resultgen', { state: { user_details } });
+              } else {
+                alert('Result not available yet, please refresh the page.');
+              }
             }
 
             console.log('Payment and analysis stored successfully in background');
