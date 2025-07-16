@@ -18,6 +18,7 @@ import Contact from './components/pages/contact/Contact.jsx';
 import Loading from './components/Loading'; // Import the Loading component
 import FAQ from './components/pages/FAQ/Faq.jsx';
 import AboutUs from './components/pages/aboutus/AboutUs.jsx';
+import Payments from './components/pages/payments/Payments.jsx';
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,11 @@ const router = createBrowserRouter([
       {
         path:"/AboutUs",
         element:<AboutUs></AboutUs>
+      },
+
+      {
+        path:"/Payments",
+        element:<Payments></Payments>
       }
       
     ],

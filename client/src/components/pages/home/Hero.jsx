@@ -49,6 +49,10 @@ export default function Hero() {
                         <Link to="/">Home</Link>
                         <Link to="/assistant">Assistant</Link>
                         <Link to="/contact">Contact</Link>
+                        {user && (
+                        <Link to="/Payments">Payment</Link>
+                        )}
+
                         <a href="/Techpath_scout blueprint.pdf" target="_blank" rel="noopener noreferrer">Blueprint</a>
                     </nav>
                     <button className="hero-app-btn" onClick={handleGetStarted}>
