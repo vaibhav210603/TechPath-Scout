@@ -521,7 +521,7 @@ width: 100%;
     background: #888 !important;
     color: #fff !important;
     border-radius: 20px;
-    margin: 0 0 0.5rem 0;
+    margin-top: -50px !important;
     text-align: center !important;
     white-space: nowrap;
     overflow: hidden;
@@ -555,7 +555,7 @@ width: 100%;
   display: flex;
   align-items: center;
   gap: 18px;
-  margin-top: -1.5rem;
+  margin-top: -3.5rem;
   
 }
 
@@ -859,4 +859,21 @@ width: 100%;
 }
 .footer-socials a:hover img {
   opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .hero-modern-bg {
+    min-height: 40vh;
+    height: 60vh;
+  }
+  .hero-bg-video {
+    height: 60vh !important;
+    min-height: 40vh !important;
+    max-height: 80vh !important;
+  }
+  .hero-bg-overlay {
+    height: 60vh !important;
+    min-height: 40vh !important;
+    max-height: 80vh !important;
+  }
 }
