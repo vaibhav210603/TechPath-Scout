@@ -39,78 +39,105 @@ export default function Hero() {
         navigate('/');
     };
 
+    const userName = user ? user.full_name?.split(' ')[0] : '';
+
     return (
         <div className="hero-container">
             {/* Modern Hero Section */}
-            <section className="hero-modern-bg">
-                <div className="hero-navbar">
-                    <div className="hero-logo">TechPath Scout</div>
-                    <nav className="hero-nav-links">
-                        <Link to="/">Home</Link>
-                        <Link to="/assistant">Assistant</Link>
-                        <Link to="/contact">Contact</Link>
-                        {user && (
-                        <Link to="/Payments">Payment</Link>
-                        )}
-
-                        <a href="/Techpath_scout blueprint.pdf" target="_blank" rel="noopener noreferrer">Blueprint</a>
-                    </nav>
-                    <button className="hero-app-btn" onClick={handleGetStarted}>
-                        <span>Get Started</span>
-                    </button>
-                </div>
-                <div className="hero-main-content">
-                    <motion.div
-                        className="hero-left"
-                        initial={{ opacity: 0, x: -60 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        {/* <div className="hero-badge">
-                            <img src="/github.png" alt="badge" className="hero-badge-icon" />
-                            <span>Free forever. No credit card</span>
-                        </div> */}
-                        <h1 className="hero-title-main">
+            <section className="hero-modern-bg" style={{ position: 'relative', overflow: 'hidden' }}>
+                {/* Background Video */}
+                <video
+                    className="hero-bg-video"
+                    src="/images/hero_back.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        zIndex: 0
+                    }}
+                />
+                {/* Black Overlay */}
+                <div
+                    className="hero-bg-overlay"
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        background: 'rgba(0,0,0,0.6)',
+                        zIndex: 1
+                    }}
+                ></div>
+                {/* Content Above Video and Overlay */}
+                <div style={{ position: 'relative', zIndex: 2 }}>
+                    <div className="hero-navbar">
+                        <div className="hero-logo">TechPath Scout</div>
+                        <nav className="hero-nav-links">
+                            <Link to="/">Home</Link>
+                            <Link to="/assistant">Assistant</Link>
+                            <Link to="/contact">Contact</Link>
+                            {user && (
+                            <Link to="/Payments">Payment</Link>
                             
-                       Hey  {user && (
-                                <span style={{ color: 'green' }}>
-                                {JSON.parse(localStorage.getItem('tp_user')).full_name.split(' ')[0]}
+                            )}
+                        </nav>
+                        
+                        <button className="hero-app-btn" onClick={handleGetStarted}>
+                            <span>Get Started</span>
+                        </button>
+                    </div>
+                    <div className="hero-main-content">
+                        <motion.div
+                            className="hero-left"
+                            initial={{ opacity: 0, x: -60 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <h1 className="hero-title-main">
+                                <div>Hey {user && (<span style={{ color: 'green' }}>{userName}</span>)}</div>
+                                <div>Choose what</div>
+                                <div>you're</div>
+                                <div>Made for!</div>
+                                <span className="hero-avatars">
+                                    <img src="/mephotocropped.jpeg" alt="avatar1" />
+                                    <img src="/nig_coder.jpg" alt="avatar2" />
                                 </span>
-                            )}
-                        <br/>   <br/>
-                            Choose  what<br /><br />You  are<br /><br />Made  for!
-                            <span className="hero-avatars">
-                                <img src="/mephotocropped.jpeg" alt="avatar1" />
-                                <img src="/nig_coder.jpg" alt="avatar2" />
-                                
-                            </span>
-                        </h1>
-                        <div className="hero-btn-row">
-                            <button className="hero-getstarted-btn" onClick={handleGetStarted}>Get Started</button>
-                            {user ? (
-                                <button className="hero-login-btn" onClick={handleLogout}>Logout</button>
-                            ) : (
-                                <Link to="/login" className="hero-login-btn">Login</Link>
-                            )}
-                            <Link to="/signin" className="hero-signup-btn">Sign Up</Link>
-                            <a href="#features" className="hero-features-link">Our Features</a>
-                        </div>
-                    </motion.div>
-                    <motion.div
-                        className="hero-right"
-                        initial={{ opacity: 0, x: 60 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                    >
-                        <div className="hero-image-card">
-                            <img src="/nig_coder.jpg" alt="hero-person" className="hero-person-img" />
-                            <div className="hero-stat-card">
-                                <span className="hero-stat-label">1,451</span>
-                                <span className="hero-stat-desc">Students helped</span>
-                                <img src="/trophy-red.png" alt="stat-graph" className="hero-stat-graph" />
+                            </h1>
+                            <div className="hero-btn-row">
+                                <button className="hero-getstarted-btn" onClick={handleGetStarted}>Get Started</button>
+                                {user ? (
+                                    <button className="hero-login-btn" onClick={handleLogout}>Logout</button>
+                                ) : (
+                                    <Link to="/login" className="hero-login-btn">Login</Link>
+                                )}
+                                <Link to="/signin" className="hero-signup-btn">Sign Up</Link>
+                                <a href="#features" className="hero-features-link">Our Features</a>
                             </div>
-                        </div>
-                    </motion.div>
+                        </motion.div>
+                        <motion.div
+                            className="hero-right"
+                            initial={{ opacity: 0, x: 60 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                        >
+                            <div className="hero-image-card">
+                                <img src="/nig_coder.jpg" alt="hero-person" className="hero-person-img" />
+                                <div className="hero-stat-card">
+                                    <span className="hero-stat-label">1,451</span>
+                                    <span className="hero-stat-desc">Students helped</span>
+                                    <img src="/trophy-red.png" alt="stat-graph" className="hero-stat-graph" />
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
             </section>
 

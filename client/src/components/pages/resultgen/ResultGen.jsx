@@ -49,7 +49,7 @@ function ResultGen() {
         if (user.result) {
           setResponse(user.result);
           setScores(extractScoresFromResponse(user.result));
-        }
+          }
       }
       setIsLoading(false);
     } catch (error) {

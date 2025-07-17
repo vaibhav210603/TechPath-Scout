@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -53,7 +55,16 @@ body {
   }
 }
 
+h1, h2 , h3, div{
+  font-family: 'Lobster Two', cursive, sans-serif;
+}
+
+body, p, span, li, td, th,  input, button, a {
+  font-family: 'Dosis', 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 h1 {
+  
   font-size: 3.2em;
   line-height: 1.1;
 }
