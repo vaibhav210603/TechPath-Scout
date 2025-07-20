@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { ChatOpenAI } from "@langchain/openai";
 import { ConversationChain } from "langchain/chains";
 import { BufferMemory } from "langchain/memory";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 import Razorpay from 'razorpay';
 import { prisma } from './database/index.js';
 import userRouter from './api/user.js';
@@ -15,7 +15,7 @@ import paymentRouter from './api/payment.js';
 dotenv.config();
 
 // --- TEMPORARY DEBUGGING ---
-console.log("Attempting to load Gemini API Key:", process.env.GEMINI_API_KEY);
+console.log("Attempting to load OpenAI API Key:", process.env.OPENAI_API_KEY);
 // --- END DEBUGGING ---
 
 const app = express();
@@ -48,9 +48,10 @@ app.options('*', cors(corsOptions));
 app.use(cors());
 app.use(express.json());
 
-// Google Generative AI Configuration (for original /generate route)
-const key = process.env.GEMINI_API_KEY;
-const genAI = new GoogleGenerativeAI(key);
+// OpenAI Configuration (for original /generate route)
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 // Razorpay Configuration
 const razorpayInstance = new Razorpay({
@@ -58,35 +59,36 @@ const razorpayInstance = new Razorpay({
   key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
-// Initialize the LangChain model
-const model = new ChatGoogleGenerativeAI({
-  apiKey: process.env.GEMINI_API_KEY,
-  model: "gemini-2.5-flash",
-  temperature: 0.7,
+// Initialize the LangChain model with OpenAI
+const model = new ChatOpenAI({
+  openAIApiKey: process.env.OPENAI_API_KEY,
+  modelName: "gpt-4.1-nano", 
+  temperature: 0.5,
 });
-
-// Remove the shared memory - we'll create user-specific memory
-// const memory = new BufferMemory();
-// const chain = new ConversationChain({
-//   llm: model,
-//   memory: memory,
-// });
 
 // Routes
 app.get("/", (req, res) => {
   res.send("Welcome to the TechPath Scout Server!");
 });
 
-// Original /generate route (using raw Gemini API)
+// Original /generate route (using raw OpenAI API)
 app.post("/generate", async (req, res) => {
   try {
     const userText = req.body.text;
     console.log("User Text:", userText);
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    const result = await model.generateContent(userText);
-    const response = await result.response;
-    const text = response.text();
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "user",
+          content: userText
+        }
+      ],
+      temperature: 0.7,
+    });
+
+    const text = completion.choices[0].message.content;
 
     console.log("Generated Response:", text);
 
@@ -187,7 +189,12 @@ app.post("/api/chat", async (req, res) => {
       memory: userMemory,
     });
 
-    const fullInput = `You are TechPath Scout, a friendly and expert career advisor for the tech industry. Provide clear, helpful, and encouraging advice. Keep your responses concise and easy to read.\n\nUser: ${message}`;
+    const fullInput = `You are TechPath Scout, a friendly and expert career advisor for the tech industry. Provide clear, helpful, and encouraging advice. Keep your responses concise and easy to read.
+    Use minimum words and very short and crisp replies under a line or 2 at max(about 10-20 words) at max
+    I want to minimize tokens used.
+    when reuqired a detailed answer,
+    answer in short bullet points when asked questions related to career advice/to do's
+    Dont tell int he prompt that youre concise\n\nUser: ${message}`;
     
     console.log("2. Calling the conversation chain with the AI...");
     const response = await userChain.call({ input: fullInput });
@@ -290,6 +297,3 @@ app.use((err, req, res, next) => {
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server is listening on port ${port}`);
 });
-
-
-
