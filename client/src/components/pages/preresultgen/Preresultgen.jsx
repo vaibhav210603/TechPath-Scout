@@ -51,36 +51,39 @@ export default function Preresultgen() {
         )
         .join('\n\n');
 
-      const prompt = `Consider yourself a computer science domain counselor. You have just evaluated a student named ${user_details.name} based on a series of responses to questions designed to assess their interests, skills, and mindset. Your task is to provide a comprehensive analysis of the student's mindset and qualities, recommending which computer science domain they should pursue and why.
+      const prompt = `Consider yourself a CS domain counselor. You just evaluated a student named ${user_details.name} based on their answers about interests, skills, and mindset. Give a concise, honest analysis and suggest suitable CS domains.
 
-        Begin your response with a friendly greeting using the student's name, such as "Hey [name], I hope you're doing great" (make this initial line as bold and higher font text). Then proceed with the analysis:
-        
-        ## Analysis:
-       
-        -Give 1 liner aobut each core competencies you could identify
-       - rate them with their respective scores/10 for each one and BE HONEST WITH your scores wrt the answers given by ythe user
-        -At lsat of this section, Also mention 2 weak spots with scores and a line aobut it
+**Start with a bold greeting: "Hey [name], I hope you're doing great" in a larger font.**
 
-        for each competency, also mention "you're in the top x % of students"
-        
-        ## Domain Recommendation:
-        - Suggest two or more computer science domains that align with the student's strengths and interests.
-        - Include a detailed justification for each recommended domain and also include links for resources to learn the domain from (free)
-        the link font should be smaller and unbolded
-        bold the statement that says "Here are some best FREE resources on the internet"
-        
-        ## Improvement Suggestions:
-        - Identify areas where the student can improve, such as enhancing their logical reasoning or technical skills.
-        - Provide practical advice on how they can develop these areas, such as engaging in specific projects, courses, or activities.
-        
-        ## Domain Inclination Score:
-        - Provide a clearly formatted list of scores, with each domain on a new line in the following format:
-          - **Software Engineering**: Score (e.g., 8/10)
-          - **Data Science/Machine Learning**: Score (e.g., 7/10)
-          - **Cybersecurity**: Score (e.g., 7/10)
-        - Use consistent bold formatting for each domain name and score.
+## Analysis
 
-        Ensure that the analysis for each student is unique and personalized based on their responses. Your tone should be encouraging and supportive, helping the student feel confident in their path forward. Give extra spaces before and after headings to make them clear.`;
+- For each core competency:  
+  - Write a 1-liner  
+  - Give a clear score /10  
+  - Add "you're in the top X% of students"
+
+- Mention 2 weak spots with short lines and honest scores.
+
+## Domain Recommendation
+
+- Suggest 2+ CS domains that fit their strengths and mindset.  
+- Justify each choice.  
+- Add **"Here are some best FREE resources on the internet"** and share resource links (plain, small font, unbolded).
+
+## Improvement Suggestions
+
+- Point out areas to grow.  
+- Give simple, practical advice: projects, courses, or activities.
+
+## Domain Inclination Score
+
+- Format:
+  - **Software Engineering**: 8/10  
+  - **Data Science/Machine Learning**: 7/10  
+  - **Cybersecurity**: 7/10
+
+Keep the tone supportive and unique to the student’s answers. Space headings clearly.
+`;
 
       const fullText = `${questionsAnswersString}\n\n${prompt}`;
 
