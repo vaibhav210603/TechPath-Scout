@@ -1,6 +1,6 @@
 // API Configuration
 // Change this to switch between local and deployed environments
-const ENVIRONMENT = 'local'; // Options: 'local' or 'deployed'
+const ENVIRONMENT = 'deployed'; // Options: 'local' or 'deployed'
 
 // API Base URLs
 const API_URLS = {
