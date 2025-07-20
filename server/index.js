@@ -48,22 +48,18 @@ app.options('*', cors(corsOptions));
 app.use(cors());
 app.use(express.json());
 
-// OpenAI Configuration (for original /generate route)
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+// OpenAI Configuration (for /generate and /api/chat)
+const openaiApiKey = process.env.OPENAI_API_KEY;
+const openaiModel = new ChatOpenAI({
+  openAIApiKey: openaiApiKey,
+  modelName: "gpt-3.5-turbo", // or gpt-4 if you have access
+  temperature: 0.7,
 });
 
 // Razorpay Configuration
 const razorpayInstance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET
-});
-
-// Initialize the LangChain model with OpenAI
-const model = new ChatOpenAI({
-  openAIApiKey: process.env.OPENAI_API_KEY,
-  modelName: "gpt-4.1-nano", 
-  temperature: 0.5,
 });
 
 // Routes
@@ -76,22 +72,9 @@ app.post("/generate", async (req, res) => {
   try {
     const userText = req.body.text;
     console.log("User Text:", userText);
-
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "user",
-          content: userText
-        }
-      ],
-      temperature: 0.7,
-    });
-
-    const text = completion.choices[0].message.content;
-
+    const result = await openaiModel.invoke(userText);
+    const text = result.content || result.text || JSON.stringify(result);
     console.log("Generated Response:", text);
-
     res.json({
       message: "Response from server",
       story: text,
@@ -135,33 +118,27 @@ app.get("/api/chat/:user_id", async (req, res) => {
 app.post("/api/chat", async (req, res) => {
   const { message, user_id } = req.body;
   console.log("1. Received request for /api/chat with message:", message, "for user_id:", user_id);
-
   if (!message) {
     console.error("Validation Error: Message is required");
     return res.status(400).json({ error: "Message is required" });
   }
-
   if (!user_id) {
     console.error("Validation Error: user_id is required");
     return res.status(400).json({ error: "user_id is required" });
   }
-
   try {
     // Verify user exists
     const user = await prisma.user.findUnique({
       where: { user_id: parseInt(user_id) }
     });
-
     if (!user) {
       console.error("User not found:", user_id);
       return res.status(404).json({ error: "User not found" });
     }
-
     // Get or create user-specific assistant chat
     let assistant = await prisma.assistant.findUnique({
       where: { user_id: parseInt(user_id) }
     });
-
     let chatHistory = [];
     if (assistant && assistant.chat_history) {
       try {
@@ -171,73 +148,32 @@ app.post("/api/chat", async (req, res) => {
         chatHistory = [];
       }
     }
-
-    // Create user-specific memory with existing chat history
-    const userMemory = new BufferMemory();
-    
-    // Restore previous conversation context
-    for (const entry of chatHistory) {
-      await userMemory.saveContext(
-        { input: entry.input },
-        { output: entry.output }
-      );
-    }
-
-    // Create user-specific conversation chain
-    const userChain = new ConversationChain({
-      llm: model,
-      memory: userMemory,
+    // Build messages array for OpenAI (system, then conversation)
+    const messages = [];
+    // Only add system prompt at the start
+    messages.push({
+      role: "system",
+      content: `You are TechPath Scout, a friendly and expert career advisor for the tech industry. Your user is ${user.full_name}. Provide clear, helpful, and encouraging advice. Keep your responses concise and easy to read. Use minimum words and very short and crisp replies under a line or 2 at max (about 10-20 words). I want to minimize tokens used. When required a detailed answer, answer in short bullet points when asked questions related to career advice/to do's. Do not say you are being concise.`
     });
-
-    const fullInput = `You are TechPath Scout, a friendly and expert career advisor for the tech industry. Provide clear, helpful, and encouraging advice. Keep your responses concise and easy to read.
-    Use minimum words and very short and crisp replies under a line or 2 at max(about 10-20 words) at max
-    I want to minimize tokens used.
-    when reuqired a detailed answer,
-    answer in short bullet points when asked questions related to career advice/to do's
-    Dont tell int he prompt that youre concise\n\nUser: ${message}`;
-    
-    console.log("2. Calling the conversation chain with the AI...");
-    const response = await userChain.call({ input: fullInput });
-    console.log("3. Received response from AI:", response);
-
-    // Get updated memory and save to database
-    const memoryVariables = await userMemory.loadMemoryVariables({});
-    const newChatHistory = memoryVariables.history || [];
-
-    // Parse the history string to extract conversation pairs
-    const conversationPairs = [];
-    const historyLines = newChatHistory.split('\n');
-    let currentInput = '';
-    let currentOutput = '';
-
-    for (const line of historyLines) {
-      if (line.startsWith('Human: ')) {
-        if (currentInput && currentOutput) {
-          conversationPairs.push({ input: currentInput, output: currentOutput });
-        }
-        currentInput = line.substring(7);
-        currentOutput = '';
-      } else if (line.startsWith('AI: ')) {
-        currentOutput = line.substring(4);
-      }
+    // Add previous conversation
+    for (const entry of chatHistory) {
+      messages.push({ role: "user", content: entry.input });
+      messages.push({ role: "assistant", content: entry.output });
     }
-    
-    // Add the current conversation
-    if (currentInput && currentOutput) {
-      conversationPairs.push({ input: currentInput, output: currentOutput });
-    }
-
-    // Save updated chat history to database
-    const chatHistoryJson = JSON.stringify(conversationPairs);
-    
+    // Add the new user message
+    messages.push({ role: "user", content: message });
+    // Call OpenAI
+    const result = await openaiModel.invoke(messages);
+    const aiReply = result.content || result.text || JSON.stringify(result);
+    // Update chat history
+    chatHistory.push({ input: message, output: aiReply });
+    const chatHistoryJson = JSON.stringify(chatHistory);
     if (assistant) {
-      // Update existing chat
       await prisma.assistant.update({
         where: { assistant_chat_id: assistant.assistant_chat_id },
         data: { chat_history: chatHistoryJson }
       });
     } else {
-      // Create new chat
       await prisma.assistant.create({
         data: {
           user_id: parseInt(user_id),
@@ -245,8 +181,7 @@ app.post("/api/chat", async (req, res) => {
         }
       });
     }
-
-    res.json({ reply: response.response });
+    res.json({ reply: aiReply });
     console.log("4. Sent AI response back to the client and saved to database.");
   } catch (error) {
     console.error("5. An error occurred in the chat processing chain:", error);
